@@ -50,7 +50,7 @@
     if (!data) {
       if (!loading) {
         loading = true;
-        fetch('home-banners.json', { cache: 'no-store' }).catch(()=>fetch('/home-banners.json', { cache: 'no-store' })).then(r => (r.ok ? r.json() : null)).then(j => { data = j || { items: [] }; schedule(); }).catch(() => { data = fallbackBanners; schedule(); });
+        fetch('data/home-banners.json', { cache: 'no-store' }).catch(()=>fetch('/data/home-banners.json', { cache: 'no-store' })).then(r => (r.ok ? r.json() : null)).then(j => { data = j || { items: [] }; schedule(); }).catch(() => { data = fallbackBanners; schedule(); });
       }
       return;
     }

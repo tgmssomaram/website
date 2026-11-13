@@ -3,98 +3,105 @@
 > Somaram (Village), Saidapur Mandal, Karimnagar District, Telangana – 505490  
 > UDISE+ Code: `36131100206` | College Code: `15124`
 
-This website is a complete, 1:1 replica of the official Telangana Model School platform (as seen on [tgmsmunagala.in](https://tgmsmunagala.in/)), tailored specifically for **TGMS Somaram** with every section, title, feature, and visual asset preserved.
+Official web portal and administrative management platform for **Telangana Model School & Junior College, Somaram**, built for deployment on **Vercel** with **Supabase** as the database.
 
 ---
 
-## 🏛️ School Overview & Details
+## 📁 Clean & Professional Project Architecture
 
-| Attribute | Details |
-| :--- | :--- |
-| **School Name** | Telangana Model School & Junior College, Somaram |
-| **Telugu Name** | తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం |
-| **Hindi Name** | तेलंगाना मॉडल स्कूल और जूनियर कॉलेज, सोमाराम |
-| **Village** | Somaram |
-| **Mandal** | Saidapur (V.Saidapur) |
-| **District** | Karimnagar |
-| **State** | Telangana |
-| **PIN Code** | 505490 |
-| **UDISE+ Code** | 36131100206 |
-| **Principal (FAC)** | Farhana (M.Sc., B.Ed.) |
-| **Office Phone** | 08727-285222 |
-| **Email** | tgmssomaram.knr@gmail.com |
-| **Affiliation & Management** | Department of School Education, Government of Telangana |
-| **Grades** | Class VI to XII (Co-educational English Medium) |
-| **Junior College Streams** | MPC, BiPC, CEC, MEC |
-
----
-
-## 📑 Replicated Sections & Features
-
-Every single section, title, and feature from the reference site is present:
-
-1. **Header & Masthead**:
-   - Multi-language Switcher: English, తెలుగు (Telugu), हिन्दी (Hindi).
-   - TGMS SOMARAM Seal & official branding.
-   - Government of Telangana State Emblem & RMSA Emblem.
-   - Navigation bar with all 20 pages/sections.
-
-2. **Animated Government Banner**:
-   - `GOVT. OF TELANGANA మన బడి · మన భవిష్యత్తు` with animated running school children SVG track.
-
-3. **Ticker & Flash Announcements**:
-   - Real-time scrolling flash news ticker with pause, play, and speed controls.
-
-4. **Leadership & Dignitaries**:
-   - Sri A. Revanth Reddy (Hon'ble Chief Minister, Government of Telangana).
-   - Principal Secretary / Commissioner of School Education.
-   - Director of Model Schools.
-   - Principal FAC.
-
-5. **20 Complete Pages & Sections**:
-   - **Home (`#home`)**: Hero banner, Welcome overview, learning platform cards, admission seats, photo highlights.
-   - **Achievements (`#achievements`)**: Academic honors, sports tournaments, science fair accolades.
-   - **Photo Gallery (`#gallery`)**: School events, meetings, yoga sessions, and campus facilities.
-   - **Results (`#results`)**: SSC 10th and Intermediate 1st & 2nd year performance, pass rates, and toppers.
-   - **Academics (`#academics`)**: English medium curriculum, subject offerings, language electives.
-   - **Academic Calendar (`#calendar`)**: Full monthly academic schedule, holidays, exam dates, and Google Calendar sync.
-   - **Student Portal (`#portal`)**: State educational portals, scholarship schemes, and board exam services.
-   - **Admissions (`#admissions`)**: TGMSCET criteria, age limits, reservation guidelines, online application link to CGG portal.
-   - **Notice Board (`#notices`)**: Official circulars, flash notices, timetable releases.
-   - **Our School (`#school`)**: Vision, mission, institutional history, and public model school values.
-   - **About Us (`#about-us`)**: RMSA initiative, facilities, computer labs, library, science laboratories.
-   - **School Strength (`#strength`)**: Enrolment statistics for Class VI to X and Intermediate sections.
-   - **Faculty (`#faculty`)**: Teaching faculty (PGTs, TGTs), guest faculty, vocational trainers, and support staff.
-   - **Campus & Labs (`#campus`)**: Infrastructure, science laboratories, digital classroom, playground, solar power.
-   - **Events & Activities (`#events`)**: Haritha Haram, Science Day, Sports Day, Republic Day, Independence Day, Yoga Day.
-   - **Books Download (`#books`)**: SCERT / NCERT & Telugu Academy downloadable textbook repository.
-   - **Downloads (`#downloads`)**: Syllabi, model question papers, previous examination materials, admission brochures.
-   - **Administration (`#admin`)**: Administrative hierarchy, School Management Committee (SMC), secure login interface.
-   - **School Directory (`#directory`)**: Comprehensive searchable directory of all 194 Telangana Model Schools.
-   - **Contact Us (`#contact`)**: Interactive Google Map embed for Somaram, official postal address, phone, and inquiry form.
-
-6. **Footer & Utility Controls**:
-   - Text size controls (`A-`, `A`, `A+`) with saved browser preference.
-   - Official policies dialogs (Privacy Policy, Linking Policy, Copyright, Terms & Conditions).
-   - Developer credit and Back to Top floating action.
-
----
-
-## 🚀 How to Run the Website
-
-### Option 1: Double Click (Offline / Direct Browser)
-You can directly open `index.html` in any web browser (Chrome, Edge, Firefox). An embedded fallback dataset ensures that all 20 sections, faculty tables, and calendar views render flawlessly without CORS issues.
-
-### Option 2: Run with Python Local Server
-Run the included launcher:
-```powershell
-python run_site.py
 ```
-This opens `http://localhost:8080/index.html` in your default web browser.
+tgms-somaram/
+├── api/                       # Vercel Serverless Functions (Supabase Backend)
+│   ├── lib/
+│   │   └── supabase.js        # Supabase client initializer & config helper
+│   ├── admin/
+│   │   ├── login.js           # Admin authentication handler
+│   │   ├── session.js         # Admin session verification
+│   │   └── enrollment-ui.js   # Admin UI integration
+│   ├── content.js             # GET/PUT school profile with Supabase & fallback
+│   ├── feedback.js            # POST contact & admission inquiries to Supabase
+│   ├── notices.js             # GET/POST flash news & announcements
+│   └── privacy-ui.js          # School privacy policies
+├── css/                       # Modular Stylesheets
+│   ├── style.css              # Core typography and branding
+│   ├── admission-seats.css    # Seat breakdown matrix styling
+│   ├── final-model-centered-22.css # Campus hero & navigation styling
+│   ├── school-sections.css    # Facilities & academic components
+│   └── ... (22 modular CSS files)
+├── data/                      # Educational & School Datasets
+│   ├── school-data.json       # Core school profile, faculty & contacts
+│   ├── academic-calendar.json # 2026–27 academic schedule
+│   ├── books.json             # Downloadable textbooks (Classes VI–XII)
+│   ├── home-banners.json      # Learning platform cards (Khan Academy, PW)
+│   ├── learning-resources.json# Curated educational links
+│   ├── neet-papers.json       # Competitive exam papers
+│   └── school-directory.json  # Directory of 194 Telangana Model Schools
+├── images/                    # Official Emblems, Dignitaries & Visual Media
+│   ├── telangana-emblem-trimmed.svg
+│   ├── rmsa-logo-trimmed.svg
+│   ├── cm-revanth-reddy.png
+│   └── ... (school activity photos & campus imagery)
+├── js/                        # Client-Side Application Modules
+│   ├── app.js                 # SPA routing and multi-language controller
+│   ├── features-news-15.js    # News ticker, maps & academic pages
+│   ├── final-model-mandal-20.js # Mandal branding & hero components
+│   ├── school-footer.js       # Official footer & policy modals
+│   └── ... (interactive widgets & UI helpers)
+├── index.html                 # Main website entry point
+├── vercel.json                # Vercel deployment & routing configuration
+├── package.json               # Node.js project definition & @supabase/supabase-js
+├── supabase_schema.sql        # Complete Supabase database schema & seed data
+├── .env.example               # Environment variables template
+├── robots.txt                 # SEO crawler rules
+├── sitemap.xml                # Search engine sitemap
+├── manifest.json              # Web app manifest
+└── .gitignore                 # Git ignore configuration
+```
 
-### Option 3: Deploy to any Static Host
-The website is completely static (HTML, CSS, JS, JSON, SVG, JPG). You can deploy it to:
-- GitHub Pages
-- Cloudflare Pages
-- Netlify / Vercel
-- Any shared Linux / Windows web host (Apache, Nginx, IIS)
+---
+
+## 🗄️ Supabase Setup (Database)
+
+1. Create a free project at [supabase.com](https://supabase.com/).
+2. Navigate to the **SQL Editor** in your Supabase dashboard.
+3. Open the file [supabase_schema.sql](supabase_schema.sql), copy its contents, paste them into the SQL editor, and click **Run**.
+4. This script automatically creates:
+   - `school_profiles` — Stores school content, principal details, faculty, and coordinates.
+   - `notices` — Stores flash news, circulars, and announcements.
+   - `feedback` — Receives contact messages and admission inquiries.
+   - `admin_users` — Manages administrator credentials.
+   - Pre-seeds the database with Somaram's verified school data!
+5. In your Supabase Dashboard, go to **Project Settings** > **API** and copy:
+   - **Project URL**
+   - **anon / public key**
+   - **service_role key** (secret)
+
+---
+
+## ▲ Deploying to Vercel
+
+### Step 1: Push & Import
+1. Push this repository to your GitHub account (`tgmssomaram/website`).
+2. Go to [vercel.com](https://vercel.com/) and click **Add New** > **Project**.
+3. Import the `tgmssomaram/website` repository.
+
+### Step 2: Configure Environment Variables
+In the Vercel project configuration, add the following Environment Variables (from your `.env`):
+* `SUPABASE_URL` = `https://your-project.supabase.co`
+* `SUPABASE_ANON_KEY` = `your-anon-key`
+* `SUPABASE_SERVICE_ROLE_KEY` = `your-service-role-key`
+* `ADMIN_EMAIL` = `tgmssomaram.knr@gmail.com`
+* `ADMIN_PASSWORD` = `your-chosen-admin-password`
+
+### Step 3: Deploy
+Click **Deploy**. Your website will be live worldwide on Vercel with high-speed CDN caching and serverless API endpoints connected to your Supabase database!
+
+---
+
+## 🔐 Next Phase: Admin Login & Management Features
+
+The backend API is pre-wired for admin features:
+* `/api/admin/login` — Authenticates against Supabase or environment credentials.
+* `/api/admin/session` — Manages HTTP-only session cookies.
+* `/api/content` — Allows administrators to edit school details, staff, and photos directly from the browser.
+* `/api/notices` — Allows publishing and managing flash news ticker items in real-time.

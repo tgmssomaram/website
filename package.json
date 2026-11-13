@@ -1,0 +1,27 @@
+{
+  "name": "tgms-somaram-website",
+  "version": "1.0.0",
+  "description": "Official website and administration platform for Telangana Model School & Junior College, Somaram",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "tgms",
+    "telangana-model-school",
+    "somaram",
+    "saidapur",
+    "karimnagar",
+    "education",
+    "school-website"
+  ],
+  "author": "TGMS Somaram",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

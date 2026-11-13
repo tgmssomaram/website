@@ -2,7 +2,7 @@ import {schoolAnswer, safeWebsite} from './school-help-core.mjs';
 const make = (tag, value, cls) => { const e=document.createElement(tag); if(value)e.textContent=value;if(cls)e.className=cls;return e; };
 const anchor = (title,href) => {const a=make('a',title);a.href=href;if(href.startsWith('https:')){a.target='_blank';a.rel='noopener noreferrer';}return a;};
 let directoryPromise;
-const directory = () => directoryPromise ||= fetch('school-directory-websites.json').catch(()=>fetch('/school-directory-websites.json')).then(r=>{if(!r.ok)throw Error('Directory unavailable');return r.json();}).catch(error=>{directoryPromise=null;throw error;});
+const directory = () => directoryPromise ||= fetch('data/school-directory-websites.json').catch(()=>fetch('/data/school-directory-websites.json')).then(r=>{if(!r.ok)throw Error('Directory unavailable');return r.json();}).catch(error=>{directoryPromise=null;throw error;});
 const language = () => document.documentElement.lang || 'en';
 const label = (en,te,hi) => language()==='te'?te:language()==='hi'?hi:en;
 export async function renderSchoolDirectory(sheet) {
@@ -37,7 +37,7 @@ let configPromise;
 async function publicSchoolContext(){
   if(typeof schoolData==='object'&&schoolData)return schoolData;
   try{
-    const config=await(configPromise ||= fetch('school-assistant-config.json').catch(()=>fetch('/school-assistant-config.json')).then(r=>{if(!r.ok)throw Error();return r.json();}));
+    const config=await(configPromise ||= fetch('data/school-assistant-config.json').catch(()=>fetch('/data/school-assistant-config.json')).then(r=>{if(!r.ok)throw Error();return r.json();}));
     try{const response=await fetch('api/content').catch(()=>fetch('/api/content'));if(!response.ok)throw Error();const content=await response.json();let p=content.values?.[config.profileKey];if(typeof p==='string')p=JSON.parse(p);if(p)return {address:p.address,principal:{name:p.principalName,designation:p.principalDesignation,phone:p.principalPhone,email:p.officialEmail}};}catch{}
     return config.fallback||{};
   }catch{return {};}
