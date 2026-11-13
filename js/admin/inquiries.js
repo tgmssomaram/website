@@ -194,3 +194,4 @@ window.AdminModules.inquiries = {
     window.AdminAPI.showToast('CSV downloaded', 'success');
   }
 };
+

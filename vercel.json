@@ -1,11 +1,10 @@
 {
-  "version": 2,
-  "routes": [
-    { "src": "/admin", "dest": "/admin/index.html" },
-    { "src": "/admin/", "dest": "/admin/index.html" },
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*\\.(css|js|json|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|txt|xml|html))", "dest": "/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/", "destination": "/admin/index.html" }
   ],
   "headers": [
     {

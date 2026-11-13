@@ -98,3 +98,4 @@ window.AdminApp = {
 document.addEventListener('DOMContentLoaded', function() {
   window.AdminApp.init();
 });
+

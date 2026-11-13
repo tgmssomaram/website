@@ -205,3 +205,4 @@ window.AdminModules.faculty = {
     };
   }
 };
+
