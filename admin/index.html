@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal | TGMS Somaram</title>
+  <link rel="stylesheet" href="./css/admin.css" />
+</head>
+<body>
+
+  <!-- ===== LOGIN SCREEN ===== -->
+  <div id="login-screen">
+    <div class="login-card">
+      <img src="../images/telangana-emblem-trimmed.svg" alt="TGMS Emblem" class="login-logo" />
+      <h1 class="login-title">TGMS Somaram — Admin Portal</h1>
+      <p class="login-subtitle">Sign in to manage your school</p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="admin-email">Email Address</label>
+          <input
+            type="email"
+            id="admin-email"
+            placeholder="tgmssomaram.knr@gmail.com"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input
+            type="password"
+            id="admin-password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <button id="login-btn" class="btn-primary" type="submit">Sign In</button>
+      </form>
+
+      <div id="login-spinner" class="spinner" aria-hidden="true"></div>
+      <div id="login-error" role="alert"></div>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD SCREEN ===== -->
+  <div id="dashboard-screen" class="hidden">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <img src="../images/telangana-emblem-trimmed.svg" alt="TGMS Emblem" />
+        <div class="sidebar-brand-text">
+          <h2>TGMS Somaram</h2>
+          <span>Admin Portal</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a data-section="dashboard" class="active">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a data-section="notices">
+          <span class="nav-icon">🗞️</span>
+          <span>Notices</span>
+        </a>
+        <a data-section="faculty">
+          <span class="nav-icon">👨‍🏫</span>
+          <span>Faculty</span>
+        </a>
+        <a data-section="gallery">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a data-section="inquiries">
+          <span class="nav-icon">📩</span>
+          <span>Inquiries</span>
+        </a>
+        <a data-section="profile">
+          <span class="nav-icon">🏫</span>
+          <span>Profile</span>
+        </a>
+        <a data-section="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logout-btn" type="button">🚪 Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main area -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <button id="sidebar-toggle" type="button" aria-label="Toggle sidebar">☰</button>
+        <span id="topbar-title" style="font-weight:600;color:#1a1a2e;font-size:1rem;">Dashboard</span>
+      </header>
+
+      <div id="admin-view" class="admin-view"></div>
+    </div>
+
+  </div><!-- /#dashboard-screen -->
+
+  <!-- Toast container (rendered by JS) -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts — order matters -->
+  <script type="text/javascript" src="../js/admin/api.js"></script>
+  <script type="text/javascript" src="../js/admin/auth.js"></script>
+  <script type="text/javascript" src="../js/admin/dashboard.js"></script>
+  <script type="text/javascript" src="../js/admin/notices.js"></script>
+  <script type="text/javascript" src="../js/admin/faculty.js"></script>
+  <script type="text/javascript" src="../js/admin/gallery.js"></script>
+  <script type="text/javascript" src="../js/admin/inquiries.js"></script>
+  <script type="text/javascript" src="../js/admin/profile.js"></script>
+  <script type="text/javascript" src="../js/admin/settings.js"></script>
+  <script type="text/javascript" src="../js/admin/app.js"></script>
+</body>
+</html>

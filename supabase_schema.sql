@@ -106,3 +106,66 @@ values
     ('సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.', 'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.', '2026-11-05', true),
     ('TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.', 'TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.', '2026-11-10', true)
 on conflict do nothing;
+
+-- ==============================================================
+-- ADMIN PORTAL ADDITIONS
+-- Run these statements after the initial schema above
+-- ==============================================================
+
+-- Faculty table
+create table if not exists public.faculty (
+    id uuid default gen_random_uuid() primary key,
+    name text not null,
+    designation text,
+    subject text,
+    qualification text,
+    photo_url text,
+    order_index integer not null default 0,
+    is_active boolean not null default true,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Gallery items table
+create table if not exists public.gallery_items (
+    id uuid default gen_random_uuid() primary key,
+    title text not null,
+    image_url text not null,
+    category text not null default 'School Activities',
+    caption text,
+    is_active boolean not null default true,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.faculty enable row level security;
+alter table public.gallery_items enable row level security;
+
+drop policy if exists "Allow public read on faculty" on public.faculty;
+create policy "Allow public read on faculty" on public.faculty for select using (is_active = true);
+
+drop policy if exists "Allow service role full access on faculty" on public.faculty;
+create policy "Allow service role full access on faculty" on public.faculty for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+drop policy if exists "Allow public read on gallery_items" on public.gallery_items;
+create policy "Allow public read on gallery_items" on public.gallery_items for select using (is_active = true);
+
+drop policy if exists "Allow service role full access on gallery_items" on public.gallery_items;
+create policy "Allow service role full access on gallery_items" on public.gallery_items for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+insert into public.faculty (name, designation, subject, qualification, order_index, is_active) values
+    ('Farhana', 'Principal FAC', 'Administration', 'M.Sc., B.Ed.', 0, true),
+    ('K. Veerababu', 'PGT Mathematics', 'Mathematics', 'M.Sc., B.Ed.', 1, true),
+    ('Jamalapuram Ramakrishna', 'PGT Economics', 'Economics', 'M.Sc., Town Planning, SET', 2, true),
+    ('Boora Saidaiah Goud', 'PGT Civics', 'Civics', 'M.A., B.Ed.', 3, true),
+    ('Bandi Saidulu', 'PGT Botany', 'Botany', 'M.Sc., B.Ed., SET', 4, true),
+    ('Vutukuri Ravinder Reddy', 'PGT Chemistry', 'Chemistry', 'M.Sc., B.Ed.', 5, true),
+    ('Pokala Venkateswara Rao', 'PGT Zoology', 'Zoology', 'M.Sc., B.Ed.', 6, true),
+    ('Shaik Sharief', 'PGT Physics', 'Physics', 'M.Sc., B.Ed.', 7, true),
+    ('Shaik Jani', 'PGT English', 'English', 'M.A., B.Ed.', 8, true),
+    ('Bommaganti Sushmitha', 'PGT Mathematics', 'Mathematics', 'M.Sc., B.Ed.', 9, true),
+    ('Chandala Vani Sree', 'PGT Telugu', 'Telugu', 'M.A., B.Ed.', 10, true),
+    ('Shaik Jakir Hussain', 'PGT Telugu', 'Telugu', 'M.A., B.Ed.', 11, true),
+    ('Kondeti Saidulu', 'PGT English', 'English', 'M.A., B.Ed.', 12, true)
+on conflict do nothing;
