@@ -1,0 +1,3094 @@
+[
+  {
+    "district": "Adilabad",
+    "location": "Bangariguda",
+    "mandal": "Adilabad",
+    "website": null,
+    "id": "tgms-web-001",
+    "serial": 1,
+    "websiteSource": null,
+    "aliases": [
+      "ADILABAD",
+      "BANGARIGUDA",
+      "Bangariguda"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bangariguda, Adilabad Mandal, Adilabad District, Telangana"
+  },
+  {
+    "district": "Adilabad",
+    "location": "Bazarhathnoor",
+    "mandal": "Bazarhathnoor",
+    "website": null,
+    "id": "tgms-web-002",
+    "serial": 2,
+    "websiteSource": null,
+    "aliases": [
+      "ADILABAD",
+      "BAZARHATHNOOR",
+      "Bazarhathnoor"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bazarhathnoor, Bazarhathnoor Mandal, Adilabad District, Telangana"
+  },
+  {
+    "district": "Adilabad",
+    "location": "Boath",
+    "mandal": "Boath",
+    "website": null,
+    "id": "tgms-web-003",
+    "serial": 3,
+    "websiteSource": null,
+    "aliases": [
+      "ADILABAD",
+      "Boath"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Boath, Boath Mandal, Adilabad District, Telangana"
+  },
+  {
+    "district": "Adilabad",
+    "location": "Gudihathnoor",
+    "mandal": "Gudihathnoor",
+    "website": "https://gudihathnoor.telanganamodelschool.com/",
+    "id": "tgms-web-004",
+    "serial": 4,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "ADILABAD",
+      "Gudi Hatnoor",
+      "Gudihathnoor"
+    ],
+    "address": "Gudihathnoor, Gudihathnoor Mandal, Adilabad District, Telangana"
+  },
+  {
+    "district": "Adilabad",
+    "location": "Jainad",
+    "mandal": "Jainad",
+    "website": "https://jainad.telanganamodelschool.com/",
+    "id": "tgms-web-005",
+    "serial": 5,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "ADILABAD",
+      "JAINAD",
+      "JAINAD"
+    ],
+    "address": "Jainad, Jainad Mandal, Adilabad District, Telangana"
+  },
+  {
+    "district": "Adilabad",
+    "location": "Narnoor",
+    "mandal": "Narnoor",
+    "website": null,
+    "id": "tgms-web-006",
+    "serial": 6,
+    "websiteSource": null,
+    "aliases": [
+      "ADILABAD",
+      "Narnoor"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Narnoor, Narnoor Mandal, Adilabad District, Telangana"
+  },
+  {
+    "district": "Hanumakonda",
+    "location": "Elkathurty",
+    "mandal": "Elkathurthy",
+    "website": "https://elkathurty.telanganamodelschool.com/",
+    "id": "tgms-web-007",
+    "serial": 7,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "WARANGAL (URBAN)",
+      "ELKATHURTHY",
+      "ELKATHURTY"
+    ],
+    "address": "Elkathurty, Elkathurthy Mandal, Hanumakonda District, Telangana"
+  },
+  {
+    "district": "Hanumakonda",
+    "location": "Kamalapur",
+    "mandal": "Kamalapur",
+    "website": null,
+    "id": "tgms-web-008",
+    "serial": 8,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (URBAN)",
+      "KAMALAPUR",
+      "Kamalapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kamalapur, Kamalapur Mandal, Hanumakonda District, Telangana"
+  },
+  {
+    "district": "Hanumakonda",
+    "location": "Mulkanur",
+    "mandal": "Bheemadevara Pally",
+    "website": null,
+    "id": "tgms-web-009",
+    "serial": 9,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "CHIGURUMAMIDI",
+      "MULKANUR",
+      "WARANGAL (URBAN)",
+      "BHEEMADEVARA PALLY",
+      "Mulkanur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mulkanur, Bheemadevara Pally Mandal, Hanumakonda District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Gollapally",
+    "mandal": "Gollapally",
+    "website": null,
+    "id": "tgms-web-010",
+    "serial": 10,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "GOLLAPALLY",
+      "Gollapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gollapally, Gollapally Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Ibrahimpatnam",
+    "mandal": "Ibrahimpatnam",
+    "website": null,
+    "id": "tgms-web-011",
+    "serial": 11,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "IBRAHIMPATNAM",
+      "Ibrahimpatnam"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ibrahimpatnam, Ibrahimpatnam Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Itikyal",
+    "mandal": "Raikal",
+    "website": null,
+    "id": "tgms-web-012",
+    "serial": 12,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "RAIKAL",
+      "ITIKYAL",
+      "Itikyal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Itikyal, Raikal Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Kallur",
+    "mandal": "Korutla",
+    "website": null,
+    "id": "tgms-web-013",
+    "serial": 13,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "KORUTLA",
+      "KALLUR",
+      "Kallur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kallur, Korutla Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Kandlapally",
+    "mandal": "Jagitial",
+    "website": null,
+    "id": "tgms-web-014",
+    "serial": 14,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "KANDLAPALLY",
+      "Kandlapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kandlapally, Jagitial Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Kathalapur",
+    "mandal": "Kathalapur",
+    "website": null,
+    "id": "tgms-web-015",
+    "serial": 15,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "KATHALAPUR",
+      "Kathalapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kathalapur, Kathalapur Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Kodimiyal",
+    "mandal": "Kodimiyal",
+    "website": null,
+    "id": "tgms-web-016",
+    "serial": 16,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "Kodimiyal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kodimiyal, Kodimiyal Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Kummarripally",
+    "mandal": "Velgatoor",
+    "website": null,
+    "id": "tgms-web-017",
+    "serial": 17,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "VELGATOOR",
+      "KUMMARRIPALLY",
+      "Kummarripally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kummarripally, Velgatoor Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Maggidi",
+    "mandal": "Dharmapuri",
+    "website": null,
+    "id": "tgms-web-018",
+    "serial": 18,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "DHARMAPURI",
+      "MAGGIDI",
+      "Maggidi"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Maggidi, Dharmapuri Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Mallapur",
+    "mandal": "Mallapur",
+    "website": null,
+    "id": "tgms-web-019",
+    "serial": 19,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "MALLAPUR",
+      "Mallapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mallapur, Mallapur Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Medipally",
+    "mandal": "Medipally",
+    "website": null,
+    "id": "tgms-web-020",
+    "serial": 20,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "Medipally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Medipally, Medipally Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Nookapally",
+    "mandal": "Mallial",
+    "website": null,
+    "id": "tgms-web-021",
+    "serial": 21,
+    "websiteSource": null,
+    "aliases": [
+      "JAGITIAL",
+      "MALLIAL",
+      "NOOKAPALLY",
+      "Nookapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nookapally, Mallial Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jagtial",
+    "location": "Pegadapally",
+    "mandal": "Pegada Pally",
+    "website": null,
+    "id": "tgms-web-022",
+    "serial": 22,
+    "websiteSource": null,
+    "aliases": [
+      "Pegdapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Pegadapally, Pegada Pally Mandal, Jagtial District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Bachannapet",
+    "mandal": "Bachannapet",
+    "website": "https://bachannapet.telanganamodelschool.com/",
+    "id": "tgms-web-023",
+    "serial": 23,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "JANGOAN",
+      "Bachannapet",
+      "Bachannapet"
+    ],
+    "address": "Bachannapet, Bachannapet Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Chowdaram",
+    "mandal": "Jangaon",
+    "website": null,
+    "id": "tgms-web-024",
+    "serial": 24,
+    "websiteSource": null,
+    "aliases": [
+      "JANGOAN",
+      "Jangaon",
+      "Chowdaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chowdaram, Jangaon Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Ghanpur (Stn)",
+    "mandal": "Ghanpur (Stn)",
+    "website": null,
+    "id": "tgms-web-025",
+    "serial": 25,
+    "websiteSource": null,
+    "aliases": [
+      "JANGOAN",
+      "Ghanpur (Stn)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ghanpur (Stn), Ghanpur (Stn) Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Kodakandla",
+    "mandal": "Kodakandla",
+    "website": "https://tgmskodakandla.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-026",
+    "serial": 26,
+    "aliases": [
+      "JANGOAN",
+      "Kodakandla"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kodakandla, Kodakandla Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Lingala Ghanpur",
+    "mandal": "Lingala Ghanpur",
+    "website": null,
+    "id": "tgms-web-027",
+    "serial": 27,
+    "websiteSource": null,
+    "aliases": [
+      "JANGOAN",
+      "Lingala Ghanpur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Lingala Ghanpur, Lingala Ghanpur Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Narmetta",
+    "mandal": "Narmetta",
+    "website": null,
+    "id": "tgms-web-028",
+    "serial": 28,
+    "websiteSource": null,
+    "aliases": [
+      "JANGOAN",
+      "Narmetta"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Narmetta, Narmetta Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Veldi",
+    "mandal": "Raghunathpally",
+    "website": null,
+    "id": "tgms-web-029",
+    "serial": 29,
+    "websiteSource": null,
+    "aliases": [
+      "JANGOAN",
+      "Raghunathpally",
+      "Veldi"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Veldi, Raghunathpally Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jangaon",
+    "location": "Zaffergadh",
+    "mandal": "Zaffergadh",
+    "website": null,
+    "id": "tgms-web-030",
+    "serial": 30,
+    "websiteSource": null,
+    "aliases": [
+      "JANGOAN",
+      "Zaffergadh"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Zaffergadh, Zaffergadh Mandal, Jangaon District, Telangana"
+  },
+  {
+    "district": "Jayashankar Bhupalpally",
+    "location": "Chityal",
+    "mandal": "Chityal",
+    "website": null,
+    "id": "tgms-web-031",
+    "serial": 31,
+    "websiteSource": null,
+    "aliases": [
+      "JAYASHANKAR (BHUPALPALLI)",
+      "Chityal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chityal, Chityal Mandal, Jayashankar Bhupalpally District, Telangana"
+  },
+  {
+    "district": "Jayashankar Bhupalpally",
+    "location": "Dubbalapadu",
+    "mandal": "Maha Mutharam",
+    "website": null,
+    "id": "tgms-web-032",
+    "serial": 32,
+    "websiteSource": null,
+    "aliases": [
+      "JAYASHANKAR (BHUPALPALLI)",
+      "MAHA MUTHARAM",
+      "DUBBALAPADU",
+      "Dubbalapadu"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dubbalapadu, Maha Mutharam Mandal, Jayashankar Bhupalpally District, Telangana"
+  },
+  {
+    "district": "Jayashankar Bhupalpally",
+    "location": "Edlapally",
+    "mandal": "Malahar Rao",
+    "website": null,
+    "id": "tgms-web-033",
+    "serial": 33,
+    "websiteSource": null,
+    "aliases": [
+      "JAYASHANKAR (BHUPALPALLI)",
+      "MALAHAR RAO",
+      "EDLAPALLY",
+      "Edlapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Edlapally, Malahar Rao Mandal, Jayashankar Bhupalpally District, Telangana"
+  },
+  {
+    "district": "Jayashankar Bhupalpally",
+    "location": "Gangaram",
+    "mandal": "Kataram",
+    "website": null,
+    "id": "tgms-web-034",
+    "serial": 34,
+    "websiteSource": null,
+    "aliases": [
+      "JAYASHANKAR (BHUPALPALLI)",
+      "KATARAM",
+      "GANGARAM",
+      "Gangaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gangaram, Kataram Mandal, Jayashankar Bhupalpally District, Telangana"
+  },
+  {
+    "district": "Jayashankar Bhupalpally",
+    "location": "Ghanpur (M)",
+    "mandal": "Ghanpur (M)",
+    "website": null,
+    "id": "tgms-web-035",
+    "serial": 35,
+    "websiteSource": null,
+    "aliases": [
+      "JAYASHANKAR (BHUPALPALLI)",
+      "Ghanpur (M)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ghanpur (M), Ghanpur (M) Mandal, Jayashankar Bhupalpally District, Telangana"
+  },
+  {
+    "district": "Jayashankar Bhupalpally",
+    "location": "Korkishala",
+    "mandal": "Mogullapally",
+    "website": null,
+    "id": "tgms-web-036",
+    "serial": 36,
+    "websiteSource": null,
+    "aliases": [
+      "JAYASHANKAR (BHUPALPALLI)",
+      "Mogullapally",
+      "Korkishala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Korkishala, Mogullapally Mandal, Jayashankar Bhupalpally District, Telangana"
+  },
+  {
+    "district": "Kamareddy",
+    "location": "Achampet",
+    "mandal": "Nizamsagar",
+    "website": null,
+    "id": "tgms-web-037",
+    "serial": 37,
+    "websiteSource": null,
+    "aliases": [
+      "KAMAREDDY",
+      "NIZAMSAGAR",
+      "ACHAMPET",
+      "Achampet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Achampet, Nizamsagar Mandal, Kamareddy District, Telangana"
+  },
+  {
+    "district": "Kamareddy",
+    "location": "Gopalpet",
+    "mandal": "Nagireddypet",
+    "website": "https://tgmsgopalpet.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-038",
+    "serial": 38,
+    "aliases": [
+      "KAMAREDDY",
+      "NAGIREDDYPET",
+      "GOPALPET",
+      "Gopalpet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gopalpet, Nagireddypet Mandal, Kamareddy District, Telangana"
+  },
+  {
+    "district": "Kamareddy",
+    "location": "Kothabad",
+    "mandal": "Banswada",
+    "website": null,
+    "id": "tgms-web-039",
+    "serial": 39,
+    "websiteSource": null,
+    "aliases": [
+      "KAMAREDDY",
+      "BANSWADA",
+      "KOTHABAD",
+      "Kothabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kothabad, Banswada Mandal, Kamareddy District, Telangana"
+  },
+  {
+    "district": "Kamareddy",
+    "location": "Mennur",
+    "mandal": "Madnoor",
+    "website": null,
+    "id": "tgms-web-040",
+    "serial": 40,
+    "websiteSource": null,
+    "aliases": [
+      "KAMAREDDY",
+      "MADNOOR",
+      "MENNUR",
+      "Mennur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mennur, Madnoor Mandal, Kamareddy District, Telangana"
+  },
+  {
+    "district": "Kamareddy",
+    "location": "Sada Shiv Nagar",
+    "mandal": "Ss Nagar",
+    "website": null,
+    "id": "tgms-web-041",
+    "serial": 41,
+    "websiteSource": null,
+    "aliases": [
+      "KAMAREDDY",
+      "SS NAGAR",
+      "SADA SHIV NAGAR",
+      "Sada Shiv Nagar"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Sada Shiv Nagar, Ss Nagar Mandal, Kamareddy District, Telangana"
+  },
+  {
+    "district": "Kamareddy",
+    "location": "Yellareddy",
+    "mandal": "Yellareddy",
+    "website": null,
+    "id": "tgms-web-042",
+    "serial": 42,
+    "websiteSource": null,
+    "aliases": [
+      "KAMAREDDY",
+      "YELLAREDDY",
+      "Yellareddy"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Yellareddy, Yellareddy Mandal, Kamareddy District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Elagandal",
+    "mandal": "Karimnagar (Kothapalle)",
+    "website": null,
+    "id": "tgms-web-043",
+    "serial": 43,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "KARIMNAGAR (KOTHAPALLE)",
+      "ELAGANDAL",
+      "Elagandal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Elagandal, Karimnagar (Kothapalle) Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Ganmukla",
+    "mandal": "Veenavanka",
+    "website": null,
+    "id": "tgms-web-044",
+    "serial": 44,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "VEENAVANKA",
+      "GANMUKLA",
+      "Ganmukla"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ganmukla, Veenavanka Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Mulkanur",
+    "mandal": "Chigurumamidi",
+    "website": null,
+    "id": "tgms-web-045",
+    "serial": 45,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "CHIGURUMAMIDI",
+      "MULKANUR",
+      "WARANGAL (URBAN)",
+      "BHEEMADEVARA PALLY",
+      "Mulkanur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mulkanur, Chigurumamidi Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Nylamkondapally",
+    "mandal": "Gangadhara",
+    "website": null,
+    "id": "tgms-web-046",
+    "serial": 46,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "GANGADHARA",
+      "NYLAMKONDAPALLY",
+      "Nylamkondapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nylamkondapally, Gangadhara Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Pochampally",
+    "mandal": "Manakondur",
+    "website": null,
+    "id": "tgms-web-047",
+    "serial": 47,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "MANAKONDUR",
+      "POCHAMPALLY",
+      "YADADRI (BHONGIRI)",
+      "Pochampally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Pochampally, Manakondur Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Ramadugu",
+    "mandal": "Ramadugu",
+    "website": null,
+    "id": "tgms-web-048",
+    "serial": 48,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "RAMADUGU",
+      "Ramadugu"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ramadugu, Ramadugu Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Rukmapur",
+    "mandal": "Choppadandi",
+    "website": null,
+    "id": "tgms-web-049",
+    "serial": 49,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "CHOPPADANDI",
+      "RUKMAPUR",
+      "Rukmapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Rukmapur, Choppadandi Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Shankarapatnam",
+    "mandal": "Shankarapatnam",
+    "website": null,
+    "id": "tgms-web-050",
+    "serial": 50,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "SHANKARAPATNAM",
+      "Shankarapatnam"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Shankarapatnam, Shankarapatnam Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Somaram",
+    "mandal": "Saidapur",
+    "website": "/",
+    "id": "tgms-web-051",
+    "serial": 51,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "SAIDAPUR",
+      "SOMARAM",
+      "Somaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Somaram, Saidapur Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Tekurthy",
+    "mandal": "Ellandakunta (Jammikunta)",
+    "website": null,
+    "id": "tgms-web-052",
+    "serial": 52,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "ELLANDAKUNTA (JAMMIKUNTA)",
+      "TEKURTHY",
+      "Tekurthy"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Tekurthy, Ellandakunta (Jammikunta) Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Karimnagar",
+    "location": "Thimmapur",
+    "mandal": "Thimmapur",
+    "website": null,
+    "id": "tgms-web-053",
+    "serial": 53,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "THIMMAPUR",
+      "Thimmapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Thimmapur, Thimmapur Mandal, Karimnagar District, Telangana"
+  },
+  {
+    "district": "Khammam",
+    "location": "Karepally",
+    "mandal": "Singareni",
+    "website": null,
+    "id": "tgms-web-054",
+    "serial": 54,
+    "websiteSource": null,
+    "aliases": [
+      "KHAMMAM",
+      "SINGARENI",
+      "KAREPALLY",
+      "Karepally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Karepally, Singareni Mandal, Khammam District, Telangana"
+  },
+  {
+    "district": "Khammam",
+    "location": "Tekulapally",
+    "mandal": "Penubally",
+    "website": null,
+    "id": "tgms-web-055",
+    "serial": 55,
+    "websiteSource": null,
+    "aliases": [
+      "KHAMMAM",
+      "PENUBALLY",
+      "TEKULAPALLY",
+      "Tekulapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Tekulapally, Penubally Mandal, Khammam District, Telangana"
+  },
+  {
+    "district": "Kumuram Bheem",
+    "location": "Asifabad",
+    "mandal": "Asifabad",
+    "website": null,
+    "id": "tgms-web-056",
+    "serial": 56,
+    "websiteSource": null,
+    "aliases": [
+      "Komarambheem (Asifabad)",
+      "ASIFABAD",
+      "Asifabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Asifabad, Asifabad Mandal, Kumuram Bheem District, Telangana"
+  },
+  {
+    "district": "Kumuram Bheem",
+    "location": "Sirpur (U)",
+    "mandal": "Sirpur (U)",
+    "website": null,
+    "id": "tgms-web-057",
+    "serial": 57,
+    "websiteSource": null,
+    "aliases": [
+      "Komarambheem (Asifabad)",
+      "SIRPUR (U)",
+      "Sirpur (U)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Sirpur (U), Sirpur (U) Mandal, Kumuram Bheem District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Chilukodu",
+    "mandal": "Dornakal",
+    "website": null,
+    "id": "tgms-web-058",
+    "serial": 58,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Dornakal",
+      "Chilukodu"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chilukodu, Dornakal Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Gurthur",
+    "mandal": "Thorrur",
+    "website": null,
+    "id": "tgms-web-059",
+    "serial": 59,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Thorrur",
+      "Gurthur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gurthur, Thorrur Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Kalwala, Kesamudram",
+    "mandal": "Kesamudram",
+    "website": null,
+    "id": "tgms-web-060",
+    "serial": 60,
+    "websiteSource": null,
+    "aliases": [
+      "Kalwala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kalwala, Kesamudram, Kesamudram Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Mahabubabad",
+    "mandal": "Mahabubabad",
+    "website": null,
+    "id": "tgms-web-061",
+    "serial": 61,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Mahabubabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mahabubabad, Mahabubabad Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Maripeda",
+    "mandal": "Maripeda",
+    "website": null,
+    "id": "tgms-web-062",
+    "serial": 62,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Maripeda"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Maripeda, Maripeda Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Narsimhulapet",
+    "mandal": "Narsimhulapet",
+    "website": null,
+    "id": "tgms-web-063",
+    "serial": 63,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Narsimhulapet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Narsimhulapet, Narsimhulapet Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Nellikuduru",
+    "mandal": "Nellikuduru",
+    "website": null,
+    "id": "tgms-web-064",
+    "serial": 64,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Nellikuduru"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nellikuduru, Nellikuduru Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubabad",
+    "location": "Nereda",
+    "mandal": "Kuravi",
+    "website": null,
+    "id": "tgms-web-065",
+    "serial": 65,
+    "websiteSource": null,
+    "aliases": [
+      "MAHABUBABAD",
+      "Kuravi",
+      "Nereda"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nereda, Kuravi Mandal, Mahabubabad District, Telangana"
+  },
+  {
+    "district": "Mahabubnagar",
+    "location": "Vennached",
+    "mandal": "Ganded",
+    "website": null,
+    "id": "tgms-web-066",
+    "serial": 66,
+    "websiteSource": null,
+    "aliases": [
+      "Vennechad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Vennached, Ganded Mandal, Mahabubnagar District, Telangana"
+  },
+  {
+    "district": "Mancherial",
+    "location": "Kasipet",
+    "mandal": "Kasipeta",
+    "website": null,
+    "id": "tgms-web-067",
+    "serial": 67,
+    "websiteSource": null,
+    "aliases": [
+      "MANCHERIAL",
+      "Kasipeta",
+      "Kasipet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kasipet, Kasipeta Mandal, Mancherial District, Telangana"
+  },
+  {
+    "district": "Mancherial",
+    "location": "Kotapally",
+    "mandal": "Kotapally",
+    "website": null,
+    "id": "tgms-web-068",
+    "serial": 68,
+    "websiteSource": null,
+    "aliases": [
+      "MANCHERIAL",
+      "Kotapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kotapally, Kotapally Mandal, Mancherial District, Telangana"
+  },
+  {
+    "district": "Mancherial",
+    "location": "Lingapur",
+    "mandal": "Dandepalli",
+    "website": null,
+    "id": "tgms-web-069",
+    "serial": 69,
+    "websiteSource": null,
+    "aliases": [
+      "MANCHERIAL",
+      "DANDEPALLI",
+      "LINGAPUR",
+      "PEDDAPALLY",
+      "RAMAGUNDAM",
+      "Lingapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Lingapur, Dandepalli Mandal, Mancherial District, Telangana"
+  },
+  {
+    "district": "Mancherial",
+    "location": "Manchiryal",
+    "mandal": "Manchiryal",
+    "website": null,
+    "id": "tgms-web-070",
+    "serial": 70,
+    "websiteSource": null,
+    "aliases": [
+      "MANCHERIAL",
+      "Manchiryal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Manchiryal, Manchiryal Mandal, Mancherial District, Telangana"
+  },
+  {
+    "district": "Mancherial",
+    "location": "Mandamarri",
+    "mandal": "Mandamarri",
+    "website": null,
+    "id": "tgms-web-071",
+    "serial": 71,
+    "websiteSource": null,
+    "aliases": [
+      "MANCHERIAL",
+      "MANDAMARRI",
+      "Mandamarri"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mandamarri, Mandamarri Mandal, Mancherial District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Chegunta (Wadiaram)",
+    "mandal": "Chegunta",
+    "website": null,
+    "id": "tgms-web-072",
+    "serial": 72,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Chegunta",
+      "Chegunta (WADIARAM)",
+      "Chegunta (Wadiaram)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chegunta (Wadiaram), Chegunta Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Jakkapalli",
+    "mandal": "Narsapur",
+    "website": null,
+    "id": "tgms-web-073",
+    "serial": 73,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Narsapur",
+      "Jakkapalli"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Jakkapalli, Narsapur Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Ramayampet (Komatipally)",
+    "mandal": "Ramayanpet",
+    "website": null,
+    "id": "tgms-web-074",
+    "serial": 74,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Ramayanpet",
+      "Ramayampet (Komatipally)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ramayampet (Komatipally), Ramayanpet Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Regode",
+    "mandal": "Regode",
+    "website": null,
+    "id": "tgms-web-075",
+    "serial": 75,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Regode"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Regode, Regode Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Shankarampet R",
+    "mandal": "Shankarampet R",
+    "website": null,
+    "id": "tgms-web-076",
+    "serial": 76,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Shankarampet R"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Shankarampet R, Shankarampet R Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Tekmal",
+    "mandal": "Tekmal",
+    "website": null,
+    "id": "tgms-web-077",
+    "serial": 77,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Tekmal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Tekmal, Tekmal Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Medak",
+    "location": "Thirumalapur",
+    "mandal": "Shankarampet-A",
+    "website": null,
+    "id": "tgms-web-078",
+    "serial": 78,
+    "websiteSource": null,
+    "aliases": [
+      "MEDAK",
+      "Shankarampet-A",
+      "Thirumalapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Thirumalapur, Shankarampet-A Mandal, Medak District, Telangana"
+  },
+  {
+    "district": "Mulugu",
+    "location": "Bandarupally",
+    "mandal": "Mulugu",
+    "website": null,
+    "id": "tgms-web-079",
+    "serial": 79,
+    "websiteSource": null,
+    "aliases": [
+      "MULUGU",
+      "Mulugu",
+      "Bandarupally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bandarupally, Mulugu Mandal, Mulugu District, Telangana"
+  },
+  {
+    "district": "Mulugu",
+    "location": "Chalvai",
+    "mandal": "Govindaraopet",
+    "website": null,
+    "id": "tgms-web-080",
+    "serial": 80,
+    "websiteSource": null,
+    "aliases": [
+      "MULUGU",
+      "Govindaraopet",
+      "Chalvai"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chalvai, Govindaraopet Mandal, Mulugu District, Telangana"
+  },
+  {
+    "district": "Mulugu",
+    "location": "Jawahar nagar",
+    "mandal": "Venkatapur",
+    "website": null,
+    "id": "tgms-web-081",
+    "serial": 81,
+    "websiteSource": null,
+    "aliases": [
+      "MULUGU",
+      "Venkatapur",
+      "Jawahar nagar",
+      "Jawahar Nagar"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Jawahar nagar, Venkatapur Mandal, Mulugu District, Telangana"
+  },
+  {
+    "district": "Nagarkurnool",
+    "location": "Kodair",
+    "mandal": "Kodair",
+    "website": null,
+    "id": "tgms-web-082",
+    "serial": 82,
+    "websiteSource": null,
+    "aliases": [
+      "NAGARKURNOOL",
+      "Kodair"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kodair, Kodair Mandal, Nagarkurnool District, Telangana"
+  },
+  {
+    "district": "Nagarkurnool",
+    "location": "Veldanda",
+    "mandal": "Veldanda",
+    "website": null,
+    "id": "tgms-web-083",
+    "serial": 83,
+    "websiteSource": null,
+    "aliases": [
+      "NAGARKURNOOL",
+      "Veldanda"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Veldanda, Veldanda Mandal, Nagarkurnool District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Amrp Colony",
+    "mandal": "Thipparthy",
+    "website": null,
+    "id": "tgms-web-084",
+    "serial": 84,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "THIPPARTHY",
+      "AMRP COLONY",
+      "Amrp Colony"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Amrp Colony, Thipparthy Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Bothalapalem",
+    "mandal": "Damaracharla",
+    "website": null,
+    "id": "tgms-web-085",
+    "serial": 85,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "DAMARACHARLA",
+      "BOTHALAPALEM",
+      "Bothalapalem"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bothalapalem, Damaracharla Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Chinthapally",
+    "mandal": "Chinthapally",
+    "website": null,
+    "id": "tgms-web-086",
+    "serial": 86,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "CHINTHAPALLY",
+      "Chinthapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chinthapally, Chinthapally Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Dugyala",
+    "mandal": "P.A.Pally",
+    "website": null,
+    "id": "tgms-web-087",
+    "serial": 87,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "P.A.PALLY",
+      "DUGYALA",
+      "Dugyala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dugyala, P.A.Pally Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Gundlapally",
+    "mandal": "Gundlapally",
+    "website": null,
+    "id": "tgms-web-088",
+    "serial": 88,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "GUNDLAPALLY",
+      "Gundlapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gundlapally, Gundlapally Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Gurrampode",
+    "mandal": "Gurrampode",
+    "website": "https://gurrampode.telanganamodelschool.com/",
+    "id": "tgms-web-089",
+    "serial": 89,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [],
+    "address": "Gurrampode, Gurrampode Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Kampasagar",
+    "mandal": "Tripuraram",
+    "website": null,
+    "id": "tgms-web-090",
+    "serial": 90,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "TRIPURARAM",
+      "KAMPASAGAR",
+      "Kampasagar"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kampasagar, Tripuraram Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Kanagal",
+    "mandal": "Kanagal",
+    "website": null,
+    "id": "tgms-web-091",
+    "serial": 91,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "KANAGAL",
+      "Kanagal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kanagal, Kanagal Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Kethepally",
+    "mandal": "Kethepally",
+    "website": null,
+    "id": "tgms-web-092",
+    "serial": 92,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "KETHEPALLY",
+      "Kethepally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kethepally, Kethepally Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Medichandrapuram",
+    "mandal": "Marrigudem",
+    "website": null,
+    "id": "tgms-web-093",
+    "serial": 93,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "MARRIGUDEM",
+      "MEDICHANDRAPURAM",
+      "Medichandrapuram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Medichandrapuram, Marrigudem Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Neredugomma",
+    "mandal": "Chandampet",
+    "website": null,
+    "id": "tgms-web-094",
+    "serial": 94,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "CHANDAMPET",
+      "NEREDUGOMMA",
+      "Neredugomma"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Neredugomma, Chandampet Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Nidamanoor",
+    "mandal": "Nidamanoor",
+    "website": null,
+    "id": "tgms-web-095",
+    "serial": 95,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "NIDAMANOOR",
+      "Nidamanoor"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nidamanoor, Nidamanoor Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Peddapuram",
+    "mandal": "Nampally",
+    "website": null,
+    "id": "tgms-web-096",
+    "serial": 96,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "NAMPALLY",
+      "PEDDAPURAM",
+      "Peddapuram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Peddapuram, Nampally Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Penchikalpahad",
+    "mandal": "Devarakonda",
+    "website": null,
+    "id": "tgms-web-097",
+    "serial": 97,
+    "websiteSource": null,
+    "aliases": [],
+    "mandalSource": "https://www.telanganaeducationhub.com/intermediate/colleges/model-school-junior-college-deverakonda/",
+    "address": "Penchikalpahad, Devarakonda Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Thungapahad",
+    "mandal": "Miryalaguda",
+    "website": null,
+    "id": "tgms-web-098",
+    "serial": 98,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "MIRYALAGUDA",
+      "THUNGAPAHAD",
+      "Thungapahad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Thungapahad, Miryalaguda Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Vallala",
+    "mandal": "Shaligowraram",
+    "website": null,
+    "id": "tgms-web-099",
+    "serial": 99,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "SHALIGOWRARAM",
+      "VALLALA",
+      "Vallala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Vallala, Shaligowraram Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Nalgonda",
+    "location": "Vemulapally",
+    "mandal": "Vemulapally",
+    "website": null,
+    "id": "tgms-web-100",
+    "serial": 100,
+    "websiteSource": null,
+    "aliases": [
+      "NALGONDA",
+      "VEMULAPALLY",
+      "Vemulapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Vemulapally, Vemulapally Mandal, Nalgonda District, Telangana"
+  },
+  {
+    "district": "Narayanpet",
+    "location": "Dhanwada",
+    "mandal": "Dhanwada",
+    "website": null,
+    "id": "tgms-web-101",
+    "serial": 101,
+    "websiteSource": null,
+    "aliases": [
+      "NARAYANPET",
+      "Dhanwada"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dhanwada, Dhanwada Mandal, Narayanpet District, Telangana"
+  },
+  {
+    "district": "Narayanpet",
+    "location": "Kosgi (Gundumal)",
+    "mandal": "Kosgi",
+    "website": null,
+    "id": "tgms-web-102",
+    "serial": 102,
+    "websiteSource": null,
+    "aliases": [
+      "NARAYANPET",
+      "Kosgi",
+      "Kosgi (GUNDUMAL)",
+      "Kosgi (Gundumal)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kosgi (Gundumal), Kosgi Mandal, Narayanpet District, Telangana"
+  },
+  {
+    "district": "Nirmal",
+    "location": "Kuntala",
+    "mandal": "Kuntala",
+    "website": "https://kuntala.telanganamodelschool.com/",
+    "id": "tgms-web-103",
+    "serial": 103,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "NIRMAL",
+      "KUNTALA",
+      "KUNTALA"
+    ],
+    "address": "Kuntala, Kuntala Mandal, Nirmal District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Ambam",
+    "mandal": "Rudrur (Varni)",
+    "website": null,
+    "id": "tgms-web-104",
+    "serial": 104,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "RUDRUR (VARNI)",
+      "AMBAM",
+      "Ambam"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ambam, Rudrur (Varni) Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Dharpally",
+    "mandal": "Dharpally",
+    "website": null,
+    "id": "tgms-web-105",
+    "serial": 105,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "DHARPALLY",
+      "Dharpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dharpally, Dharpally Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Dichpally",
+    "mandal": "Dichpally",
+    "website": null,
+    "id": "tgms-web-106",
+    "serial": 106,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "DICHPALLY",
+      "Dichpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dichpally, Dichpally Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Jakranpally",
+    "mandal": "Jakranpalli",
+    "website": null,
+    "id": "tgms-web-107",
+    "serial": 107,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "JAKRANPALLI",
+      "JAKRANPALLY",
+      "Jakranpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Jakranpally, Jakranpalli Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Mamidipalli",
+    "mandal": "Armoor",
+    "website": null,
+    "id": "tgms-web-108",
+    "serial": 108,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "ARMOOR",
+      "MAMIDIPALLI",
+      "Mamidipalli"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mamidipalli, Armoor Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Nandipet",
+    "mandal": "Nandipet",
+    "website": null,
+    "id": "tgms-web-109",
+    "serial": 109,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "NANDIPET",
+      "Nandipet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nandipet, Nandipet Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Navipet",
+    "mandal": "Navipet",
+    "website": null,
+    "id": "tgms-web-110",
+    "serial": 110,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "NAVIPET",
+      "Navipet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Navipet, Navipet Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Renjal",
+    "mandal": "Renjal",
+    "website": null,
+    "id": "tgms-web-111",
+    "serial": 111,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "RENJAL",
+      "Renjal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Renjal, Renjal Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Thandalkunta",
+    "mandal": "Sirikonda",
+    "website": null,
+    "id": "tgms-web-112",
+    "serial": 112,
+    "websiteSource": null,
+    "aliases": [
+      "NIZAMABAD",
+      "SIRIKONDA",
+      "THANDALKUNTA",
+      "Thandalkunta"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Thandalkunta, Sirikonda Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Nizamabad",
+    "location": "Vempally (Balkonda)",
+    "mandal": "Balkonda",
+    "website": null,
+    "id": "tgms-web-113",
+    "serial": 113,
+    "websiteSource": null,
+    "aliases": [
+      "Vempally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Vempally (Balkonda), Balkonda Mandal, Nizamabad District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Daryapur",
+    "mandal": "Mutharam ( Mnt )",
+    "website": null,
+    "id": "tgms-web-114",
+    "serial": 114,
+    "websiteSource": null,
+    "aliases": [
+      "PEDDAPALLY",
+      "MUTHARAM ( MNT )",
+      "DARYAPUR",
+      "Daryapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Daryapur, Mutharam ( Mnt ) Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Dharmaram",
+    "mandal": "Dharmaram",
+    "website": null,
+    "id": "tgms-web-115",
+    "serial": 115,
+    "websiteSource": null,
+    "aliases": [
+      "PEDDAPALLY",
+      "DHARMARAM",
+      "Dharmaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dharmaram, Dharmaram Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Garrepally",
+    "mandal": "Sulthanabad",
+    "website": null,
+    "id": "tgms-web-116",
+    "serial": 116,
+    "websiteSource": null,
+    "aliases": [
+      "PEDDAPALLY",
+      "SULTHANABAD",
+      "GARREPALLY",
+      "Garrepally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Garrepally, Sulthanabad Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Lingapur",
+    "mandal": "Ramagundam",
+    "website": null,
+    "id": "tgms-web-117",
+    "serial": 117,
+    "websiteSource": null,
+    "aliases": [
+      "MANCHERIAL",
+      "DANDEPALLI",
+      "LINGAPUR",
+      "PEDDAPALLY",
+      "RAMAGUNDAM",
+      "Lingapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Lingapur, Ramagundam Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Mallial",
+    "mandal": "Srirampur",
+    "website": "https://mallial.telanganamodelschool.com/",
+    "id": "tgms-web-118",
+    "serial": 118,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "PEDDAPALLY",
+      "SRIRAMPUR",
+      "MALLIAL"
+    ],
+    "address": "Mallial, Srirampur Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Odela",
+    "mandal": "Odela",
+    "website": null,
+    "id": "tgms-web-119",
+    "serial": 119,
+    "websiteSource": null,
+    "aliases": [
+      "PEDDAPALLY",
+      "ODELA",
+      "Odela"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Odela, Odela Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Peddapalli",
+    "location": "Peddapoor",
+    "mandal": "Julapally",
+    "website": null,
+    "id": "tgms-web-120",
+    "serial": 120,
+    "websiteSource": null,
+    "aliases": [
+      "PEDDAPALLY",
+      "JULAPALLY",
+      "PEDDAPOOR",
+      "Peddapoor"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Peddapoor, Julapally Mandal, Peddapalli District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Boinpally",
+    "mandal": "Boinpally",
+    "website": null,
+    "id": "tgms-web-121",
+    "serial": 121,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "BOINPALLY",
+      "Boinpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Boinpally, Boinpally Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Dammannapet",
+    "mandal": "Gambhirao Pet",
+    "website": null,
+    "id": "tgms-web-122",
+    "serial": 122,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "GAMBHIRAO PET",
+      "DAMMANNAPET",
+      "Dammannapet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Dammannapet, Gambhirao Pet Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Konaraopet",
+    "mandal": "Konaraopet",
+    "website": null,
+    "id": "tgms-web-123",
+    "serial": 123,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "KONARAOPET",
+      "Konaraopet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Konaraopet, Konaraopet Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Mandepally",
+    "mandal": "Sircilla",
+    "website": null,
+    "id": "tgms-web-124",
+    "serial": 124,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "SIRCILLA",
+      "MANDEPALLY",
+      "Mandepally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mandepally, Sircilla Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Namapur",
+    "mandal": "Mustabad",
+    "website": null,
+    "id": "tgms-web-125",
+    "serial": 125,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "MUSTABAD",
+      "NAMAPUR",
+      "Namapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Namapur, Mustabad Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Rahimkhanpet",
+    "mandal": "Ellanthakunta",
+    "website": null,
+    "id": "tgms-web-126",
+    "serial": 126,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "ELLANTHAKUNTA",
+      "RAHIMKHANPET",
+      "Rahimkhanpet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Rahimkhanpet, Ellanthakunta Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rajanna Sircilla",
+    "location": "Veernapally",
+    "mandal": "Veernapally",
+    "website": null,
+    "id": "tgms-web-127",
+    "serial": 127,
+    "websiteSource": null,
+    "aliases": [
+      "RAJANNA (SIRCILLA)",
+      "VEERNAPALLY",
+      "Veernapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Veernapally, Veernapally Mandal, Rajanna Sircilla District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Arutla",
+    "mandal": "Manchal",
+    "website": null,
+    "id": "tgms-web-128",
+    "serial": 128,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Manchal",
+      "Arutla"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Arutla, Manchal Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Bongaluru",
+    "mandal": "Ibrahim Patnam",
+    "website": null,
+    "id": "tgms-web-129",
+    "serial": 129,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Ibrahim patnam",
+      "Bongaluru"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bongaluru, Ibrahim Patnam Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Chevella",
+    "mandal": "Chevella",
+    "website": null,
+    "id": "tgms-web-130",
+    "serial": 130,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Chevella"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Chevella, Chevella Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Gungal",
+    "mandal": "Yacharam",
+    "website": null,
+    "id": "tgms-web-131",
+    "serial": 131,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Yacharam",
+      "Gungal"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gungal, Yacharam Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Maheswaram",
+    "mandal": "Maheshwaram",
+    "website": null,
+    "id": "tgms-web-132",
+    "serial": 132,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Maheshwaram",
+      "Maheswaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Maheswaram, Maheshwaram Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Nendanur",
+    "mandal": "Kandakoor",
+    "website": null,
+    "id": "tgms-web-133",
+    "serial": 133,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Kandakoor",
+      "Nendanur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nendanur, Kandakoor Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Palamakula",
+    "mandal": "Shamshabad",
+    "website": null,
+    "id": "tgms-web-134",
+    "serial": 134,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Shamshabad",
+      "Palamakula"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Palamakula, Shamshabad Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Shabad",
+    "mandal": "Shabad",
+    "website": null,
+    "id": "tgms-web-135",
+    "serial": 135,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Shabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Shabad, Shabad Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Rangareddy",
+    "location": "Shankarpally",
+    "mandal": "Shankarpally",
+    "website": null,
+    "id": "tgms-web-136",
+    "serial": 136,
+    "websiteSource": null,
+    "aliases": [
+      "RANGAREDDY",
+      "Shankarpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Shankarpally, Shankarpally Mandal, Rangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Aksanpally",
+    "mandal": "Andhole",
+    "website": null,
+    "id": "tgms-web-137",
+    "serial": 137,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Andhole",
+      "Aksanpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Aksanpally, Andhole Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Baswapur",
+    "mandal": "Pulkal",
+    "website": null,
+    "id": "tgms-web-138",
+    "serial": 138,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Pulkal",
+      "Baswapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Baswapur, Pulkal Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Bollaram",
+    "mandal": "Jinnaram",
+    "website": null,
+    "id": "tgms-web-139",
+    "serial": 139,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Jinnaram",
+      "Bollaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bollaram, Jinnaram Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Gundlamachanooru",
+    "mandal": "Hathnoora",
+    "website": "https://gundlamachanooru.telanganamodelschool.com/",
+    "id": "tgms-web-140",
+    "serial": 140,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [],
+    "address": "Gundlamachanooru, Hathnoora Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Jharasangam",
+    "mandal": "Jharasangam",
+    "website": null,
+    "id": "tgms-web-141",
+    "serial": 141,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Jharasangam"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Jharasangam, Jharasangam Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Morgi",
+    "mandal": "Manoor",
+    "website": null,
+    "id": "tgms-web-142",
+    "serial": 142,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Manoor",
+      "Morgi"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Morgi, Manoor Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Munipalli",
+    "mandal": "Munipalli",
+    "website": null,
+    "id": "tgms-web-143",
+    "serial": 143,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Munipalli"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Munipalli, Munipalli Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Pothulaguda",
+    "mandal": "Alladurg (Watpally)",
+    "website": null,
+    "id": "tgms-web-144",
+    "serial": 144,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "Alladurg (Watpally)",
+      "Pothulaguda"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Pothulaguda, Alladurg (Watpally) Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Raikode",
+    "mandal": "Raikode",
+    "website": "https://raikode.telanganamodelschool.com/",
+    "id": "tgms-web-145",
+    "serial": 145,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "SANGAREDDY",
+      "Raikode",
+      "Raikode"
+    ],
+    "address": "Raikode, Raikode Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Sangareddy",
+    "location": "Velimela",
+    "mandal": "Rc Puram",
+    "website": null,
+    "id": "tgms-web-146",
+    "serial": 146,
+    "websiteSource": null,
+    "aliases": [
+      "SANGAREDDY",
+      "RC Puram",
+      "Velimela"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Velimela, Rc Puram Mandal, Sangareddy District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Akkenapally",
+    "mandal": "Nangunoor",
+    "website": null,
+    "id": "tgms-web-147",
+    "serial": 147,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Nangunoor",
+      "Akkenapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Akkenapally, Nangunoor Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Bejjanki",
+    "mandal": "Bejjanki",
+    "website": "https://bejjanki.telanganamodelschool.com/",
+    "id": "tgms-web-148",
+    "serial": 148,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "SIDDIPET",
+      "BEJJANKI",
+      "BEJJANKI"
+    ],
+    "address": "Bejjanki, Bejjanki Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Daultabad",
+    "mandal": "Daultabad",
+    "website": null,
+    "id": "tgms-web-149",
+    "serial": 149,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Daultabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Daultabad, Daultabad Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Husnabad",
+    "mandal": "Husnabad",
+    "website": null,
+    "id": "tgms-web-150",
+    "serial": 150,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "HUSNABAD",
+      "Husnabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Husnabad, Husnabad Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Ibrahimnagar",
+    "mandal": "Chinnakodure",
+    "website": null,
+    "id": "tgms-web-151",
+    "serial": 151,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Chinnakodure",
+      "Ibrahimnagar"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ibrahimnagar, Chinnakodure Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Irkode",
+    "mandal": "Siddipet",
+    "website": null,
+    "id": "tgms-web-152",
+    "serial": 152,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Siddipet",
+      "Irkode"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Irkode, Siddipet Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Jagadevpur",
+    "mandal": "Jagdevpur",
+    "website": null,
+    "id": "tgms-web-153",
+    "serial": 153,
+    "websiteSource": null,
+    "aliases": [
+      "Jagdevpur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Jagadevpur, Jagdevpur Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Kondapak",
+    "mandal": "Kondapak",
+    "website": null,
+    "id": "tgms-web-154",
+    "serial": 154,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Kondapak"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kondapak, Kondapak Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Lachapet",
+    "mandal": "Dubbak",
+    "website": null,
+    "id": "tgms-web-155",
+    "serial": 155,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Dubbak",
+      "Lachapet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Lachapet, Dubbak Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Maddur",
+    "mandal": "Maddur",
+    "website": null,
+    "id": "tgms-web-156",
+    "serial": 156,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Maddur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Maddur, Maddur Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Mirdoddi",
+    "mandal": "Mirdoddi",
+    "website": null,
+    "id": "tgms-web-157",
+    "serial": 157,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Mirdoddi"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mirdoddi, Mirdoddi Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Mustyala",
+    "mandal": "Cheriyal",
+    "website": null,
+    "id": "tgms-web-158",
+    "serial": 158,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Cheriyal",
+      "Mustyala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mustyala, Cheriyal Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Mutrajpally",
+    "mandal": "Gajwel",
+    "website": null,
+    "id": "tgms-web-159",
+    "serial": 159,
+    "websiteSource": null,
+    "aliases": [
+      "SIDDIPET",
+      "Gajwel",
+      "Mutrajpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mutrajpally, Gajwel Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Siddipet",
+    "location": "Nagasamudrala",
+    "mandal": "Koheda",
+    "website": null,
+    "id": "tgms-web-160",
+    "serial": 160,
+    "websiteSource": null,
+    "aliases": [],
+    "mandalSource": "https://www.inspireawards-dst.gov.in/students_corner/states/telangana/2022-23/student_list/STList-17202343549PM.pdf",
+    "address": "Nagasamudrala, Koheda Mandal, Siddipet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Anajipuram",
+    "mandal": "Penpahad",
+    "website": "https://tgmsanajipuram.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-161",
+    "serial": 161,
+    "aliases": [
+      "SURYAPET",
+      "PENPAHAD",
+      "ANAJIPURAM",
+      "Anajipuram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Anajipuram, Penpahad Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Anantharam",
+    "mandal": "Thirumalagiri",
+    "website": "https://tgmsanantharam.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-162",
+    "serial": 162,
+    "aliases": [
+      "SURYAPET",
+      "THIRULMALAGIRI",
+      "ANANTHARAM",
+      "Anantharam"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Anantharam, Thirumalagiri Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Athmakur (S)",
+    "mandal": "Athmakur(S)",
+    "website": null,
+    "id": "tgms-web-163",
+    "serial": 163,
+    "websiteSource": null,
+    "aliases": [
+      "SURYAPET",
+      "ATHMAKUR(S)",
+      "Athmakur(S)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Athmakur (S), Athmakur(S) Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Gaddipally",
+    "mandal": "Garedepally",
+    "website": null,
+    "id": "tgms-web-164",
+    "serial": 164,
+    "websiteSource": null,
+    "aliases": [
+      "SURYAPET",
+      "GAREDEPALLY",
+      "GADDIPALLY",
+      "Gaddipally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gaddipally, Garedepally Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Imampet",
+    "mandal": "Suryapet",
+    "website": "https://tgmsimampet.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-165",
+    "serial": 165,
+    "aliases": [
+      "SURYAPET",
+      "IMAMPET",
+      "Imampet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Imampet, Suryapet Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Karavirala",
+    "mandal": "Nadigudem",
+    "website": null,
+    "id": "tgms-web-166",
+    "serial": 166,
+    "websiteSource": null,
+    "aliases": [
+      "SURYAPET",
+      "NADIGUDEM",
+      "KARAVIRALA",
+      "Karavirala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Karavirala, Nadigudem Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Mattampally",
+    "mandal": "Mattampally",
+    "website": null,
+    "id": "tgms-web-167",
+    "serial": 167,
+    "websiteSource": null,
+    "aliases": [
+      "SURYAPET",
+      "MATTAMPALLY",
+      "Mattampally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mattampally, Mattampally Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Munagala",
+    "mandal": "Munagala",
+    "website": "https://tgmsmunagala.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-168",
+    "serial": 168,
+    "aliases": [
+      "SURYAPET",
+      "MUNAGALA",
+      "Munagala"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Munagala, Munagala Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Suryapet",
+    "location": "Pasunoor",
+    "mandal": "Thungathurthy (Nagaram)",
+    "website": "https://tgmspasnoor.in/",
+    "websiteSource": "Independently maintained TGMS school website",
+    "id": "tgms-web-169",
+    "serial": 169,
+    "aliases": [
+      "SURYAPET",
+      "THUNGATHURTHY (NAGARAM)",
+      "PASUNOOR",
+      "Pasunoor"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Pasunoor, Thungathurthy (Nagaram) Mandal, Suryapet District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Bantwaram",
+    "mandal": "Bantwaram",
+    "website": null,
+    "id": "tgms-web-170",
+    "serial": 170,
+    "websiteSource": null,
+    "aliases": [
+      "VIKARABAD",
+      "Bantwaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Bantwaram, Bantwaram Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Basheerabad",
+    "mandal": "Basheerabad",
+    "website": "https://basheerabad.telanganamodelschool.com/",
+    "id": "tgms-web-171",
+    "serial": 171,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "VIKARABAD",
+      "Basheerabad",
+      "Basheerabad"
+    ],
+    "address": "Basheerabad, Basheerabad Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Jafferpally",
+    "mandal": "Pargi",
+    "website": null,
+    "id": "tgms-web-172",
+    "serial": 172,
+    "websiteSource": null,
+    "aliases": [
+      "VIKARABAD",
+      "Pargi",
+      "Jafferpally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Jafferpally, Pargi Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Marpally",
+    "mandal": "Marpally",
+    "website": "https://marpally.telanganamodelschool.com/",
+    "id": "tgms-web-173",
+    "serial": 173,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [
+      "VIKARABAD",
+      "Marpally",
+      "Marpally"
+    ],
+    "address": "Marpally, Marpally Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Mujahidpur",
+    "mandal": "Kulkacherla",
+    "website": null,
+    "id": "tgms-web-174",
+    "serial": 174,
+    "websiteSource": null,
+    "aliases": [
+      "VIKARABAD",
+      "Kulkacherla",
+      "Mujahidpur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Mujahidpur, Kulkacherla Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Nawabpet (Dathapur)",
+    "mandal": "Nawabpet",
+    "website": null,
+    "id": "tgms-web-175",
+    "serial": 175,
+    "websiteSource": null,
+    "aliases": [
+      "VIKARABAD",
+      "Nawabpet",
+      "Nawabpet (DATHAPUR)",
+      "Nawabpet (Dathapur)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nawabpet (Dathapur), Nawabpet Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Peddemul",
+    "mandal": "Peddemul",
+    "website": null,
+    "id": "tgms-web-176",
+    "serial": 176,
+    "websiteSource": null,
+    "aliases": [
+      "VIKARABAD",
+      "Peddemul"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Peddemul, Peddemul Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Pudur",
+    "mandal": "Pudur",
+    "website": "https://pudur.telanganamodelschool.com/",
+    "id": "tgms-web-177",
+    "serial": 177,
+    "websiteSource": "https://telanganamodelschool.com/schools",
+    "aliases": [],
+    "address": "Pudur, Pudur Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Vikarabad",
+    "location": "Tandur",
+    "mandal": "Tandur",
+    "website": null,
+    "id": "tgms-web-178",
+    "serial": 178,
+    "websiteSource": null,
+    "aliases": [
+      "VIKARABAD",
+      "Tandur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Tandur, Tandur Mandal, Vikarabad District, Telangana"
+  },
+  {
+    "district": "Wanaparthy",
+    "location": "Khillaghanpur (DK Thanda)",
+    "mandal": "Khillaghanpur (Ghanpur)",
+    "website": null,
+    "id": "tgms-web-179",
+    "serial": 179,
+    "websiteSource": null,
+    "aliases": [
+      "WANAPARTHY",
+      "Khillaghanpur (Ghanpur)",
+      "Khillaghanpur (DK THANDA)",
+      "Khillaghanpur (Dk Thanda)"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Khillaghanpur (DK Thanda), Khillaghanpur (Ghanpur) Mandal, Wanaparthy District, Telangana"
+  },
+  {
+    "district": "Wanaparthy",
+    "location": "Kothakota",
+    "mandal": "Kothakota",
+    "website": null,
+    "id": "tgms-web-180",
+    "serial": 180,
+    "websiteSource": null,
+    "aliases": [
+      "WANAPARTHY",
+      "Kothakota"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Kothakota, Kothakota Mandal, Wanaparthy District, Telangana"
+  },
+  {
+    "district": "Wanaparthy",
+    "location": "Pebbair",
+    "mandal": "Pebbair",
+    "website": null,
+    "id": "tgms-web-181",
+    "serial": 181,
+    "websiteSource": null,
+    "aliases": [
+      "WANAPARTHY",
+      "Pebbair"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Pebbair, Pebbair Mandal, Wanaparthy District, Telangana"
+  },
+  {
+    "district": "Warangal",
+    "location": "Ameenabad",
+    "mandal": "Chennaraopet",
+    "website": null,
+    "id": "tgms-web-182",
+    "serial": 182,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (RURAL)",
+      "Chennaraopet",
+      "Ameenabad"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Ameenabad, Chennaraopet Mandal, Warangal District, Telangana"
+  },
+  {
+    "district": "Warangal",
+    "location": "Budharaopet",
+    "mandal": "Khanapur",
+    "website": null,
+    "id": "tgms-web-183",
+    "serial": 183,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (RURAL)",
+      "Khanapur",
+      "Budharaopet"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Budharaopet, Khanapur Mandal, Warangal District, Telangana"
+  },
+  {
+    "district": "Warangal",
+    "location": "Gavicherla",
+    "mandal": "Sangem",
+    "website": null,
+    "id": "tgms-web-184",
+    "serial": 184,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (RURAL)",
+      "Sangem",
+      "Gavicherla"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Gavicherla, Sangem Mandal, Warangal District, Telangana"
+  },
+  {
+    "district": "Warangal",
+    "location": "Nekkonda",
+    "mandal": "Nekkonda",
+    "website": null,
+    "id": "tgms-web-185",
+    "serial": 185,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (RURAL)",
+      "Nekkonda"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Nekkonda, Nekkonda Mandal, Warangal District, Telangana"
+  },
+  {
+    "district": "Warangal",
+    "location": "Parvathagiri",
+    "mandal": "Parvathagiri",
+    "website": null,
+    "id": "tgms-web-186",
+    "serial": 186,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (RURAL)",
+      "Parvathagiri"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Parvathagiri, Parvathagiri Mandal, Warangal District, Telangana"
+  },
+  {
+    "district": "Warangal",
+    "location": "Vanchanagiri",
+    "mandal": "Geesugonda",
+    "website": null,
+    "id": "tgms-web-187",
+    "serial": 187,
+    "websiteSource": null,
+    "aliases": [
+      "WARANGAL (RURAL)",
+      "Geesugonda",
+      "Vanchanagiri"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Vanchanagiri, Geesugonda Mandal, Warangal District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "B'Ramaram",
+    "mandal": "B'Ramaram",
+    "website": null,
+    "id": "tgms-web-188",
+    "serial": 188,
+    "websiteSource": null,
+    "aliases": [
+      "YADADRI (BHONGIRI)",
+      "B'RAMARAM",
+      "B'Ramaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "B'Ramaram, B'Ramaram Mandal, Yadadri Bhuvanagiri District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "Lakkaram",
+    "mandal": "Choutuppal",
+    "website": null,
+    "id": "tgms-web-189",
+    "serial": 189,
+    "websiteSource": null,
+    "aliases": [
+      "YADADRI (BHONGIRI)",
+      "CHOUTUPPAL",
+      "LAKKARAM",
+      "Lakkaram"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Lakkaram, Choutuppal Mandal, Yadadri Bhuvanagiri District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "Lothukunta",
+    "mandal": "Valigonda",
+    "website": null,
+    "id": "tgms-web-190",
+    "serial": 190,
+    "websiteSource": null,
+    "aliases": [
+      "YADADRI (BHONGIRI)",
+      "VALIGONDA",
+      "LOTHUKUNTA",
+      "Lothukunta"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Lothukunta, Valigonda Mandal, Yadadri Bhuvanagiri District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "M.Thurkapally",
+    "mandal": "M.Thurkapally",
+    "website": null,
+    "id": "tgms-web-191",
+    "serial": 191,
+    "websiteSource": null,
+    "aliases": [
+      "YADADRI (BHONGIRI)",
+      "M.THURKAPALLY",
+      "M.Thurkapally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "M.Thurkapally, M.Thurkapally Mandal, Yadadri Bhuvanagiri District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "Narayanapur",
+    "mandal": "Narayanapur",
+    "website": null,
+    "id": "tgms-web-192",
+    "serial": 192,
+    "websiteSource": null,
+    "aliases": [
+      "YADADRI (BHONGIRI)",
+      "NARAYANAPUR",
+      "Narayanapur"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Narayanapur, Narayanapur Mandal, Yadadri Bhuvanagiri District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "Parupally",
+    "mandal": "Gundala",
+    "website": null,
+    "id": "tgms-web-193",
+    "serial": 193,
+    "websiteSource": null,
+    "aliases": [
+      "YADADRI (BHONGIRI)",
+      "GUNDALA",
+      "PARUPALLY",
+      "Parupally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Parupally, Gundala Mandal, Yadadri Bhuvanagiri District, Telangana"
+  },
+  {
+    "district": "Yadadri Bhuvanagiri",
+    "location": "Pochampally",
+    "mandal": "Pochampally",
+    "website": null,
+    "id": "tgms-web-194",
+    "serial": 194,
+    "websiteSource": null,
+    "aliases": [
+      "KARIMNAGAR",
+      "MANAKONDUR",
+      "POCHAMPALLY",
+      "YADADRI (BHONGIRI)",
+      "Pochampally"
+    ],
+    "mandalSource": "/downloads/telangana-model-schools-194-source.pdf",
+    "address": "Pochampally, Pochampally Mandal, Yadadri Bhuvanagiri District, Telangana"
+  }
+]

@@ -1,0 +1,8 @@
+/* "Apply on Official CGG Portal" button above the X icon of the right-hand social rail; yellow, blinks (fades in and out). Only this element is animated. */
+.school-cgg-apply{position:fixed;right:0;bottom:55%;z-index:81;display:block;max-width:156px;padding:8px 11px;background:#ffc21a;color:#2b1b00;border:1px solid #d99a00;border-right:0;border-radius:8px 0 0 8px;font:700 13px/1.25 Arial,sans-serif;text-align:center;text-decoration:none;box-shadow:0 3px 14px #15243d33;animation:school-cgg-blink 2.2s ease-in-out infinite}
+.school-cgg-apply:hover,.school-cgg-apply:focus-visible{background:#ffb000;outline:2px solid #2b1b00;outline-offset:-3px}
+@keyframes school-cgg-blink{0%,100%{opacity:1;box-shadow:0 3px 14px #15243d33,0 0 0 0 #ffb40099}50%{opacity:.35;box-shadow:0 3px 14px #15243d33,0 0 16px 5px #ffb400cc}}
+html.school-motion-paused .school-cgg-apply{animation:none;opacity:1}
+@media(prefers-reduced-motion:reduce){.school-cgg-apply{animation:none;opacity:1}}
+@media(max-width:600px){.school-cgg-apply{max-width:122px;padding:6px 8px;font-size:11px}}
+@media print{.school-cgg-apply{display:none}}
