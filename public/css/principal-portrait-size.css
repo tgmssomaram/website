@@ -1,0 +1,17 @@
+/* Shared public principal portrait size, matching the approved size. No effect on staff/admin photos. */
+.pp-principal .principal-card{max-width:420px!important;width:100%;box-sizing:border-box}
+body.model-home .principal-press .pp-principal .principal-card img{width:340px!important;height:auto!important;aspect-ratio:17/21;max-width:calc(100% - 16px)!important;object-fit:cover}
+.principal-press .pp-principal{width:100%!important;min-width:0;box-sizing:border-box}
+.final-principal-message-row .final-principal{max-width:420px;width:100%;min-width:0}
+.final-principal-message-row .principal-photo-editor{max-width:100%;width:340px}
+.final-principal-message-row .final-principal .principal-portrait{display:block!important;width:100%!important;max-width:340px!important;height:auto!important;aspect-ratio:17/21;flex:none}
+.final-principal-message-row .final-principal .principal-portrait img{display:block;width:100%!important;height:100%!important;object-fit:cover;transform:none}
+main .final-our-school>.final-principal{flex-direction:column;align-items:flex-start;width:100%;max-width:420px;min-width:0}
+main .final-principal .principal-photo-editor{width:340px;max-width:100%}
+main .final-principal .principal-portrait{width:100%!important;max-width:340px!important;height:auto!important;aspect-ratio:17/21;flex:none}
+main .final-principal .principal-portrait img{width:100%!important;height:100%!important;object-fit:cover;transform:none}
+.gp-principal-head>img{width:340px!important;height:auto!important;max-width:100%;aspect-ratio:17/21;object-fit:cover}
+@media(min-width:901px){.final-principal-message-row{grid-template-columns:minmax(0,420px) minmax(0,1fr)}}
+@media(max-width:900px){.final-principal-message-row{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:901px){body .principal-press{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:24px;align-items:start}.principal-press .pp-image{grid-column:1/-1}}
+@media(max-width:900px){body .principal-press{display:grid!important;grid-template-columns:minmax(0,1fr)!important}}

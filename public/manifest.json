@@ -1,0 +1,15 @@
+{
+  "name": "Telangana Model School & Junior College, Somaram",
+  "short_name": "TGMS Somaram",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#15543e",
+  "icons": [
+    {
+      "src": "images/telangana-emblem-trimmed.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

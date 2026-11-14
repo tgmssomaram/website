@@ -1,0 +1,1 @@
+setTimeout(()=>{if(!document.body.classList.contains("final-school-model"))document.documentElement.classList.add("boot-timeout")},20000);

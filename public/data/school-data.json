@@ -1,0 +1,216 @@
+{
+  "principal": {
+    "name": "Farhana",
+    "designation": "Principal FAC",
+    "qualification": "M.Sc., B.Ed.",
+    "phone": "08727-285222",
+    "email": "tgmssomaram.knr@gmail.com"
+  },
+  "address": "Somaram (Village), Saidapur Mandal, Karimnagar District, Telangana – 505490",
+  "faculty": [
+    [
+      "K. Veerababu",
+      "PGT Mathematics / Principal FAC",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Jamalapuram Ramakrishna",
+      "PGT Economics",
+      "M.Sc., Town Planning, SET"
+    ],
+    [
+      "Boora Saidaiah Goud",
+      "PGT Civics",
+      "M.A., B.Ed."
+    ],
+    [
+      "Bandi Saidulu",
+      "PGT Botany",
+      "M.Sc., B.Ed., SET"
+    ],
+    [
+      "Vutukuri Ravinder Reddy",
+      "PGT Chemistry",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Pokala Venkateswara Rao",
+      "PGT Zoology",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Shaik Sharief",
+      "PGT Physics",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Shaik Jani",
+      "PGT English",
+      "M.A., B.Ed."
+    ],
+    [
+      "Bommaganti Sushmitha",
+      "PGT Mathematics",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Chandala Vani Sree",
+      "PGT Telugu",
+      "M.A., B.Ed."
+    ],
+    [
+      "Shaik Jakir Hussain",
+      "PGT Telugu",
+      "M.A., B.Ed."
+    ],
+    [
+      "Kondeti Saidulu",
+      "PGT English",
+      "M.A., B.Ed."
+    ],
+    [
+      "Guttula G. S. Veera Subramaneswara Rao",
+      "TGT Social Studies",
+      "M.A., M.Ed."
+    ],
+    [
+      "Konkapaka Gayathri",
+      "TGT Mathematics",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Nagarjunapu Ramalinga Chary",
+      "TGT Telugu",
+      "M.A., B.Ed."
+    ],
+    [
+      "Shaik Ramjanbegam",
+      "TGT Hindi",
+      "M.A., HPT"
+    ]
+  ],
+  "guest": [
+    [
+      "Sk. Rajiya",
+      "TGT Hindi",
+      "M.A., HPT"
+    ],
+    [
+      "Ch. Ramesh",
+      "TGT English",
+      "M.A., B.Ed."
+    ],
+    [
+      "M. Venkateswarlu",
+      "TGT Science",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "D. Renuka",
+      "PGT Mathematics",
+      "M.Sc., B.Ed."
+    ],
+    [
+      "Ch. Ramesh",
+      "PGT Commerce",
+      "M.Com., B.Ed."
+    ]
+  ],
+  "vocational": [
+    [
+      "K. Lakshmi",
+      "Media and Entertainment",
+      "B.Com. (Computers), DTP, PGDCA, Animation"
+    ],
+    [
+      "E. Vijaya Durga",
+      "Health Care",
+      "GNM Nursing"
+    ]
+  ],
+  "support": [
+    [
+      "Narra Kavitha",
+      "Computer Operator"
+    ],
+    [
+      "Shaik Jan Pasha",
+      "Physical Director (PD)"
+    ],
+    [
+      "Bobbili Padma",
+      "Office Subordinate"
+    ],
+    [
+      "Kolukulapalli Pullaiah",
+      "Night Watchman"
+    ]
+  ],
+  "gallery": [
+    {
+      "src": "images/parents-meeting.jpg",
+      "title": "Parent–teacher meeting",
+      "te": "తల్లిదండ్రుల సమావేశం",
+      "category": "School Activities"
+    },
+    {
+      "src": "images/yoga-session.jpg",
+      "title": "Yoga and well-being",
+      "te": "యోగా కార్యక్రమం",
+      "category": "Well-being"
+    },
+    {
+      "src": "images/meeting-address.jpg",
+      "title": "School–parent interaction",
+      "te": "పాఠశాల–తల్లిదండ్రుల ముఖాముఖి",
+      "category": "School Activities"
+    },
+    {
+      "src": "images/parents-participation.jpg",
+      "title": "Parents participating in school activities",
+      "te": "పాఠశాల కార్యక్రమంలో తల్లిదండ్రుల భాగస్వామ్యం",
+      "category": "School Activities"
+    }
+  ],
+  "mapUrl": "https://maps.google.com/maps?q=18.240000,79.300000",
+  "coordinates": {
+    "lat": 18.24,
+    "lng": 79.3
+  },
+  "notices": [],
+  "downloads": [],
+  "calendarFeedUrl": "https://calendar.google.com/calendar/ical/9b6bd89b931449c6dab271ec3d5ec995dbb2a8235139220258a8161a39805386%40group.calendar.google.com/public/basic.ics",
+  "udiseCode": "36131100206",
+  "collegeCode": "15124",
+  "showAdmissionSeats": true,
+  "settings": {
+    "schoolTitle": "Telangana Model School & Junior College, Somaram",
+    "teluguTitle": "తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం",
+    "authority": "School Education Department, Govt. of Telangana",
+    "welcomeTitle": "Welcome to TGMS Somaram",
+    "welcomeDescription": "A place to learn, explore and grow. Discover school information, educational resources and opportunities to connect with our learning community.",
+    "gradientStart": "#fff0df",
+    "gradientEnd": "#ff983f",
+    "youtubeUrl": ""
+  },
+  "flashNews": [
+    {
+      "id": "somaram-welcome-1",
+      "title": "Welcome to Telangana Model School & Junior College, Somaram (Saidapur Mandal, Karimnagar Dist.)",
+      "detail": "Welcome to Telangana Model School & Junior College, Somaram. High quality English medium education from Class VI to XII.",
+      "date": "2026-11-01"
+    },
+    {
+      "id": "somaram-admissions-2",
+      "title": "సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.",
+      "detail": "సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.",
+      "date": "2026-11-05"
+    },
+    {
+      "id": "somaram-exams-3",
+      "title": "TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.",
+      "detail": "TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.",
+      "date": "2026-11-10"
+    }
+  ]
+}

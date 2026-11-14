@@ -1,0 +1,42 @@
+/* Home-page row: principal | message / press note with links | press image (see principal-press.js). Hidden unless schoolData.principalPress has content. */
+.principal-press{display:flex;gap:18px;align-items:stretch;margin:24px 0}
+.principal-press>*{background:#fff;border:1px solid #dce6df;border-radius:12px;padding:18px;min-width:0}
+.pp-principal{flex:0 0 250px;display:flex;align-items:center;justify-content:center;background:#f3f7f1}
+.pp-principal .principal-card{margin:0;max-width:none;width:100%;background:transparent;text-align:center;display:flex;flex-direction:column;align-items:center}
+.pp-principal .principal-card img{width:170px;height:210px;object-fit:cover;border-radius:10px;margin:0 0 10px}
+.pp-note{flex:1 1 0}
+.pp-note h2{font-family:Georgia,serif;font-size:26px;line-height:1.3;color:#164b3c;margin:0 0 10px}
+.pp-note p{line-height:1.75;color:#33493f;white-space:pre-line;margin:0 0 10px;overflow-wrap:anywhere}
+.pp-note a{color:#0d6a52;font-weight:700;text-decoration:underline;overflow-wrap:anywhere}
+.pp-links{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.pp-links a{display:inline-block;min-height:24px;padding:8px 14px;border:1px solid #0d6a52;border-radius:999px;text-decoration:none;background:#f3f7f1}
+.pp-links a:hover{background:#e3f0e8}
+.pp-image{flex:0 0 340px;margin:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center}
+.pp-image a{display:block;width:100%}
+.pp-image img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;border-radius:8px;background:#f4f6f5}
+.pp-image figcaption{font-size:13px;line-height:1.4;color:#44594f;text-align:center}
+.model-school-overview.intro-only{grid-template-columns:1fr}
+@media(max-width:900px){.principal-press{flex-direction:column}.pp-principal,.pp-image{flex:none;width:100%}.pp-note h2{font-size:23px}}
+.pp-link-row{display:grid;grid-template-columns:1fr 1.6fr auto;gap:8px;margin-bottom:8px}
+@media(max-width:700px){.pp-link-row{grid-template-columns:1fr}}
+
+.consolidated-strength{margin:20px 0;border:2px solid #b98722!important}.consolidated-strength-total{display:flex;align-items:center;justify-content:center;gap:22px;padding:24px;background:linear-gradient(120deg,#15543e,#24785c);color:#fff;border-radius:12px;margin:16px 0}.consolidated-strength-total strong{font-size:clamp(48px,7vw,76px);line-height:1.1}.consolidated-strength-total span{font-size:clamp(16px,2vw,23px);font-weight:700;max-width:340px}@media(max-width:600px){.consolidated-strength-total{flex-direction:column;gap:8px;text-align:center}}
+
+/* Principal photo aligned at top; personal important message below, main message to the right. */
+.principal-press{align-items:flex-start;gap:28px}
+.pp-principal{flex-direction:column;align-items:stretch;justify-content:flex-start;align-self:flex-start;box-sizing:border-box}
+.pp-principal .principal-card{align-self:flex-start}
+.pp-important{width:100%;border-top:1px solid #cad9cf;margin-top:16px;padding-top:14px;overflow-wrap:anywhere}
+.pp-important h3{font-size:18px;line-height:1.4;margin:0 0 10px;color:#164b3c}
+.pp-important p{font-size:14px;line-height:1.65;white-space:pre-line;margin:0 0 10px}
+.pp-note{align-self:flex-start;min-width:0}
+@media(max-width:900px){.pp-principal,.pp-note{width:100%;box-sizing:border-box}.principal-press{gap:16px}}
+
+/* Balanced message columns: allow important information to fit below the principal. */
+@media(min-width:901px){
+ .principal-press{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+ .pp-principal,.pp-note{width:100%;box-sizing:border-box}
+ .pp-principal .principal-card{max-width:320px;align-self:center}
+ .pp-important{box-sizing:border-box;text-align:left}
+ .pp-image{grid-column:1/-1;width:100%;box-sizing:border-box}
+}
