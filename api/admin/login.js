@@ -19,10 +19,10 @@ export default async function handler(req, res) {
   }
 
   const adminEmail = process.env.ADMIN_EMAIL || 'tgmssomaram.knr@gmail.com';
-  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin@123';
 
-  // 1. Direct environment variable check
-  if (adminPassword && email.toLowerCase() === adminEmail.toLowerCase() && password === adminPassword) {
+  // 1. Direct environment variable check (with fallback default)
+  if (email.toLowerCase().trim() === adminEmail.toLowerCase().trim() && password === adminPassword) {
     res.setHeader('Set-Cookie', 'tgms_admin_session=authenticated; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400');
     return res.status(200).json({
       success: true,

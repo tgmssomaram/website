@@ -169,3 +169,8 @@ insert into public.faculty (name, designation, subject, qualification, order_ind
     ('Shaik Jakir Hussain', 'PGT Telugu', 'Telugu', 'M.A., B.Ed.', 11, true),
     ('Kondeti Saidulu', 'PGT English', 'English', 'M.A., B.Ed.', 12, true)
 on conflict do nothing;
+
+-- Default admin user seed
+insert into public.admin_users (email, password_hash, role)
+values ('tgmssomaram.knr@gmail.com', 'admin@123', 'superadmin')
+on conflict (email) do nothing;
