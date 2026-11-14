@@ -132,7 +132,10 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(500);
       res.end('Error loading file');
     } else {
-      res.writeHead(200, { 'Content-Type': contentType });
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Cache-Control': 'no-cache, no-store, must-revalidate'
+      });
       res.end(content);
     }
   });
