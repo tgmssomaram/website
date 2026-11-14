@@ -82,6 +82,15 @@ const server = http.createServer(async (req, res) => {
       if (apiRel.endsWith('/')) apiRel = apiRel.slice(0, -1);
       let apiFile = path.join(__dirname, 'api', apiRel + '.js');
 
+      // Support Vercel dynamic route: api/admin/[route].js
+      if (!fs.existsSync(apiFile) && apiRel.startsWith('admin/')) {
+        const dynamicFile = path.join(__dirname, 'api', 'admin', '[route].js');
+        if (fs.existsSync(dynamicFile)) {
+          apiFile = dynamicFile;
+          req.query.route = apiRel.replace(/^admin\//, '');
+        }
+      }
+
       if (!fs.existsSync(apiFile)) {
         res.status(404).json({ error: `API route not found: ${pathname}` });
         return;
