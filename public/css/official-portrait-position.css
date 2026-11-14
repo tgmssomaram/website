@@ -1,9 +1,0 @@
-/* three-official-portraits-lower-18: retain existing zoom and move only these images inside their frames */
-.final-official-photo.yogita img,.final-official-photo.naveen img,.final-official-photo.chary img,
-.state-official .official-photo-frame img:is([alt="Dr. Yogita Rana, IAS"],[alt="Dr. E. Naveen Nicolas, IAS"],[alt="S. Srinivasa Chary"]){translate:0 5px!important}
-
-/* User requested a slightly smaller CM portrait; preserve its frame and header layout. */
-.chief-minister-frame img[alt="Sri A. Revanth Reddy"]{scale:1.15!important;transform-origin:center 30%!important}
-
-/* User-approved Chary face close-up; preserve the circle and existing 5px portrait offset. */
-.final-official-photo.chary img,.state-official .official-photo-frame img[alt="S. Srinivasa Chary"]{scale:1.4!important;transform-origin:center 30%!important}

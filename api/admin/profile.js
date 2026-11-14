@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../../lib/supabase.js';
+import { supabase, isSupabaseConfigured } from '../lib/supabase.js';
 
 function isAuthenticated(req) {
   const cookies = req.headers.cookie || '';
