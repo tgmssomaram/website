@@ -1,10 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { supabase, isSupabaseConfigured } from '../lib/supabase.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 function isAuthenticated(req) {
   const cookies = req.headers.cookie || '';
@@ -94,7 +90,7 @@ export default async function handler(req, res) {
 
   // 2. Local Fallback (filesystem)
   try {
-    const uploadDir = path.join(__dirname, '..', '..', 'images', 'uploads');
+    const uploadDir = path.join(process.cwd(), 'images', 'uploads');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
