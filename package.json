@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node dev-server.js",
-    "start": "node dev-server.js",
-    "build": "echo 'Static site - no build required'"
+    "start": "node dev-server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0"
