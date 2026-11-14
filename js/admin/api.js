@@ -47,6 +47,31 @@ window.AdminAPI = {
     return r.json();
   },
 
+  async uploadImage(file, folder) {
+    folder = folder || 'general';
+    return new Promise(function(resolve, reject) {
+      if (!file) return reject(new Error('No file selected'));
+      if (file.size > 10 * 1024 * 1024) {
+        return reject(new Error('File size exceeds 10MB limit'));
+      }
+      var reader = new FileReader();
+      reader.onload = async function() {
+        try {
+          var res = await window.AdminAPI.post('/api/admin/upload', {
+            data: reader.result,
+            name: file.name,
+            folder: folder
+          });
+          resolve(res);
+        } catch (err) {
+          reject(err);
+        }
+      };
+      reader.onerror = function(err) { reject(err); };
+      reader.readAsDataURL(file);
+    });
+  },
+
   showToast(message, type) {
     type = type || 'info';
     var container = document.getElementById('toast-container');

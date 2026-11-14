@@ -126,35 +126,37 @@ window.AdminModules.inquiries = {
     var dateStr = item.created_at ? new Date(item.created_at).toLocaleString('en-IN') : '-';
 
     modal.innerHTML = '\
-      <div class="modal" style="max-width:540px;background:#fff;border-radius:12px;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,0.2);">\
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">\
-          <h2 style="font-size:1.2rem;margin:0;">Inquiry Details</h2>\
-          <button id="close-inq-modal-btn" style="background:none;border:none;font-size:1.4rem;cursor:pointer;">&times;</button>\
+      <div class="modal">\
+        <div class="modal-header">\
+          <h2>Inquiry Details</h2>\
+          <button type="button" class="modal-close-btn" id="close-inq-modal-btn">&times;</button>\
         </div>\
-        <div style="margin-bottom:14px;">\
-          <div style="font-size:0.8rem;color:#64748b;text-transform:uppercase;font-weight:600;">Sender Name</div>\
-          <div style="font-size:1rem;font-weight:600;color:#1a1a2e;">' + (item.name || 'Anonymous') + '</div>\
-        </div>\
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">\
-          <div>\
-            <div style="font-size:0.8rem;color:#64748b;text-transform:uppercase;font-weight:600;">Role / Interest</div>\
-            <div><span class="badge badge-info">' + (item.role || 'General') + '</span></div>\
+        <div class="modal-body">\
+          <div style="margin-bottom:16px;">\
+            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:4px;">Sender Name</div>\
+            <div style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">' + (item.name || 'Anonymous') + '</div>\
           </div>\
-          <div>\
-            <div style="font-size:0.8rem;color:#64748b;text-transform:uppercase;font-weight:600;">Date & Time</div>\
-            <div style="font-size:0.85rem;color:#374151;">' + dateStr + '</div>\
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">\
+            <div>\
+              <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:4px;">Role / Interest</div>\
+              <div><span class="badge badge-info">' + (item.role || 'General') + '</span></div>\
+            </div>\
+            <div>\
+              <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:4px;">Date & Time</div>\
+              <div style="font-size:0.9rem;font-weight:600;color:var(--text-secondary);">' + dateStr + '</div>\
+            </div>\
           </div>\
-        </div>\
-        <div style="margin-bottom:14px;">\
-          <div style="font-size:0.8rem;color:#64748b;text-transform:uppercase;font-weight:600;">Contact Details</div>\
-          <div style="font-size:0.95rem;color:#1a1a2e;">' + (item.contact || 'None provided') + '</div>\
-        </div>\
-        <div style="margin-bottom:20px;">\
-          <div style="font-size:0.8rem;color:#64748b;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Message</div>\
-          <div style="background:#f8fafc;padding:14px;border-radius:8px;font-size:0.9rem;line-height:1.5;color:#334155;white-space:pre-wrap;border:1px solid #e2e8f0;">' + (item.message || 'No message content.') + '</div>\
-        </div>\
-        <div style="display:flex;justify-content:flex-end;">\
-          <button id="dismiss-inq-btn" class="btn btn-secondary">Close</button>\
+          <div style="margin-bottom:16px;">\
+            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:4px;">Contact Details</div>\
+            <div style="font-size:1rem;font-weight:600;color:var(--text-primary);">' + (item.contact || 'None provided') + '</div>\
+          </div>\
+          <div style="margin-bottom:20px;">\
+            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:6px;">Message Content</div>\
+            <div style="background:#f8fafc;padding:16px;border-radius:var(--radius-sm);font-size:0.92rem;line-height:1.55;color:var(--text-primary);white-space:pre-wrap;border:1.5px solid var(--border-color);">' + (item.message || 'No message content.') + '</div>\
+          </div>\
+          <div class="modal-footer">\
+            <button type="button" id="dismiss-inq-btn" class="btn btn-secondary">Close</button>\
+          </div>\
         </div>\
       </div>';
 

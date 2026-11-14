@@ -103,9 +103,16 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Handle Static Routes
-  if (pathname === '/admin' || pathname === '/admin/') {
+  // Handle Static Routes & Aliases
+  if (pathname === '/admin') {
+    res.writeHead(301, { 'Location': '/admin/' });
+    res.end();
+    return;
+  }
+  if (pathname === '/admin/') {
     pathname = '/admin/index.html';
+  } else if (pathname === '/css/admin.css') {
+    pathname = '/admin/css/admin.css';
   } else if (pathname === '/') {
     pathname = '/index.html';
   }
@@ -138,3 +145,4 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(`🔐 Admin Portal: http://localhost:${PORT}/admin`);
   console.log(`======================================================\n`);
 });
+

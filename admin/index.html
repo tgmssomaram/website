@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Portal | TGMS Somaram</title>
-  <link rel="stylesheet" href="./css/admin.css" />
+  <link rel="stylesheet" href="/admin/css/admin.css" />
 </head>
 <body>
 
@@ -99,8 +99,16 @@
     <!-- Main area -->
     <div class="admin-main">
       <header class="admin-topbar">
-        <button id="sidebar-toggle" type="button" aria-label="Toggle sidebar">☰</button>
-        <span id="topbar-title" style="font-weight:600;color:#1a1a2e;font-size:1rem;">Dashboard</span>
+        <div style="display:flex;align-items:center;">
+          <button id="sidebar-toggle" type="button" aria-label="Toggle sidebar">☰</button>
+          <span id="topbar-title" style="font-weight:700;color:var(--text-primary);font-size:1.1rem;">Dashboard</span>
+        </div>
+        <div class="topbar-right">
+          <a href="/" target="_blank" class="topbar-live-link">
+            <span>View Live Website</span>
+            <span>↗</span>
+          </a>
+        </div>
       </header>
 
       <div id="admin-view" class="admin-view"></div>
@@ -112,15 +120,15 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- Scripts — order matters -->
-  <script type="text/javascript" src="../js/admin/api.js"></script>
-  <script type="text/javascript" src="../js/admin/auth.js"></script>
-  <script type="text/javascript" src="../js/admin/dashboard.js"></script>
-  <script type="text/javascript" src="../js/admin/notices.js"></script>
-  <script type="text/javascript" src="../js/admin/faculty.js"></script>
-  <script type="text/javascript" src="../js/admin/gallery.js"></script>
-  <script type="text/javascript" src="../js/admin/inquiries.js"></script>
-  <script type="text/javascript" src="../js/admin/profile.js"></script>
-  <script type="text/javascript" src="../js/admin/settings.js"></script>
-  <script type="text/javascript" src="../js/admin/app.js"></script>
+  <script type="text/javascript" src="/js/admin/api.js"></script>
+  <script type="text/javascript" src="/js/admin/auth.js"></script>
+  <script type="text/javascript" src="/js/admin/dashboard.js"></script>
+  <script type="text/javascript" src="/js/admin/notices.js"></script>
+  <script type="text/javascript" src="/js/admin/faculty.js"></script>
+  <script type="text/javascript" src="/js/admin/gallery.js"></script>
+  <script type="text/javascript" src="/js/admin/inquiries.js"></script>
+  <script type="text/javascript" src="/js/admin/profile.js"></script>
+  <script type="text/javascript" src="/js/admin/settings.js"></script>
+  <script type="text/javascript" src="/js/admin/app.js"></script>
 </body>
 </html>

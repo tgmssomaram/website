@@ -105,35 +105,37 @@ window.AdminModules.notices = {
     var today = new Date().toISOString().split('T')[0];
 
     modal.innerHTML = '\
-      <div class="modal" style="max-width:540px;background:#fff;border-radius:12px;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,0.2);">\
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">\
-          <h2 style="font-size:1.2rem;margin:0;">' + (isEdit ? 'Edit Notice' : 'New Flash Notice') + '</h2>\
-          <button id="close-modal-btn" style="background:none;border:none;font-size:1.4rem;cursor:pointer;">&times;</button>\
+      <div class="modal">\
+        <div class="modal-header">\
+          <h2>' + (isEdit ? 'Edit Notice' : 'New Flash Notice') + '</h2>\
+          <button type="button" class="modal-close-btn" id="close-modal-btn">&times;</button>\
         </div>\
-        <form id="notice-form">\
-          <div class="form-group-dash">\
-            <label for="notice-title">Notice Title / Headline *</label>\
-            <input type="text" id="notice-title" required value="' + (item?.title || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Admissions Open for Academic Year 2026-27" />\
-          </div>\
-          <div class="form-group-dash">\
-            <label for="notice-detail">Additional Details (Optional)</label>\
-            <textarea id="notice-detail" rows="3" placeholder="Enter detailed announcement or instructions...">' + (item?.detail || '') + '</textarea>\
-          </div>\
-          <div class="form-row">\
+        <div class="modal-body">\
+          <form id="notice-form">\
             <div class="form-group-dash">\
-              <label for="notice-date">Publish Date</label>\
-              <input type="date" id="notice-date" value="' + (item?.date || today) + '" />\
+              <label for="notice-title">Notice Title / Headline *</label>\
+              <input type="text" id="notice-title" required value="' + (item?.title || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Admissions Open for Academic Year 2026-27" />\
             </div>\
-            <div class="form-group-dash" style="display:flex;align-items:center;gap:10px;margin-top:28px;">\
-              <input type="checkbox" id="notice-active" style="width:20px;height:20px;accent-color:#FF9933;" ' + (item?.is_active !== false ? 'checked' : '') + ' />\
-              <label for="notice-active" style="margin:0;cursor:pointer;">Display Live on Website</label>\
+            <div class="form-group-dash">\
+              <label for="notice-detail">Additional Details (Optional)</label>\
+              <textarea id="notice-detail" rows="3" placeholder="Enter detailed announcement or instructions...">' + (item?.detail || '') + '</textarea>\
             </div>\
-          </div>\
-          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">\
-            <button type="button" id="cancel-modal-btn" class="btn btn-secondary">Cancel</button>\
-            <button type="submit" class="btn btn-primary-dash">' + (isEdit ? 'Save Changes' : 'Publish Notice') + '</button>\
-          </div>\
-        </form>\
+            <div class="form-row">\
+              <div class="form-group-dash">\
+                <label for="notice-date">Publish Date</label>\
+                <input type="date" id="notice-date" value="' + (item?.date || today) + '" />\
+              </div>\
+              <div class="form-group-dash" style="display:flex;align-items:center;gap:10px;margin-top:28px;">\
+                <input type="checkbox" id="notice-active" style="width:20px;height:20px;accent-color:var(--primary);cursor:pointer;" ' + (item?.is_active !== false ? 'checked' : '') + ' />\
+                <label for="notice-active" style="margin:0;cursor:pointer;font-weight:600;">Display Live on Website</label>\
+              </div>\
+            </div>\
+            <div class="modal-footer">\
+              <button type="button" id="cancel-modal-btn" class="btn btn-secondary">Cancel</button>\
+              <button type="submit" class="btn btn-primary-dash">' + (isEdit ? 'Save Changes' : 'Publish Notice') + '</button>\
+            </div>\
+          </form>\
+        </div>\
       </div>';
 
     modal.classList.remove('hidden');
