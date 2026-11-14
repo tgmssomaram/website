@@ -23,24 +23,57 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // GET: Read school profile
+  // GET: Read school profile + active faculty
   if (req.method === 'GET') {
     if (isSupabaseConfigured()) {
       try {
-        const { data, error } = await supabase
-          .from('school_profiles')
-          .select('values, revision')
-          .eq('profile_key', PROFILE_KEY)
-          .maybeSingle();
+        const [profileRes, facultyRes] = await Promise.all([
+          supabase
+            .from('school_profiles')
+            .select('values, revision')
+            .eq('profile_key', PROFILE_KEY)
+            .maybeSingle(),
+          supabase
+            .from('faculty')
+            .select('*')
+            .eq('is_active', true)
+            .order('order_index', { ascending: true })
+        ]);
 
-        if (data && data.values) {
-          return res.status(200).json({
-            values: {
-              [PROFILE_KEY]: typeof data.values === 'string' ? data.values : JSON.stringify(data.values)
-            },
-            revision: data.revision || 1
-          });
+        let profileValues = profileRes.data?.values || getFallbackData() || {};
+        if (typeof profileValues === 'string') {
+          try { profileValues = JSON.parse(profileValues); } catch {}
         }
+
+        if (facultyRes.data && facultyRes.data.length > 0) {
+          const facultyRows = facultyRes.data;
+          profileValues.facultyList = facultyRows;
+          profileValues.faculty = facultyRows.map(f => [
+            f.name,
+            f.designation + (f.subject ? ' / ' + f.subject : ''),
+            f.qualification || ''
+          ]);
+          profileValues.staffPhotos = profileValues.staffPhotos || {};
+          facultyRows.forEach(f => {
+            if (f.photo_url) profileValues.staffPhotos[f.name] = f.photo_url;
+          });
+
+          const princ = facultyRows.find(f => /principal/i.test(f.designation));
+          if (princ) {
+            profileValues.principal = profileValues.principal || {};
+            profileValues.principal.name = princ.name;
+            profileValues.principal.designation = princ.designation;
+            profileValues.principal.qualification = princ.qualification;
+            if (princ.photo_url) profileValues.principalPhoto = princ.photo_url;
+          }
+        }
+
+        return res.status(200).json({
+          values: {
+            [PROFILE_KEY]: JSON.stringify(profileValues)
+          },
+          revision: profileRes.data?.revision || 1
+        });
       } catch (err) {
         console.error('Supabase query error:', err);
       }
