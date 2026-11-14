@@ -2,6 +2,7 @@
   "name": "tgms-somaram-website",
   "version": "1.0.0",
   "description": "Official website and administration platform for Telangana Model School & Junior College, Somaram",
+  "type": "module",
   "main": "index.html",
   "scripts": {
     "dev": "node dev-server.js",

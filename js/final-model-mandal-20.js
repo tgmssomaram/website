@@ -33,21 +33,32 @@
    header.append(identity,officials);document.querySelector('.masthead').before(header);
   }
   const masthead=document.querySelector('.masthead');
-  if(!masthead.querySelector('.model-menu-disclosure')){
-   const details=node('details',null,'model-menu-disclosure');const summary=node('summary','☰ Menu / మెను');summary.setAttribute('aria-label','Open school navigation');
-   const contents=node('div',null,'model-menu-contents');contents.id='model-menu-contents';summary.setAttribute('aria-controls',contents.id);
-   for(const part of [...masthead.children])if(!part.classList.contains('brand'))contents.append(part);
-   details.append(summary,contents);masthead.append(details);
-   const finder=node('form',null,'model-finder');finder.setAttribute('role','search');finder.setAttribute('aria-label','Find a Model School');const search=node('input');search.type='search';search.placeholder='Find a Model School';search.setAttribute('aria-label','School name, mandal or district');const find=node('button','⌕');find.type='submit';find.setAttribute('aria-label','Search school directory');finder.append(search,find);finder.addEventListener('submit',e=>{e.preventDefault();const term=search.value.trim();location.hash='directory';render();const directorySearch=document.querySelector('#main input');if(directorySearch&&term){directorySearch.value=term;directorySearch.dispatchEvent(new Event('input',{bubbles:true}));}document.querySelector('#main').focus({preventScroll:false});});masthead.append(finder);
+  let menuName=masthead.querySelector('.model-menu-school-name');
+  if(!menuName){
+    menuName=node('div',null,'model-menu-school-name');
+    menuName.append(node('strong','Telangana Model School & Junior College'),node('span','Somaram (Village), Saidapur Mandal · Karimnagar District'));
+    masthead.prepend(menuName);
   }
-  let menuName=masthead.querySelector('.model-menu-school-name');if(!menuName){menuName=node('div',null,'model-menu-school-name');menuName.append(node('strong','Telangana Model School & Junior College'),node('span','Somaram (Village), Saidapur Mandal · Karimnagar District'));masthead.querySelector('.model-menu-disclosure').after(menuName);}
-  const schoolCodes=menuName.querySelector('.model-school-codes');if(!schoolCodes){const codes=node('small',null,'model-school-codes');codes.append(node('span','UDISE+ code: '+(schoolData?.udiseCode||'36301200719')),node('span','College code: '+(schoolData?.collegeCode||'52015')));menuName.append(codes);}
-  const sheetSchoolTitle=schoolData?.settings?.schoolTitle;if(sheetSchoolTitle)menuName.querySelector('strong').textContent=sheetSchoolTitle;
-  const menuContents=masthead.querySelector('.model-menu-contents');for(const part of [...masthead.children])if(part.matches('.header-quick-actions,.top'))menuContents.append(part);
-  const directLanguages=masthead.querySelector('.languages');if(directLanguages){directLanguages.classList.add('model-direct-languages');menuName.after(directLanguages);}
-  const compactFinder=masthead.querySelector('.model-finder');if(compactFinder)menuContents.append(compactFinder);
-  const visibleTabs=document.querySelector('#menu');if(visibleTabs){masthead.append(visibleTabs);groupedSchoolNavigation(visibleTabs);}
-  const isHome=(location.hash.slice(1)||'home')==='home';document.body.classList.toggle('model-home',isHome);
+  const schoolCodes=menuName.querySelector('.model-school-codes');
+  if(!schoolCodes){
+    const codes=node('small',null,'model-school-codes');
+    codes.append(node('span','UDISE+ code: '+(schoolData?.udiseCode||'36301200719')),node('span','College code: '+(schoolData?.collegeCode||'52015')));
+    menuName.append(codes);
+  }
+  const sheetSchoolTitle=schoolData?.settings?.schoolTitle;
+  if(sheetSchoolTitle)menuName.querySelector('strong').textContent=sheetSchoolTitle;
+  const directLanguages=masthead.querySelector('.languages');
+  if(directLanguages){
+    directLanguages.classList.add('model-direct-languages');
+    menuName.after(directLanguages);
+  }
+  const visibleTabs=document.querySelector('#menu');
+  if(visibleTabs){
+    masthead.append(visibleTabs);
+    groupedSchoolNavigation(visibleTabs);
+  }
+  const isHome=(location.hash.slice(1)||'home')==='home';
+  document.body.classList.toggle('model-home',isHome);
   const disclosure=masthead.querySelector('details');if(disclosure){disclosure.querySelectorAll('a').forEach(a=>{if(!a.dataset.closeMenu){a.dataset.closeMenu='true';a.addEventListener('click',()=>disclosure.open=false);}});}
   if(!isHome||!schoolData)return;
   const main=document.querySelector('#main');const oldHero=main.querySelector('.hero');if(oldHero){const gallery=oldHero.querySelector('.illustration');oldHero.className='model-live-gallery';oldHero.replaceChildren(node('h2',lang==='te'?'ఫొటో గ్యాలరీ':'School Photo Gallery'));if(gallery)oldHero.append(gallery);main.append(oldHero);}

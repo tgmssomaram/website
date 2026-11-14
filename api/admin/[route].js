@@ -31,7 +31,6 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  // Extract route parameter from Vercel dynamic query or URL path
   const route = req.query?.route || req.url?.split('?')[0].split('/').filter(Boolean).pop();
   const target = routes[route];
 
@@ -41,3 +40,4 @@ export default async function handler(req, res) {
 
   return target(req, res);
 }
+
