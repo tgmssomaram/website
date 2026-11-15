@@ -39,7 +39,7 @@
 
 .munagala-running-strip{background:#fbfdff;border-bottom:1px solid #dce6ef;padding:5px 22px}.munagala-running-strip .school-run-banner{margin:auto;width:100%;max-width:1050px}.learning-cartoon{display:none}@media(max-width:1000px){.munagala-running-strip .school-run-banner{max-width:1050px}.munagala-running-strip .school-run-caption{display:block}}
 
-.school-page-shell{position:relative;width:calc(100% - 64px);max-width:1800px;margin:16px auto;border:1px solid #d3deeb;box-shadow:0 8px 32px #163f8712;overflow:clip;background:#f3f7fc}@media(max-width:760px){.school-page-shell{width:calc(100% - 24px);margin:12px auto}}@media(max-width:480px){.school-page-shell{width:calc(100% - 16px);margin:8px auto}}@media print{.school-page-shell{width:100%;max-width:none;margin:0;border:0;box-shadow:none}}
+.school-page-shell{position:relative;width:100%;max-width:100%;margin:0 auto;border:0;box-shadow:none;overflow:clip;background:#fff}@media(max-width:760px){.school-page-shell{width:100%;margin:0}}@media(max-width:480px){.school-page-shell{width:100%;margin:0}}@media print{.school-page-shell{width:100%;max-width:none;margin:0;border:0;box-shadow:none}}
 
 .school-sparkle-layer{z-index:2}.school-light-streak{position:absolute;width:160px;height:2px;border-radius:50%;background:linear-gradient(90deg,transparent,#9ac5f780 65%,#fff);box-shadow:0 0 8px #8db7e966;opacity:0;transform:rotate(32deg);animation:school-comet-flight var(--streak-duration) linear var(--streak-delay) infinite;pointer-events:none}@keyframes school-comet-flight{0%,76%{opacity:0;transform:translate(-180px,-100px) rotate(32deg)}79%{opacity:.6}89%,100%{opacity:0;transform:translate(380px,250px) rotate(32deg)}}@media(prefers-reduced-motion:reduce){.school-light-streak{display:none;animation:none}}
 

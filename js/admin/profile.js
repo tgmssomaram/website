@@ -51,11 +51,11 @@ window.AdminModules.profile = {
         <div class="form-row">\
           <div class="form-group-dash">\
             <label for="prof-principal">Principal (FAC) Name</label>\
-            <input type="text" id="prof-principal" value="' + (val.principal || 'Farhana').replace(/"/g, '&quot;') + '" />\
+            <input type="text" id="prof-principal" value="' + (val.principal || 'Dr.Bandari Sampath Kumar').replace(/"/g, '&quot;') + '" />\
           </div>\
           <div class="form-group-dash">\
             <label for="prof-qualification">Principal Qualification</label>\
-            <input type="text" id="prof-qualification" value="' + (val.principalQualification || 'M.Sc., B.Ed.').replace(/"/g, '&quot;') + '" />\
+            <input type="text" id="prof-qualification" value="' + (val.principalQualification || 'Phd in chemistry, B.Ed.').replace(/"/g, '&quot;') + '" />\
           </div>\
         </div>\
         <h3 style="font-size:1.05rem;font-weight:600;margin:24px 0 16px;color:#1e293b;border-bottom:1px solid #f1f5f9;padding-bottom:8px;">Contact & Location</h3>\
@@ -66,7 +66,7 @@ window.AdminModules.profile = {
           </div>\
           <div class="form-group-dash">\
             <label for="prof-phone">Contact Phone</label>\
-            <input type="text" id="prof-phone" value="' + (val.phone || '+91-08727-285222').replace(/"/g, '&quot;') + '" />\
+            <input type="text" id="prof-phone" value="' + (val.phone || '').replace(/"/g, '&quot;') + '" />\
           </div>\
         </div>\
         <div class="form-row">\

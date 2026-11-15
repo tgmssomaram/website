@@ -23,11 +23,11 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // GET: Read school profile + active faculty
+  // GET: Real-time sync of school profile + active faculty + gallery + notices
   if (req.method === 'GET') {
     if (isSupabaseConfigured()) {
       try {
-        const [profileRes, facultyRes] = await Promise.all([
+        const [profileRes, facultyRes, galleryRes, noticesRes] = await Promise.all([
           supabase
             .from('school_profiles')
             .select('values, revision')
@@ -37,7 +37,17 @@ export default async function handler(req, res) {
             .from('faculty')
             .select('*')
             .eq('is_active', true)
-            .order('order_index', { ascending: true })
+            .order('order_index', { ascending: true }),
+          supabase
+            .from('gallery_items')
+            .select('*')
+            .eq('is_active', true)
+            .order('created_at', { ascending: false }),
+          supabase
+            .from('notices')
+            .select('*')
+            .eq('is_active', true)
+            .order('created_at', { ascending: false })
         ]);
 
         let profileValues = profileRes.data?.values || getFallbackData() || {};
@@ -45,6 +55,7 @@ export default async function handler(req, res) {
           try { profileValues = JSON.parse(profileValues); } catch {}
         }
 
+        // Live Faculty Sync
         if (facultyRes.data && facultyRes.data.length > 0) {
           const facultyRows = facultyRes.data;
           profileValues.facultyList = facultyRows;
@@ -68,6 +79,28 @@ export default async function handler(req, res) {
           }
         }
 
+        // Live Gallery Sync
+        if (galleryRes.data && galleryRes.data.length > 0) {
+          profileValues.gallery = galleryRes.data.map(g => ({
+            src: g.image_url,
+            title: g.title,
+            te: g.caption || g.title,
+            category: g.category || 'School Activities'
+          }));
+        }
+
+        // Live Notices & Flash News Sync
+        if (noticesRes.data && noticesRes.data.length > 0) {
+          const mappedNotices = noticesRes.data.map(n => ({
+            id: n.id,
+            title: n.title,
+            detail: n.detail || n.title,
+            date: n.date || new Date().toISOString().slice(0, 10)
+          }));
+          profileValues.notices = mappedNotices;
+          profileValues.flashNews = mappedNotices;
+        }
+
         return res.status(200).json({
           values: {
             [PROFILE_KEY]: JSON.stringify(profileValues)
@@ -75,7 +108,7 @@ export default async function handler(req, res) {
           revision: profileRes.data?.revision || 1
         });
       } catch (err) {
-        console.error('Supabase query error:', err);
+        console.error('Supabase query error in api/content:', err);
       }
     }
 
@@ -116,14 +149,29 @@ export default async function handler(req, res) {
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Failed to update Supabase school profile:', error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      // Also update local file if present
+      try {
+        const localPath = path.join(process.cwd(), 'data', 'school-data.json');
+        if (fs.existsSync(localPath)) {
+          fs.writeFileSync(localPath, JSON.stringify(parsed, null, 2), 'utf-8');
+        }
+      } catch (writeErr) {
+        console.warn('Could not write local data/school-data.json:', writeErr.message);
+      }
 
       return res.status(200).json({
         success: true,
-        revision: nextRevision
+        revision: nextRevision,
+        data
       });
     } catch (err) {
-      return res.status(500).json({ error: err.message || 'Failed to update content' });
+      console.error('Content update error:', err);
+      return res.status(500).json({ error: err.message });
     }
   }
 

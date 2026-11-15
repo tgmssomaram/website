@@ -11,14 +11,155 @@ document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',(
 
 let schoolData=(typeof SOMARAM_DEFAULT_DATA!=='undefined'?JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA)):null);
 const originalRender=render;
-function photoCard(photo){const article=node('article',null,'photo-card');const b=node('button');b.type='button';b.className='photo-open';b.setAttribute('aria-label','View '+photo.title);const image=node('img');image.src=photo.src;image.alt=photo.title;image.loading='lazy';b.append(image);b.addEventListener('click',()=>{let dialog=document.querySelector('#photo-view');if(!dialog){dialog=node('dialog');dialog.id='photo-view';document.body.append(dialog);}dialog.replaceChildren();const close=node('button',t('close'));close.addEventListener('click',()=>dialog.close());const full=node('img');full.src=photo.src;full.alt=photo.title;dialog.append(close,full,node('p',lang==='te'?photo.te:photo.title));dialog.showModal();});article.append(b,node('h3',lang==='te'?photo.te:photo.title),node('p',photo.category));return article;}
+function openLightbox(activePhoto, list) {
+  const photos = Array.isArray(list) && list.length > 0 ? list : [activePhoto];
+  let currentIndex = photos.findIndex(p => p.src === activePhoto.src);
+  if (currentIndex < 0) currentIndex = 0;
+
+  let dialog = document.querySelector('#photo-view');
+  if (!dialog) {
+    dialog = document.createElement('dialog');
+    dialog.id = 'photo-view';
+    dialog.className = 'ag-lightbox';
+    document.body.append(dialog);
+  }
+
+  function renderSlide(index) {
+    currentIndex = (index + photos.length) % photos.length;
+    const photo = photos[currentIndex];
+
+    dialog.replaceChildren();
+
+    const shell = document.createElement('div');
+    shell.className = 'ag-lightbox-shell';
+
+    const header = document.createElement('div');
+    header.className = 'ag-lightbox-header';
+
+    const meta = document.createElement('div');
+    meta.className = 'ag-lightbox-meta';
+
+    if (photo.category) {
+      const cat = document.createElement('span');
+      cat.className = 'ag-lightbox-category';
+      cat.textContent = photo.category;
+      meta.append(cat);
+    }
+
+    const counter = document.createElement('span');
+    counter.className = 'ag-lightbox-counter';
+    counter.textContent = (currentIndex + 1) + ' / ' + photos.length;
+    meta.append(counter);
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'ag-lightbox-close';
+    closeBtn.setAttribute('aria-label', 'Close photo view');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', () => dialog.close());
+
+    header.append(meta, closeBtn);
+
+    const mediaWrap = document.createElement('div');
+    mediaWrap.className = 'ag-lightbox-media-wrap';
+
+    const stage = document.createElement('div');
+    stage.className = 'ag-lightbox-stage';
+
+    const img = document.createElement('img');
+    img.className = 'ag-lightbox-img';
+    img.src = photo.src;
+    img.alt = photo.title || 'School photo';
+    stage.append(img);
+
+    if (photos.length > 1) {
+      const prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'ag-lightbox-nav ag-lightbox-prev';
+      prevBtn.setAttribute('aria-label', 'Previous photo');
+      prevBtn.innerHTML = '&#8249;';
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        renderSlide(currentIndex - 1);
+      });
+
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'ag-lightbox-nav ag-lightbox-next';
+      nextBtn.setAttribute('aria-label', 'Next photo');
+      nextBtn.innerHTML = '&#8250;';
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        renderSlide(currentIndex + 1);
+      });
+
+      mediaWrap.append(prevBtn, stage, nextBtn);
+    } else {
+      mediaWrap.append(stage);
+    }
+
+    const footer = document.createElement('div');
+    footer.className = 'ag-lightbox-footer';
+
+    const titleEl = document.createElement('h3');
+    titleEl.className = 'ag-lightbox-title';
+    titleEl.textContent = photo.title || 'TGMS Somaram';
+    footer.append(titleEl);
+
+    if (photo.te && photo.te !== photo.title) {
+      const teEl = document.createElement('p');
+      teEl.className = 'ag-lightbox-telugu';
+      teEl.textContent = photo.te;
+      footer.append(teEl);
+    }
+
+    shell.append(header, mediaWrap, footer);
+    dialog.append(shell);
+  }
+
+  dialog.onclick = (e) => {
+    if (e.target === dialog) dialog.close();
+  };
+
+  dialog.onkeydown = (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      renderSlide(currentIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      renderSlide(currentIndex + 1);
+    }
+  };
+
+  renderSlide(currentIndex);
+  dialog.showModal();
+}
+window.openLightbox = openLightbox;
+
+function photoCard(photo){
+  const article = node('article', null, 'photo-card');
+  const b = node('button');
+  b.type = 'button';
+  b.className = 'photo-open';
+  b.setAttribute('aria-label', 'View ' + (photo.title || 'photo'));
+  const image = node('img');
+  image.src = photo.src;
+  image.alt = photo.title || 'School photo';
+  image.loading = 'lazy';
+  const overlay = node('span', null, 'photo-hover-overlay');
+  overlay.innerHTML = '<span class="photo-zoom-icon">🔍</span><span>' + (lang === 'te' ? 'వీక్షించండి' : 'Enlarge') + '</span>';
+  b.append(image, overlay);
+  b.addEventListener('click', () => {
+    const all = (schoolData && schoolData.gallery) || [];
+    openLightbox(photo, all);
+  });
+  article.append(b, node('h3', lang === 'te' ? (photo.te || photo.title) : (photo.title || '')), node('p', photo.category || 'School Activities'));
+  return article;
+}
 function principalCard(){const card=node('div',null,'principal-card');const image=node('img');image.src=schoolData.principalPhoto||'images/principal-veerababu.jpg';image.alt='K. Veerababu, Principal FAC';card.append(image,node('span',schoolData.principal.designation),node('h3',schoolData.principal.name),node('p',schoolData.principal.qualification),link(schoolData.principal.phone,'tel:+91'+schoolData.principal.phone));return card;}
 function createFacultyCard(member) {
   const card = document.createElement('article');
   card.className = 'faculty-card';
-
-  const frame = document.createElement('div');
-  frame.className = 'faculty-photo-frame';
 
   const des = String(member.designation || '').toUpperCase();
   let badgeClass = 'role-staff';
@@ -32,7 +173,25 @@ function createFacultyCard(member) {
   } else if (des.includes('TGT')) {
     badgeClass = 'role-tgt';
     badgeText = 'TGT';
+  } else if (des.includes('VOCATIONAL') || des.includes('TRAINER') || des.includes('MEDIA') || des.includes('HEALTH')) {
+    badgeClass = 'role-vocational';
+    badgeText = 'Vocational';
   }
+
+  let subj = member.subject || '';
+  if (!subj && member.designation) {
+    const match = member.designation.match(/PGT\s+([A-Za-z]+)|TGT\s+([A-Za-z\s]+)/i);
+    if (match) subj = match[1] || match[2];
+  }
+
+  card.dataset.name = (member.name || '').toLowerCase();
+  card.dataset.des = (member.designation || '').toLowerCase();
+  card.dataset.subj = (subj || '').toLowerCase();
+  card.dataset.role = badgeClass;
+  card.tabIndex = 0;
+
+  const frame = document.createElement('div');
+  frame.className = 'faculty-photo-frame';
 
   const roleBadge = document.createElement('span');
   roleBadge.className = 'faculty-role-badge ' + badgeClass;
@@ -70,15 +229,10 @@ function createFacultyCard(member) {
   const meta = document.createElement('div');
   meta.className = 'faculty-meta-list';
 
-  let subj = member.subject || '';
-  if (!subj && member.designation) {
-    const match = member.designation.match(/PGT\s+([A-Za-z]+)|TGT\s+([A-Za-z\s]+)/i);
-    if (match) subj = match[1] || match[2];
-  }
   if (subj && subj.toLowerCase() !== (member.designation || '').toLowerCase()) {
     const sItem = document.createElement('div');
-    sItem.className = 'faculty-meta-item';
-    sItem.innerHTML = '<span class="faculty-meta-icon">📚</span><span><span class="faculty-meta-label">Subject:</span><span class="faculty-meta-value">' + subj + '</span></span>';
+    sItem.className = 'faculty-meta-item faculty-subject-highlight';
+    sItem.innerHTML = '<span class="faculty-meta-icon">📚</span><span><span class="faculty-meta-label">Subject:</span><strong class="faculty-meta-value">' + subj + '</strong></span>';
     meta.append(sItem);
   }
 
@@ -100,7 +254,7 @@ function createFacultyPlaceholder(name) {
 
   const circle = document.createElement('div');
   circle.className = 'faculty-placeholder-circle';
-  circle.textContent = '👨‍🏫';
+  circle.innerHTML = '<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" opacity="0.85"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>';
 
   const initials = document.createElement('div');
   initials.className = 'faculty-placeholder-initials';
@@ -156,6 +310,48 @@ function renderModernFacultyPage(sheet, d) {
   header.append(title, subtitle, badge);
   container.append(header);
 
+  // Live Search & Category Filter Toolbar
+  const toolbar = document.createElement('div');
+  toolbar.className = 'faculty-filter-toolbar';
+
+  const searchBox = document.createElement('div');
+  searchBox.className = 'faculty-search-box';
+  const searchInput = document.createElement('input');
+  searchInput.type = 'search';
+  searchInput.className = 'faculty-search-input';
+  searchInput.placeholder = lang === 'te' ? 'పేరు లేదా సబ్జెక్ట్ ద్వారా శోధించండి...' : 'Search by name, subject, or role...';
+  searchBox.append(searchInput);
+
+  const pills = document.createElement('div');
+  pills.className = 'faculty-filter-pills';
+  const filterOptions = [
+    ['all', lang === 'te' ? 'అందరూ' : 'All'],
+    ['role-principal', lang === 'te' ? 'ప్రిన్సిపాల్' : 'Principal'],
+    ['role-pgt', lang === 'te' ? 'పి.జి.టి (ఇంటర్)' : 'PGT (Junior College)'],
+    ['role-tgt', lang === 'te' ? 'టి.జి.టి (హైస్కూల్)' : 'TGT (High School)'],
+    ['role-vocational', lang === 'te' ? 'వృత్తి విద్య' : 'Vocational'],
+    ['role-staff', lang === 'te' ? 'సిబ్బంది' : 'Support Staff']
+  ];
+  let currentFilter = 'all';
+
+  filterOptions.forEach(([key, lbl]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'faculty-filter-btn' + (key === 'all' ? ' active' : '');
+    btn.textContent = lbl;
+    btn.dataset.filter = key;
+    btn.addEventListener('click', () => {
+      pills.querySelectorAll('.faculty-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = key;
+      applyFilter();
+    });
+    pills.append(btn);
+  });
+
+  toolbar.append(searchBox, pills);
+  container.append(toolbar);
+
   const grid = document.createElement('div');
   grid.className = 'faculty-grid';
 
@@ -164,12 +360,13 @@ function renderModernFacultyPage(sheet, d) {
   });
   container.append(grid);
 
+  const subgroups = [];
   if (Array.isArray(d.guest) && d.guest.length > 0) {
+    const subWrap = document.createElement('div');
+    subWrap.className = 'faculty-subgroup-block';
     const subH = document.createElement('h3');
     subH.className = 'faculty-subgroup-title';
     subH.innerHTML = '<span>🎓</span> <span>' + (lang === 'te' ? 'గెస్ట్ అధ్యాపకులు' : 'HBT / Guest Faculty') + ' · ' + d.guest.length + '</span>';
-    container.append(subH);
-
     const guestGrid = document.createElement('div');
     guestGrid.className = 'faculty-grid';
     d.guest.forEach(row => {
@@ -181,15 +378,17 @@ function renderModernFacultyPage(sheet, d) {
         photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null
       }));
     });
-    container.append(guestGrid);
+    subWrap.append(subH, guestGrid);
+    container.append(subWrap);
+    subgroups.push(subWrap);
   }
 
   if (Array.isArray(d.vocational) && d.vocational.length > 0) {
+    const subWrap = document.createElement('div');
+    subWrap.className = 'faculty-subgroup-block';
     const subH = document.createElement('h3');
     subH.className = 'faculty-subgroup-title';
     subH.innerHTML = '<span>🛠️</span> <span>' + (lang === 'te' ? 'వృత్తి విద్యా శిక్షకులు' : 'Vocational Trainers') + ' · ' + d.vocational.length + '</span>';
-    container.append(subH);
-
     const vocGrid = document.createElement('div');
     vocGrid.className = 'faculty-grid';
     d.vocational.forEach(row => {
@@ -201,15 +400,17 @@ function renderModernFacultyPage(sheet, d) {
         photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null
       }));
     });
-    container.append(vocGrid);
+    subWrap.append(subH, vocGrid);
+    container.append(subWrap);
+    subgroups.push(subWrap);
   }
 
   if (Array.isArray(d.support) && d.support.length > 0) {
+    const subWrap = document.createElement('div');
+    subWrap.className = 'faculty-subgroup-block';
     const subH = document.createElement('h3');
     subH.className = 'faculty-subgroup-title';
     subH.innerHTML = '<span>🏛️</span> <span>' + (lang === 'te' ? 'సహాయక సిబ్బంది' : 'Support Staff') + ' · ' + d.support.length + '</span>';
-    container.append(subH);
-
     const supGrid = document.createElement('div');
     supGrid.className = 'faculty-grid';
     d.support.forEach(row => {
@@ -221,12 +422,592 @@ function renderModernFacultyPage(sheet, d) {
         photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null
       }));
     });
-    container.append(supGrid);
+    subWrap.append(subH, supGrid);
+    container.append(subWrap);
+    subgroups.push(subWrap);
   }
+
+  function applyFilter() {
+    const q = searchInput.value.trim().toLowerCase();
+    const allCards = container.querySelectorAll('.faculty-card');
+    let visibleCount = 0;
+    allCards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      const des = (card.dataset.des || '').toLowerCase();
+      const subj = (card.dataset.subj || '').toLowerCase();
+      const role = card.dataset.role || '';
+
+      const matchesSearch = !q || name.includes(q) || des.includes(q) || subj.includes(q);
+      const matchesFilter = currentFilter === 'all' || role === currentFilter;
+
+      if (matchesSearch && matchesFilter) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    let noResult = container.querySelector('.faculty-no-results');
+    if (visibleCount === 0) {
+      if (!noResult) {
+        noResult = document.createElement('div');
+        noResult.className = 'faculty-no-results';
+        noResult.innerHTML = '<span style="font-size:36px;display:block;margin-bottom:8px">🔍</span><strong>' + 
+          (lang === 'te' ? 'ఏ ఉపాధ్యాయులు కనుగొనబడలేదు' : 'No matching faculty members found') + 
+          '</strong><p style="font-size:13px;color:#6b7280;margin-top:4px">' + 
+          (lang === 'te' ? 'దయచేసి వేరే పేరు లేదా సబ్జెక్ట్ టైప్ చేయండి' : 'Try searching with a different name or subject keyword') + 
+          '</p>';
+        grid.after(noResult);
+      }
+      noResult.hidden = false;
+    } else if (noResult) {
+      noResult.hidden = true;
+    }
+
+    subgroups.forEach(sub => {
+      const visibleInSub = sub.querySelectorAll('.faculty-card:not([style*="display: none"])').length;
+      sub.style.display = visibleInSub > 0 ? '' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('input', applyFilter);
 
   sheet.replaceChildren(container);
 }
 window.renderModernFacultyPage = renderModernFacultyPage;
+
+function renderModernStrengthPage(sheet, d) {
+  const isTe = lang === 'te';
+  const rawData = (d && d.strength) || (typeof INITIAL_STRENGTH !== 'undefined' ? INITIAL_STRENGTH : {
+    year: '2026–27',
+    groups: [
+      { title: 'School · Classes VI–X', rows: [['VI',48,33],['VII',55,21],['VIII',63,34],['IX',51,46],['X',55,39]] },
+      { title: 'Junior College · First Year (Intermediate)', rows: [['MPC',18,28],['BiPC',4,37],['CEC',15,16],['ACE',7,10]] },
+      { title: 'Junior College · Second Year (Intermediate)', rows: [['MPC',16,33],['BiPC',0,39],['CEC',15,11]] }
+    ],
+    sections: [['IX A',49],['IX B',50],['X A',46],['X B',48],['I CEC',31],['II CEC',25]]
+  });
+
+  const container = document.createElement('div');
+  container.className = 'strength-page-container';
+
+  const header = document.createElement('div');
+  header.className = 'strength-page-header';
+
+  const title = document.createElement('h2');
+  title.textContent = isTe ? 'పాఠశాల విద్యార్థుల సంఖ్య & నమోదు వివరాలు' : 'School Strength & Enrolment Statistics';
+
+  const subtitle = document.createElement('p');
+  subtitle.textContent = isTe
+    ? 'తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారంలో 6వ తరగతి నుండి 12వ తరగతి వరకు విద్యార్థుల సంఖ్య గణాంకాలు · విద్యా సంవత్సరం ' + rawData.year
+    : 'Comprehensive student enrolment breakdown across High School (Classes VI–X) and Junior College (Intermediate I & II Year) · Academic Year ' + rawData.year + ' · UDISE+ 36131100206';
+
+  const verifiedBadge = document.createElement('div');
+  verifiedBadge.className = 'strength-verified-badge';
+  verifiedBadge.innerHTML = '<span>🏛️</span> <span>' + (isTe ? 'ప్రభుత్వ ఆమోదిత నమోదు గణాంకాలు · ఉచిత విద్య' : 'Official Enrolment Record · 100% Free Education') + '</span>';
+
+  header.append(title, subtitle, verifiedBadge);
+  container.append(header);
+
+  // Totals
+  let totalBoys = 0;
+  let totalGirls = 0;
+  (rawData.groups || []).forEach(group => {
+    (group.rows || []).forEach(row => {
+      totalBoys += Number(row[1]) || 0;
+      totalGirls += Number(row[2]) || 0;
+    });
+  });
+  const grandTotal = totalBoys + totalGirls;
+  const boysPct = grandTotal > 0 ? Math.round((totalBoys / grandTotal) * 100) : 50;
+  const girlsPct = 100 - boysPct;
+
+  // Stat summary bar
+  const statsGrid = document.createElement('div');
+  statsGrid.className = 'ag-strength-summary';
+
+  const statItems = [
+    {
+      icon: '👥',
+      label: isTe ? 'మొత్తం విద్యార్థులు' : 'Total Enrolment',
+      val: grandTotal,
+      sub: isTe ? 'తరగతులు VI – XII' : 'Classes VI through XII',
+      accent: 'emerald'
+    },
+    {
+      icon: '👦',
+      label: isTe ? 'బాలుర సంఖ్య' : 'Boys Enrolled',
+      val: totalBoys,
+      sub: boysPct + '% ' + (isTe ? 'మొత్తం నమోదులో' : 'of student strength'),
+      accent: 'teal'
+    },
+    {
+      icon: '👧',
+      label: isTe ? 'బాలికల సంఖ్య' : 'Girls Enrolled',
+      val: totalGirls,
+      sub: girlsPct + '% ' + (isTe ? 'మొత్తం నమోదులో' : 'of student strength'),
+      accent: 'rose'
+    },
+    {
+      icon: '⚖️',
+      label: isTe ? 'లింగ నిష్పత్తి' : 'Gender Parity Ratio',
+      val: '1 : 1',
+      sub: isTe ? 'సమాన నిష్పత్తి' : 'Equal Opportunity Parity',
+      accent: 'amber'
+    }
+  ];
+
+  statItems.forEach(item => {
+    const card = document.createElement('article');
+    card.className = 'ag-strength-stat-card accent-' + item.accent;
+    card.innerHTML = '<div class="stat-card-top"><span class="stat-card-icon">' + item.icon + '</span><span class="stat-card-label">' + item.label + '</span></div><strong class="stat-card-value">' + item.val + '</strong><span class="stat-card-sub">' + item.sub + '</span>';
+    statsGrid.append(card);
+  });
+  container.append(statsGrid);
+
+  // Filter Toolbar
+  const filterToolbar = document.createElement('div');
+  filterToolbar.className = 'strength-filter-bar';
+
+  const filterOptions = [
+    ['all', isTe ? 'అన్నీ చూడండి' : 'All Sections'],
+    ['school', isTe ? 'హైస్కూల్ (VI–X)' : 'High School (VI–X)'],
+    ['inter', isTe ? 'జూనియర్ కళాశాల (XI–XII)' : 'Junior College (XI–XII)'],
+    ['sections', isTe ? 'సెక్షన్ల వివరాలు' : 'Section Statement']
+  ];
+
+  filterOptions.forEach(([key, lbl], idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'strength-filter-btn' + (idx === 0 ? ' active' : '');
+    btn.textContent = lbl;
+    btn.dataset.target = key;
+    btn.addEventListener('click', () => {
+      filterToolbar.querySelectorAll('.strength-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const blocks = tablesContainer.querySelectorAll('.strength-block');
+      blocks.forEach(b => {
+        const bKey = b.dataset.blockKey;
+        if (key === 'all') {
+          b.style.display = '';
+        } else if (key === 'school' && bKey === 'school') {
+          b.style.display = '';
+        } else if (key === 'inter' && (bKey === 'inter-first' || bKey === 'inter-second')) {
+          b.style.display = '';
+        } else if (key === 'sections' && bKey === 'sections') {
+          b.style.display = '';
+        } else {
+          b.style.display = 'none';
+        }
+      });
+    });
+    filterToolbar.append(btn);
+  });
+  container.append(filterToolbar);
+
+  // Tables
+  const tablesContainer = document.createElement('div');
+  tablesContainer.className = 'strength-tables-container';
+
+  function createTableBlock(blockKey, titleText, titleTe, badgeText, rows, isGroupTable) {
+    const card = document.createElement('section');
+    card.className = 'strength-block ag-strength-card block-' + blockKey;
+    card.dataset.blockKey = blockKey;
+
+    const blockHeader = document.createElement('div');
+    blockHeader.className = 'strength-block-header';
+
+    const h3 = document.createElement('h3');
+    h3.textContent = isTe ? titleTe : titleText;
+
+    const badge = document.createElement('span');
+    badge.className = 'strength-block-badge';
+    badge.textContent = badgeText;
+
+    blockHeader.append(h3, badge);
+    card.append(blockHeader);
+
+    const scrollWrap = document.createElement('div');
+    scrollWrap.className = 'ag-table-scroll';
+    scrollWrap.tabIndex = 0;
+    scrollWrap.setAttribute('role', 'region');
+    scrollWrap.setAttribute('aria-label', titleText + ' table');
+
+    const table = document.createElement('table');
+    table.className = 'ag-modern-table';
+
+    if (isGroupTable) {
+      const thead = document.createElement('thead');
+      const trH = document.createElement('tr');
+      const headers = isTe
+        ? ['తరగతి / విభాగం', 'బాలురు', 'బాలికలు', 'మొత్తం', 'శాతం']
+        : ['Class / Stream', 'Boys', 'Girls', 'Total', 'Share'];
+
+      headers.forEach((h, hIdx) => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        if (hIdx >= 1) th.style.textAlign = 'right';
+        trH.append(th);
+      });
+      thead.append(trH);
+      table.append(thead);
+
+      const tbody = document.createElement('tbody');
+      let bSum = 0;
+      let gSum = 0;
+
+      rows.forEach(r => {
+        bSum += Number(r[1]) || 0;
+        gSum += Number(r[2]) || 0;
+      });
+      const groupTotal = bSum + gSum;
+
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+        const bVal = Number(r[1]) || 0;
+        const gVal = Number(r[2]) || 0;
+        const tVal = bVal + gVal;
+        const pct = groupTotal > 0 ? Math.round((tVal / groupTotal) * 100) + '%' : '—';
+
+        const tdName = document.createElement('td');
+        tdName.className = 'td-class-name';
+        tdName.innerHTML = '<span class="class-pill">' + r[0] + '</span>';
+
+        const tdB = document.createElement('td');
+        tdB.className = 'td-num td-boys';
+        tdB.textContent = bVal;
+
+        const tdG = document.createElement('td');
+        tdG.className = 'td-num td-girls';
+        tdG.textContent = gVal;
+
+        const tdT = document.createElement('td');
+        tdT.className = 'td-num td-total';
+        tdT.innerHTML = '<strong>' + tVal + '</strong>';
+
+        const tdP = document.createElement('td');
+        tdP.className = 'td-num td-share';
+        tdP.innerHTML = '<span class="share-badge">' + pct + '</span>';
+
+        tr.append(tdName, tdB, tdG, tdT, tdP);
+        tbody.append(tr);
+      });
+      table.append(tbody);
+
+      const tfoot = document.createElement('tfoot');
+      const trF = document.createElement('tr');
+
+      const thFootLabel = document.createElement('th');
+      thFootLabel.textContent = isTe ? 'విభాగం మొత్తం' : 'Subtotal';
+
+      const thFootB = document.createElement('th');
+      thFootB.className = 'td-num';
+      thFootB.textContent = bSum;
+
+      const thFootG = document.createElement('th');
+      thFootG.className = 'td-num';
+      thFootG.textContent = gSum;
+
+      const thFootT = document.createElement('th');
+      thFootT.className = 'td-num';
+      thFootT.innerHTML = '<strong>' + groupTotal + '</strong>';
+
+      const thFootP = document.createElement('th');
+      thFootP.className = 'td-num';
+      thFootP.textContent = '100%';
+
+      trF.append(thFootLabel, thFootB, thFootG, thFootT, thFootP);
+      tfoot.append(trF);
+      table.append(tfoot);
+    } else {
+      const thead = document.createElement('thead');
+      const trH = document.createElement('tr');
+      const headers = isTe ? ['సెక్షన్ / తరగతి', 'విద్యార్థుల సంఖ్య'] : ['Section / Class', 'Enrolled Strength'];
+      headers.forEach((h, hIdx) => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        if (hIdx === 1) th.style.textAlign = 'right';
+        trH.append(th);
+      });
+      thead.append(trH);
+      table.append(thead);
+
+      const tbody = document.createElement('tbody');
+      let secTotal = 0;
+      rows.forEach(r => {
+        const count = Number(r[1]) || 0;
+        secTotal += count;
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.className = 'td-class-name';
+        tdName.innerHTML = '<span class="class-pill section-pill">' + r[0] + '</span>';
+
+        const tdCount = document.createElement('td');
+        tdCount.className = 'td-num';
+        tdCount.innerHTML = '<strong>' + count + '</strong>';
+
+        tr.append(tdName, tdCount);
+        tbody.append(tr);
+      });
+      table.append(tbody);
+
+      const tfoot = document.createElement('tfoot');
+      const trF = document.createElement('tr');
+      const thLabel = document.createElement('th');
+      thLabel.textContent = isTe ? 'మొత్తం' : 'Total Statement';
+      const thTot = document.createElement('th');
+      thTot.className = 'td-num';
+      thTot.innerHTML = '<strong>' + secTotal + '</strong>';
+      trF.append(thLabel, thTot);
+      tfoot.append(trF);
+      table.append(tfoot);
+    }
+
+    scrollWrap.append(table);
+    card.append(scrollWrap);
+    return card;
+  }
+
+  if (rawData.groups && rawData.groups[0]) {
+    tablesContainer.append(createTableBlock(
+      'school',
+      'High School Section · Classes VI to X',
+      'ఉన్నత పాఠశాల విభాగం · 6వ – 10వ తరగతులు',
+      '🏫 Classes VI – X',
+      rawData.groups[0].rows,
+      true
+    ));
+  }
+
+  if (rawData.groups && rawData.groups[1]) {
+    tablesContainer.append(createTableBlock(
+      'inter-first',
+      'Junior College · First Year Intermediate',
+      'జూనియర్ కళాశాల · ప్రథమ సంవత్సరం (ఇంటర్మీడియట్)',
+      '🎓 Intermediate 1st Year',
+      rawData.groups[1].rows,
+      true
+    ));
+  }
+
+  if (rawData.groups && rawData.groups[2]) {
+    tablesContainer.append(createTableBlock(
+      'inter-second',
+      'Junior College · Second Year Intermediate',
+      'జూనియర్ కళాశాల · ద్వితీయ సంవత్సరం (ఇంటర్మీడియట్)',
+      '🎓 Intermediate 2nd Year',
+      rawData.groups[2].rows,
+      true
+    ));
+  }
+
+  if (Array.isArray(rawData.sections) && rawData.sections.length > 0) {
+    tablesContainer.append(createTableBlock(
+      'sections',
+      'Section-Wise Distribution Statement',
+      'విభాగాల వారీగా నమోదు ప్రకటన',
+      '📑 Section Statement',
+      rawData.sections,
+      false
+    ));
+  }
+
+  container.append(tablesContainer);
+
+  const noticeBox = document.createElement('div');
+  noticeBox.className = 'ag-strength-notice';
+  noticeBox.innerHTML = '<div class="notice-icon">📋</div><div class="notice-content"><strong>' +
+    (isTe ? 'తెలంగాణ ప్రభుత్వ మోడల్ స్కూల్ సమాచారం' : 'Government of Telangana Model School Scheme') +
+    '</strong><p>' +
+    (isTe
+      ? 'ఉచిత ఆంగ్ల మాధ్యమ నాణ్యమైన విద్య, పాఠ్యపుస్తకాలు, యూనిఫారాలు, మధ్యాహ్న భోజన సదుపాయం ప్రభుత్వ నిబంధనల ప్రకారం అందించబడును. ప్రవేశాలు ప్రతి సంవత్సరం TGMSCET ప్రవేశ పరీక్ష మెరిట్ ఆధారంగా జరుగుతాయి.'
+      : 'High-quality English-medium education, free SCERT textbooks, uniforms, and mid-day meal facilities are provided under Telangana Model School guidelines. Admissions are conducted through TGMSCET entrance examination.') +
+    '</p></div>';
+  container.append(noticeBox);
+
+  sheet.replaceChildren(container);
+}
+window.renderModernStrengthPage = renderModernStrengthPage;
+
+function renderModernAcademicsPage(sheet) {
+  const isTe = lang === 'te';
+  const container = document.createElement('div');
+  container.className = 'academics-page-container';
+
+  const header = document.createElement('div');
+  header.className = 'academics-page-header';
+
+  const title = document.createElement('h2');
+  title.textContent = isTe ? 'విద్యా విభాగాలు & పాఠ్య ప్రణాళిక' : 'Academic Programmes & Curriculum';
+
+  const subtitle = document.createElement('p');
+  subtitle.textContent = isTe
+    ? 'తరగతి 6 నుండి 12 వరకు సమగ్ర ఆంగ్ల మాధ్యమ విద్య, అత్యాధునిక సైన్స్ ప్రయోగశాలలు, కంప్యూటర్ విద్య మరియు వృత్తి విద్యా శిక్షణ.'
+    : 'Comprehensive English medium secondary and higher secondary education under Telangana State Board curriculum with advanced labs and vocational certification.';
+
+  const badge = document.createElement('div');
+  badge.className = 'academics-hero-badge';
+  badge.innerHTML = '<span>🎓</span> <span>' + (isTe ? 'ఆంగ్ల మాధ్యమం · స్టేట్ సిలబస్' : 'English Medium · Classes VI to XII · Free Education') + '</span>';
+
+  header.append(title, subtitle, badge);
+  container.append(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'academics-cards-grid';
+
+  const highSchoolCard = document.createElement('article');
+  highSchoolCard.className = 'academics-program-card accent-emerald';
+  highSchoolCard.innerHTML = '<div class="program-card-header"><span class="program-icon">🏫</span><div><span class="program-tag">' +
+    (isTe ? 'సెకండరీ విద్య' : 'Secondary Education') +
+    '</span><h3 class="program-title">' +
+    (isTe ? 'ఉన్నత పాఠశాల విభాగం (6–10 తరగతులు)' : 'High School Section (Classes VI – X)') +
+    '</h3></div></div><p class="program-desc">' +
+    (isTe
+      ? 'తెలంగాణ ఎస్‌సిఇఆర్‌టి (SCERT) ఆమోదిత పాఠ్య ప్రణాళిక ప్రకారం 100% ఆంగ్ల మాధ్యమంలో తరగతులు నిర్వహించబడును. సి.సి.ఇ (CCE) పద్ధతిలో నిరంతర సమగ్ర మూల్యాంకనం.'
+      : 'State SCERT curriculum leading to the Secondary School Certificate (SSC) Board Examination, taught fully in English medium with continuous conceptual assessment.') +
+    '</p><div class="program-subjects"><strong>' +
+    (isTe ? 'సబ్జెక్టులు & భాషలు:' : 'Curriculum & Subjects:') +
+    '</strong><div class="subject-tags"><span class="subject-tag">Mathematics / గణితం</span><span class="subject-tag">Physical Science / భౌతిక శాస్త్రం</span><span class="subject-tag">Biological Science / జీవ శాస్త్రం</span><span class="subject-tag">Social Studies / సాంఘిక శాస్త్రం</span><span class="subject-tag">English (3rd Lang / Medium)</span><span class="subject-tag">Telugu (1st Lang)</span><span class="subject-tag">Hindi (2nd Lang)</span></div></div><ul class="program-features"><li>✓ ' +
+    (isTe ? 'డిజిటల్ స్మార్ట్ క్లాస్‌రూమ్‌లు & ప్రొజెక్టర్ బోధన' : 'Digital smart classrooms with audiovisual teaching aids') +
+    '</li><li>✓ ' +
+    (isTe ? 'సైన్స్ & గణిత ప్రయోగశాలలలో ప్రత్యక్ష సాధన' : 'Well-equipped physical science & biological science practical labs') +
+    '</li><li>✓ ' +
+    (isTe ? '10వ తరగతి పబ్లిక్ పరీక్షలకు ప్రత్యేక స్టడీ అవర్స్ & రివిజన్' : 'Dedicated evening study hours & intensive mock tests for SSC candidates') +
+    '</li></ul>';
+
+  const collegeCard = document.createElement('article');
+  collegeCard.className = 'academics-program-card accent-teal';
+  collegeCard.innerHTML = '<div class="program-card-header"><span class="program-icon">🎓</span><div><span class="program-tag">' +
+    (isTe ? 'హయ్యర్ సెకండరీ' : 'Higher Secondary (BIE TG)') +
+    '</span><h3 class="program-title">' +
+    (isTe ? 'జూనియర్ కళాశాల (ఇంటర్మీడియట్ I & II సంవత్సరం)' : 'Junior College Section (Intermediate I & II)') +
+    '</h3></div></div><p class="program-desc">' +
+    (isTe
+      ? 'తెలంగాణ ఇంటర్మీడియట్ విద్యా మండలి (BIE TG) గుర్తింపుతో రెండేళ్ల కోర్సులు. ఉన్నత విద్య మరియు జాతీయ/రాష్ట్ర స్థాయి ప్రవేశ పరీక్షలకు పునాది.'
+      : 'Affiliated with the Board of Intermediate Education, Telangana (BIE TG). Designed for academic excellence and seamless transition to prestigious university degrees.') +
+    '</p><div class="inter-streams"><div class="stream-item"><span class="stream-badge mpc">MPC</span><div class="stream-info"><strong>Mathematics · Physics · Chemistry</strong><small>' +
+    (isTe ? 'లక్ష్యం: ఇంజనీరింగ్ (JEE / EAPCET), NDA, ఆర్కిటెక్చర్' : 'Focus: Engineering (JEE Main, EAPCET), Defence (NDA), Physical Sciences') +
+    '</small></div></div><div class="stream-item"><span class="stream-badge bipc">BiPC</span><div class="stream-info"><strong>Botany · Zoology · Physics · Chemistry</strong><small>' +
+    (isTe ? 'లక్ష్యం: వైద్యం (NEET), నర్సింగ్, అగ్రికల్చర్, ఫార్మసీ' : 'Focus: Medicine (NEET-UG), Agriculture (B.Sc Agri), Pharmacy, Paramedical') +
+    '</small></div></div><div class="stream-item"><span class="stream-badge cec">CEC</span><div class="stream-info"><strong>Commerce · Economics · Civics</strong><small>' +
+    (isTe ? 'లక్ష్యం: చార్టర్డ్ అకౌంటెన్సీ (CA), సివిల్ సర్వీసెస్, లా (CLAT), బ్యాంకింగ్' : 'Focus: Chartered Accountancy (CA/CS/CMA), Civil Services, Law (CLAT), Banking') +
+    '</small></div></div></div>';
+
+  const vocCard = document.createElement('article');
+  vocCard.className = 'academics-program-card accent-amber';
+  vocCard.innerHTML = '<div class="program-card-header"><span class="program-icon">🛠️</span><div><span class="program-tag">' +
+    (isTe ? 'వృత్తి విద్య (NSQF)' : 'Vocational & Skill Education (NSQF)') +
+    '</span><h3 class="program-title">' +
+    (isTe ? 'వృత్తి విద్యా శిక్షణ & నైపుణ్యాభివృద్ధి' : 'Industry-Ready Skill Development') +
+    '</h3></div></div><p class="program-desc">' +
+    (isTe
+      ? 'సమగ్ర శిక్ష మరియు జాతీయ నైపుణ్య అర్హత ఫ్రేమ్‌వర్క్ (NSQF) కింద విద్యార్థులకు ఉపాధి అవకాశాలు కల్పించే ప్రత్యక్ష నైపుణ్యాల శిక్షణ.'
+      : 'Vocational courses empowering students with practical, industry-aligned career competencies alongside academic studies under Samagra Shiksha.') +
+    '</p><div class="voc-grid"><div class="voc-box"><span class="voc-icon">🖥️</span><strong>Media & Entertainment</strong><p>' +
+    (isTe ? 'గ్రాఫిక్ డిజైనింగ్, డిటిపి, ఫోటో ఎడిటింగ్, డిజిటల్ మీడియా మరియు కంప్యూటర్ అప్లికేషన్లు.' : 'Graphic design, desktop publishing (DTP), digital imaging, multimedia presentations and animation fundamentals.') +
+    '</p></div><div class="voc-box"><span class="voc-icon">🏥</span><strong>Healthcare & Patient Care</strong><p>' +
+    (isTe ? 'ప్రాథమిక ప్రథమ చికిత్స, రోగి సంరక్షణ, ఆరోగ్య సూత్రాలు మరియు ప్రాథమిక వైద్య సేవలు.' : 'Patient care assistance, vital signs monitoring, first responder emergency techniques, hygiene and hospital administration support.') +
+    '</p></div></div>';
+
+  const facilityCard = document.createElement('article');
+  facilityCard.className = 'academics-program-card accent-sky';
+  facilityCard.innerHTML = '<div class="program-card-header"><span class="program-icon">🔬</span><div><span class="program-tag">' +
+    (isTe ? 'విద్యా సదుపాయాలు' : 'Academic Infrastructure') +
+    '</span><h3 class="program-title">' +
+    (isTe ? 'ప్రయోగశాలలు, గ్రంథాలయం & సాంకేతికత' : 'Laboratories, Library & Digital Classrooms') +
+    '</h3></div></div><ul class="facility-list"><li><span class="fac-icon">🧪</span><div><strong>' +
+    (isTe ? 'సైన్స్ ప్రయోగశాలలు' : 'Advanced Science Labs') +
+    '</strong><small>' +
+    (isTe ? 'ఫిజిక్స్, కెమిస్ట్రీ మరియు బయాలజీ ప్రయోగాలకు ప్రత్యేక ల్యాబ్‌లు.' : 'Fully equipped physics, chemistry, botany and zoology experiment stations.') +
+    '</small></div></li><li><span class="fac-icon">💻</span><div><strong>' +
+    (isTe ? 'కంప్యూటర్ ల్యాబ్ & ఇంటర్నెట్' : 'High-Speed Computer Lab') +
+    '</strong><small>' +
+    (isTe ? 'విద్యార్థులకు ప్రత్యక్ష ఐటి శిక్షణ, డిజిటల్ లెర్నింగ్ సాఫ్ట్‌వేర్.' : 'Networked computer terminals with digital curriculum software and typing skills.') +
+    '</small></div></li><li><span class="fac-icon">📚</span><div><strong>' +
+    (isTe ? 'విస్తృత గ్రంథాలయం' : 'Institutional Library') +
+    '</strong><small>' +
+    (isTe ? '2,000+ పాఠ్యపుస్తకాలు, పోటీ పరీక్షల గైడ్‌లు మరియు దినపత్రికలు.' : 'Rich catalog of 2,000+ reference volumes, encyclopedias, and competitive journals.') +
+    '</small></div></li><li><span class="fac-icon">🏃‍♂️</span><div><strong>' +
+    (isTe ? 'క్రీడలు & శారీరక విద్య' : 'Sports & Physical Health') +
+    '</strong><small>' +
+    (isTe ? 'నిపుణుడైన ఫిజికల్ డైరెక్టర్ (PD) ఆధ్వర్యంలో రోజువారీ యోగా, క్రీడలు.' : 'Regular yoga sessions, athletics, volleyball, and physical training under PD supervision.') +
+    '</small></div></li></ul>';
+
+  grid.append(highSchoolCard, collegeCard, vocCard, facilityCard);
+  container.append(grid);
+
+  const actionsWrap = document.createElement('div');
+  actionsWrap.className = 'academics-actions-bar';
+  actionsWrap.append(
+    link(isTe ? '📅 అకడమిక్ క్యాలెండర్ ↗' : '📅 Academic Calendar 2026–27 ↗', '#calendar', 'resource-btn'),
+    link(isTe ? '📊 విద్యార్థుల సంఖ్య & నమోదు ↗' : '📊 School Enrolment Strength ↗', '#strength', 'resource-btn'),
+    link(isTe ? '📖 పాఠ్యపుస్తకాలు డౌన్‌లోడ్ ↗' : '📖 Textbook Downloads ↗', '#books', 'resource-btn'),
+    link(isTe ? '📝 ప్రవేశాల వివరాలు ↗' : '📝 Admissions Information ↗', '#admissions', 'resource-btn highlight')
+  );
+  container.append(actionsWrap);
+
+  sheet.replaceChildren(container);
+}
+window.renderModernAcademicsPage = renderModernAcademicsPage;
+
+function renderModernResultsPage(sheet) {
+  const isTe = lang === 'te';
+  const container = document.createElement('div');
+  container.className = 'results-page-container';
+
+  const header = document.createElement('div');
+  header.className = 'results-page-header';
+
+  const title = document.createElement('h2');
+  title.textContent = isTe ? 'పరీక్షా ఫలితాలు & అకడమిక్ ప్రతిభ' : 'Board Examination Results & Academic Milestones';
+
+  const subtitle = document.createElement('p');
+  subtitle.textContent = isTe
+    ? '10వ తరగతి (SSC) మరియు ఇంటర్మీడియట్ (IPE) పరీక్షలలో సోమారం తెలంగాణ మోడల్ స్కూల్ విద్యార్థుల అద్భుత ప్రతిభ మరియు ఉన్నత విద్యా పురోగతి.'
+    : 'Celebrating consistent academic excellence, high pass percentages, and premier higher-education admissions achieved by students of TGMS Somaram.';
+
+  header.append(title, subtitle);
+  container.append(header);
+
+  const metricsGrid = document.createElement('div');
+  metricsGrid.className = 'results-metrics-grid';
+
+  const stats = [
+    { icon: '🏆', title: '100%', subtitle: isTe ? '10వ తరగతి (SSC) ఉత్తీర్ణత' : 'SSC Board Pass Rate', desc: isTe ? 'వరుస సంవత్సరాలలో శతశాతం ఉత్తీర్ణత' : 'Consistent 100% pass track record' },
+    { icon: '⭐', title: '95%+', subtitle: isTe ? 'ఇంటర్మీడియట్ (IPE) ఉత్తీర్ణత' : 'Intermediate Pass Rate', desc: isTe ? 'MPC, BiPC, CEC విభాగాలలో ప్రథమ శ్రేణి' : 'Top first-division grades in IPE' },
+    { icon: '🎯', title: '9.8 GPA', subtitle: isTe ? 'టాప్ జి.పి.ఎ సాధన' : 'Highest SSC GPA Achieved', desc: isTe ? 'మండల స్థాయిలో అత్యుత్తమ మార్కులు' : 'Excellence in Karimnagar district' },
+    { icon: '🚀', title: '100% Free', subtitle: isTe ? 'పోటీ పరీక్షల ఉచిత కోచింగ్' : 'Competitive Exam Mentorship', desc: isTe ? 'EAPCET, NEET & పాలిటెక్నిక్ మార్గదర్శనం' : 'Special coaching for higher education' }
+  ];
+
+  stats.forEach(st => {
+    const card = document.createElement('div');
+    card.className = 'result-metric-card';
+    card.innerHTML = '<div class="result-metric-icon">' + st.icon + '</div><strong class="result-metric-num">' + st.title + '</strong><span class="result-metric-sub">' + st.subtitle + '</span><p class="result-metric-desc">' + st.desc + '</p>';
+    metricsGrid.append(card);
+  });
+  container.append(metricsGrid);
+
+  const details = document.createElement('section');
+  details.className = 'results-detail-card';
+  details.innerHTML = '<h3>' +
+    (isTe ? 'అకడమిక్ విజయాల వెనుక నిబద్ధత' : 'Our Approach to Academic Excellence') +
+    '</h3><p>' +
+    (isTe
+      ? 'సోమారం తెలంగాణ మోడల్ స్కూల్‌లో అనుభవజ్ఞులైన ఉపాధ్యాయులు ప్రతి విద్యార్థిపై ప్రత్యేక శ్రద్ధ వహిస్తారు. రోజువారీ హోమ్‌వర్క్ పర్యవేక్షణ, శనివారపు రివిజన్ పరీక్షలు, వెనుకబడిన విద్యార్థులకు రెమిడియల్ టీచింగ్ మరియు బోర్డు పరీక్షలకు ప్రత్యేక ప్రాక్టీస్ పేపర్లు నిర్వహించడం ద్వారా ఉత్తమ ఫలితాలు సాధిస్తున్నాము.'
+      : 'At TGMS Somaram, personalized faculty mentorship, continuous slip tests, evening study supervision, and remedial classes for slow learners ensure every student achieves their fullest academic potential in Board examinations.') +
+    '</p><div class="results-links"><a href="#strength" class="resource-btn">' +
+    (isTe ? 'విద్యార్థుల సంఖ్య వివరాలు' : 'View School Strength') +
+    ' ↗</a><a href="#academics" class="resource-btn">' +
+    (isTe ? 'విద్యా కోర్సుల వివరాలు' : 'Explore Academic Programmes') +
+    ' ↗</a><a href="#faculty" class="resource-btn">' +
+    (isTe ? 'అధ్యాపక బృందం' : 'Meet Our Teaching Faculty') +
+    ' ↗</a></div>';
+  container.append(details);
+
+  sheet.replaceChildren(container);
+}
+window.renderModernResultsPage = renderModernResultsPage;
 
 function staffTable(title,rows){const section=node('section');section.append(node('h3',title));const wrap=node('div',null,'table-scroll');wrap.tabIndex=0;const table=node('table');const head=node('thead');const tr=node('tr');for(const h of ['Name','Designation / Subject','Qualification'])tr.append(node('th',h));head.append(tr);const body=node('tbody');rows.forEach(row=>{const r=node('tr');for(const value of row)r.append(node('td',value));body.append(r);});table.append(head,body);wrap.append(table);section.append(wrap);return section;}
 render=function(){originalRender();if(!schoolData)return;
@@ -250,6 +1031,12 @@ if(id==='achievements'){
  sheet.replaceChildren(node('h2',t('contact')),node('h3','School Office'),node('p',d.address),node('h3',d.principal.name+' · Principal FAC'),node('p',d.principal.qualification),link('☎ '+d.principal.phone,'tel:+91'+d.principal.phone,'resource'),link('✉ '+d.principal.email,'mailto:'+d.principal.email,'resource'));
 }else if(id==='faculty'){
  renderModernFacultyPage(sheet, d);
+}else if(id==='strength'){
+ renderModernStrengthPage(sheet, d);
+}else if(id==='academics'){
+ renderModernAcademicsPage(sheet);
+}else if(id==='results'){
+ renderModernResultsPage(sheet);
 }else if(id==='school'||id==='about-us'){
  sheet.replaceChildren(node('h2',id==='school'?'Our School & Principal':t('about')),node('p',lang==='te'?'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల సూర్యాపేట జిల్లాలో ఉంది. విద్య, సహపాఠ్య కార్యక్రమాలు, పాఠశాల–తల్లిదండ్రుల భాగస్వామ్యాన్ని ఈ వెబ్‌సైట్ పరిచయం చేస్తుంది.':'Telangana Model School & Junior College, Somaram is located in Suryapet district, Telangana. This website introduces the school’s teaching team, academic areas and school community activities.'),principalCard(),node('h3',t('vision')),node('p',t('visionBody')),node('h3',t('mission')),node('p',t('missionBody')));
  if(id==='about-us'){
