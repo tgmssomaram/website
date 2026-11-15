@@ -92,11 +92,7 @@ function installAssistant() {
   form.addEventListener('submit',e=>{e.preventDefault();ask(input.value);});
 }
 function installDirectoryButton(){
- const nav=document.querySelector('#menu,.final-template-nav');
- if(!nav||nav.querySelector('.model-directory-button'))return;
- const button=anchor('194 MODEL SCHOOLS','#directory');button.className='model-directory-button';button.setAttribute('translate','no');
- const contact=[...nav.children].find(e=>e.matches('a[href="#contact"]')||e.matches('button')&&/^contact(?: us)?$/i.test(e.textContent.trim()));
- nav.insertBefore(button,contact||null);
+ return;
 }
 installDirectoryButton();
 let directoryButtonQueued=false;

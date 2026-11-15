@@ -177,6 +177,9 @@ body {
 
 .final-school-model .masthead>#menu>a,
 .final-school-model .masthead>#menu .model-nav-trigger {
+  flex: 1 1 120px !important;
+  max-width: 200px !important;
+  text-align: center !important;
   min-height: 40px !important;
   height: auto !important;
   max-height: none !important;
@@ -596,6 +599,9 @@ footer.munagala-site-footer {
 
 .final-school-model .masthead>#menu>a,
 .final-school-model .masthead>#menu .model-nav-trigger {
+  flex: 1 1 120px !important;
+  max-width: 200px !important;
+  text-align: center !important;
   min-height: 40px !important;
   height: auto !important;
   max-height: none !important;
@@ -2645,6 +2651,79 @@ textarea:focus-visible {
 
 .ag-scroll-top:active {
   transform: translateY(0) scale(0.95);
+}
+
+/* ── 15.5 ADMIN GATEWAY CARD ────────────────────────────── */
+.admin-gateway-card {
+  background: linear-gradient(135deg, rgba(18, 77, 64, 0.06), rgba(245, 158, 11, 0.08)) !important;
+  border: 1.5px solid rgba(18, 77, 64, 0.2) !important;
+  border-radius: var(--ag-radius-lg) !important;
+  padding: clamp(22px, 3.5vw, 36px) !important;
+  margin: 20px 0 32px !important;
+  box-shadow: 0 10px 30px -6px rgba(18, 77, 64, 0.12) !important;
+}
+
+.admin-gateway-badge {
+  display: inline-block !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.5px !important;
+  color: var(--ag-primary) !important;
+  background: rgba(18, 77, 64, 0.12) !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  margin-bottom: 12px !important;
+}
+
+.admin-gateway-card h3 {
+  font-size: clamp(20px, 2.2vw, 26px) !important;
+  color: var(--ag-primary) !important;
+  margin: 0 0 10px !important;
+}
+
+.admin-gateway-card p {
+  color: var(--ag-text-muted) !important;
+  margin: 0 0 16px !important;
+  max-width: 800px !important;
+  line-height: 1.6 !important;
+}
+
+/* ── 15.6 SUBPAGE PILL NAVIGATION ────────────────────────── */
+.school-subpage-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin: 0 0 24px !important;
+  padding: 0 0 16px !important;
+  border-bottom: 1px solid var(--ag-border) !important;
+}
+
+.school-subnav-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--ag-primary) !important;
+  background: rgba(18, 77, 64, 0.08) !important;
+  border: 1px solid rgba(18, 77, 64, 0.18) !important;
+  border-radius: 20px !important;
+  text-decoration: none !important;
+  transition: all var(--ag-transition) !important;
+}
+
+.school-subnav-btn:hover {
+  background: var(--ag-primary) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(18, 77, 64, 0.2);
+}
+
+.school-subnav-btn.active {
+  background: var(--ag-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--ag-primary) !important;
+  box-shadow: 0 4px 14px rgba(18, 77, 64, 0.3) !important;
 }
 
 /* ========================================================

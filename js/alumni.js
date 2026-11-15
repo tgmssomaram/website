@@ -8,12 +8,6 @@ import {alumniPhoto} from './alumni-core.mjs';
     queued = false;
     if (/^#admin/.test(location.hash) || location.pathname.startsWith('/admin')) return;
     const main = document.querySelector('main'); if (!main) return;
-    const nav = document.querySelector('#menu') || document.querySelector('header nav');
-    if (nav && !nav.querySelector('[data-alumni-nav]')) {
-      const a = make('a', label(), 'tgms-alumni-nav'); a.href = '#alumni'; a.dataset.alumniNav = 'true';
-      const contact = [...nav.children].find(e => e.matches('a[href="#contact"]') || /^contact us$/i.test(e.textContent.trim()));
-      nav.insertBefore(a, contact || null);
-    }
     const data = typeof schoolData === 'object' && schoolData ? schoolData : {};
     const records = (Array.isArray(data.alumni) ? data.alumni : []).filter(r => r && r.approved === true && String(r.name || '').trim());
     const key = JSON.stringify([label(), records, location.hash === '#alumni']);

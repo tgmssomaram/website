@@ -3,22 +3,27 @@
 (function(){
  const previousRender=render;
  function groupedSchoolNavigation(nav){
-  const current=location.hash.slice(1)||'home';nav.replaceChildren();
-  const groups=[['Home','home'],['Our School',[['Our school','school'],['About us','about-us'],['Faculty','faculty'],['School strength','strength'],['Campus & labs','campus'],['School directory','directory'],['Administration','admin']]],['Academics',[['Academic programmes','academics'],['Academic calendar','calendar'],['Results','results']]],['Students',[['Student portal','portal'],['Books download','books'],['Downloads','downloads']]],['Admissions','admissions'],['Updates',[['Notice board','notices'],['Photo gallery','gallery'],['Events & activities','events'],['Achievements','achievements'],['Government orders','gos'],['Feedback','feedback']]],['Activities',[['Co-curricular','cocurricular'],['Extra-curricular','extracurricular'],['Innovation','innovation']]],['Contact us','contact']];
-  function closeAll(){nav.querySelectorAll('.model-nav-panel').forEach(p=>p.hidden=true);nav.querySelectorAll('.model-nav-trigger').forEach(b=>b.setAttribute('aria-expanded','false'));}
-  for(const [title,target]of groups){if(typeof target==='string'){const a=link(title,'#'+target);if(target===current)a.setAttribute('aria-current','page');nav.append(a);continue;}
-   const wrap=node('div',null,'model-nav-group');const button=node('button',title+' ▾','model-nav-trigger');button.type='button';button.setAttribute('aria-expanded','false');if(target.some(x=>x[1]===current))button.classList.add('model-nav-current');const panel=node('div',null,'model-nav-panel');panel.hidden=true;panel.id='school-nav-'+title.toLowerCase().replaceAll(' ','-');button.setAttribute('aria-controls',panel.id);
-   for(const [name,id]of target){const a=link(name,'#'+id);if(id===current)a.setAttribute('aria-current','page');a.addEventListener('click',closeAll);panel.append(a);}
-   function open(){closeAll();panel.hidden=false;button.setAttribute('aria-expanded','true');const rect=wrap.getBoundingClientRect();if(rect.left+240>window.innerWidth){panel.classList.add('align-right');}else{panel.classList.remove('align-right');}}
-   button.addEventListener('click',e=>{e.stopPropagation();if(panel.hidden)open();else closeAll();});
-   button.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();open();panel.querySelector('a')?.focus();}});
-   panel.addEventListener('click',e=>{e.stopPropagation();});
-   wrap.addEventListener('focusout',e=>{if(!wrap.contains(e.relatedTarget)){panel.hidden=true;button.setAttribute('aria-expanded','false');}});
-   wrap.append(button,panel);nav.append(wrap);
+  const current=location.hash.slice(1)||'home';
+  nav.replaceChildren();
+  const navItems=[
+    ['Home','home','హోమ్','होम'],
+    ['Our School','school','మా పాఠశాల','हमारा विद्यालय'],
+    ['Faculty','faculty','సిబ్బంది','शिक्षक'],
+    ['Students','portal','విద్యార్థులు','छात्र'],
+    ['Campus Gallery','gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],
+    ['Contact Us','contact','సంప్రదించండి','संपर्क करें']
+  ];
+  for(const item of navItems){
+    const title=lang==='te'?item[2]:(lang==='hi'?item[3]:item[0]);
+    const target=item[1];
+    const a=link(title,'#'+target);
+    const isActive=(target===current)||
+      (target==='portal'&&current==='students')||
+      (target==='school'&&['about-us','strength','campus','directory'].includes(current));
+    if(isActive)a.setAttribute('aria-current','page');
+    nav.append(a);
   }
  }
- document.addEventListener('click',e=>{if(!e.target.closest('.model-nav-group')){document.querySelectorAll('.model-nav-panel').forEach(p=>p.hidden=true);document.querySelectorAll('.model-nav-trigger').forEach(b=>b.setAttribute('aria-expanded','false'));}});
- document.addEventListener('keydown',e=>{if(e.key==='Escape'){const active=document.querySelector('.model-nav-trigger[aria-expanded="true"]');document.querySelectorAll('.model-nav-panel').forEach(p=>p.hidden=true);document.querySelectorAll('.model-nav-trigger').forEach(b=>b.setAttribute('aria-expanded','false'));active?.focus();}});
  function finalSchoolModel(){
   document.body.classList.add('final-school-model');
   let header=document.querySelector('.state-model-header');
@@ -43,14 +48,20 @@
     menuName.append(node('strong','Telangana Model School & Junior College'),node('span','Somaram (Village), Saidapur Mandal · Karimnagar District'));
     masthead.prepend(menuName);
   }
-  const schoolCodes=menuName.querySelector('.model-school-codes');
+  let schoolCodes=menuName.querySelector('.model-school-codes');
   if(!schoolCodes){
-    const codes=node('small',null,'model-school-codes');
-    codes.append(node('span','UDISE+ code: '+(schoolData?.udiseCode||'36301200719')),node('span','College code: '+(schoolData?.collegeCode||'52015')));
-    menuName.append(codes);
+    schoolCodes=node('small',null,'model-school-codes');
+    menuName.append(schoolCodes);
   }
-  const sheetSchoolTitle=schoolData?.settings?.schoolTitle;
-  if(sheetSchoolTitle)menuName.querySelector('strong').textContent=sheetSchoolTitle;
+  schoolCodes.replaceChildren(
+    node('span','UDISE+ code: '+(schoolData?.udiseCode||'36131100206')),
+    node('span','College code: '+(schoolData?.collegeCode||'15124'))
+  );
+  const activeTitle=schoolData?.settings?.schoolTitle||schoolData?.name;
+  if(activeTitle){
+    const sTitle=menuName.querySelector('strong');
+    if(sTitle)sTitle.textContent=activeTitle;
+  }
   const directLanguages=masthead.querySelector('.languages');
   if(directLanguages){
     directLanguages.classList.add('model-direct-languages');
@@ -66,7 +77,26 @@
   const disclosure=masthead.querySelector('details');if(disclosure){disclosure.querySelectorAll('a').forEach(a=>{if(!a.dataset.closeMenu){a.dataset.closeMenu='true';a.addEventListener('click',()=>disclosure.open=false);}});}
   if(!isHome||!schoolData)return;
   const main=document.querySelector('#main');const oldHero=main.querySelector('.hero');if(oldHero){const gallery=oldHero.querySelector('.illustration');oldHero.className='model-live-gallery';oldHero.replaceChildren(node('h2',lang==='te'?'ఫొటో గ్యాలరీ':'School Photo Gallery'));if(gallery)oldHero.append(gallery);main.append(oldHero);}
-  if(main.querySelector('.model-campus-hero'))return;
+  if(main.querySelector('.model-campus-hero')){
+    const highlights=main.querySelector('.model-photo-highlights');
+    if(highlights&&schoolData.gallery&&Array.isArray(schoolData.gallery)){
+      const photosGrid=highlights.querySelector('.gallery-grid');
+      if(photosGrid){
+        photosGrid.replaceChildren();
+        for(const photo of schoolData.gallery.slice(0,6))photosGrid.append(photoCard(photo));
+      }
+    }
+    const overview=main.querySelector('.model-school-overview');
+    if(overview&&schoolData.principal){
+      const existingPrinc=overview.querySelector('.principal-card');
+      if(existingPrinc)existingPrinc.replaceWith(principalCard());
+    }
+    const flash=main.querySelector('.model-flash-news');
+    if(flash&&typeof renderNews==='function')renderNews(flash);
+    const latest=main.querySelector('.model-latest-news');
+    if(latest&&typeof renderNews==='function')renderNews(latest);
+    return;
+  }
   const hero=node('section',null,'model-campus-hero');const campus=node('img');campus.src=schoolData.campusPhotoUrl||'images/munagala-campus-blue-sky.jpg';campus.alt='Telangana Model School and Junior College, Somaram campus';campus.width=1868;campus.height=842;campus.fetchPriority='high';const badge=node('div',null,'model-campus-badge');badge.innerHTML='<span class="badge-dot"></span><span>PM SHRI · Telangana Model School &amp; Junior College, Somaram</span>';hero.append(campus,badge);main.prepend(hero);
   const overview=node('section',null,'model-school-overview');const intro=node('div');intro.append(node('span','OUR SCHOOL · మన పాఠశాల','eyebrow'),node('h2',lang==='te'?'విద్యతో ఎదుగుదల':'Learning today. Growing for tomorrow.'),node('p',lang==='te'?'కరీంనగర్ జిల్లాలోని సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల విద్యార్థులకు స్వాగతం. విద్యా సమాచారం, సిబ్బంది, అభ్యాస వనరులు, పాఠశాల కార్యక్రమాలను తెలుసుకోండి.':'Welcome to our school community in Somaram, Karimnagar district. Explore academic information, meet our teaching team and discover resources that support every step of your learning journey.'),link('Explore our school →','#school','model-text-link'),link('Find a Model School →','#directory','model-text-link'));const stats=node('div',null,'model-school-stats');const statItems=[[lang==='te'?'6 - 12వ తరగతి':'Classes VI – XII',lang==='te'?'కో-ఎడ్యుకేషన్ & జూనియర్ కళాశాల':'High School & Junior College'],[lang==='te'?'ఇంగ్లీష్ మీడియం':'English Medium',lang==='te'?'రాష్ట్ర ప్రభుత్వ విద్యా ప్రమాణాలు':'State Curriculum & Quality Learning'],[lang==='te'?'సైన్స్ & ఐటీ ల్యాబ్స్':'Modern Labs & Library',lang==='te'?'డిజిటల్ తరగతులు & ప్రయోగశాలలు':'Science, Computer & STEM Facilities'],[lang==='te'?'100% ఉచిత విద్య':'Free Education',lang==='te'?'పాఠ్యపుస్తకాలు, యూనిఫాం & మధ్యాహ్న భోజనం':'Textbooks, Uniforms & Nutritious Meals']];for(const [num,lbl]of statItems){const card=node('div',null,'model-stat-card');card.append(node('span',num,'model-stat-num'),node('span',lbl,'model-stat-label'));stats.append(card);}intro.append(stats);const ppSection=typeof principalPressSection==='function'?principalPressSection():null;if(ppSection){overview.append(intro);overview.classList.add('intro-only');hero.after(ppSection,overview);}else{overview.append(principalCard(),intro);hero.after(overview);}const highlights=node('section',null,'model-photo-highlights');highlights.append(node('h2',lang==='te'?'మన పాఠశాల ఫొటోలు':'Our School'));const photos=node('div',null,'gallery-grid');for(const photo of (schoolData.gallery||[]).slice(0,6))photos.append(photoCard(photo));highlights.append(photos);const media=node('div',null,'model-school-media');const live=main.querySelector('.model-live-gallery');if(live)media.append(live);media.append(highlights);overview.after(media);const flash=node('div',null,'bulletin model-home-bulletin model-flash-news');flash.dataset.newsKind='flash';hero.after(flash);renderNews(flash);const latest=node('div',null,'bulletin model-home-bulletin model-latest-news');latest.dataset.newsKind='latest';flash.after(latest);renderNews(latest);
  }
