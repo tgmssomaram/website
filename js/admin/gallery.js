@@ -105,6 +105,7 @@ window.AdminModules.gallery = {
     if (res && res.success) {
       window.AdminAPI.showToast('Photo deleted successfully', 'info');
       await this.loadGallery();
+      window.AdminAPI.broadcastUpdate({ gallery: this.data.map(function(g) { return { src: g.image_url, title: g.title, te: g.caption || g.title, category: g.category || 'School Activities' }; }) });
     } else {
       window.AdminAPI.showToast(res?.error || 'Failed to delete photo', 'error');
     }
@@ -343,6 +344,7 @@ window.AdminModules.gallery = {
         window.AdminAPI.showToast(isEdit ? 'Photo updated' : 'Photo added to gallery', 'success');
         closeModal();
         await self.loadGallery();
+        window.AdminAPI.broadcastUpdate({ gallery: self.data.map(function(g) { return { src: g.image_url, title: g.title, te: g.caption || g.title, category: g.category || 'School Activities' }; }) });
       } else {
         window.AdminAPI.showToast(res?.error || 'Operation failed', 'error');
       }

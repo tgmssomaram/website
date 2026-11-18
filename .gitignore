@@ -20,3 +20,4 @@ Thumbs.db
 # Python & Temporary files
 __pycache__/
 *.pyc
+*.pdf

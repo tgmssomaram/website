@@ -1,5 +1,47 @@
 'use strict';
-function applyManagedHeader(){const settings=schoolData.settings||{};if(settings.schoolTitle)document.querySelector('.brand h1').textContent=settings.schoolTitle;if(settings.teluguTitle)document.querySelector('.brand .telugu').textContent=settings.teluguTitle;if(settings.authority){let line=document.querySelector('.managed-authority');if(!line){line=node('p',null,'managed-authority');document.querySelector('.brand h1').after(line);}line.textContent=settings.authority;}if(settings.navigation?.length){const nav=document.querySelector('#menu');nav.replaceChildren(...settings.navigation.map(item=>link(item.label,'#'+item.target)));if(!settings.navigation.some(x=>x.target==='admin'))nav.append(link('Administration','#admin'));}if(settings.quickActions?.length){const actions=document.querySelector('.header-quick-actions');actions.replaceChildren(...settings.quickActions.map(item=>link(item.label,'#'+item.target,'header-quick')));}}
+function applyManagedHeader(){
+  if (!schoolData) return;
+  const settings = schoolData.settings || {};
+  const title = settings.schoolTitle || schoolData.name;
+  const telugu = settings.teluguTitle || schoolData.teluguName;
+  const addr = schoolData.address;
+
+  if (title) {
+    const brandH1 = document.querySelector('.brand h1');
+    if (brandH1) brandH1.textContent = title;
+    document.querySelectorAll('[data-text="school"]').forEach(el => el.textContent = title);
+    const mStrong = document.querySelector('.model-menu-school-name strong');
+    if (mStrong) mStrong.textContent = title;
+  }
+
+  if (telugu) {
+    const teluguEl = document.querySelector('.brand .telugu');
+    if (teluguEl) teluguEl.textContent = telugu;
+  }
+
+  if (addr) {
+    document.querySelectorAll('[data-text="location"]').forEach(el => el.textContent = addr);
+    const addrSpan = document.querySelector('.model-menu-school-name span:not(.model-school-codes span)');
+    if (addrSpan) addrSpan.textContent = addr;
+  }
+
+  const schoolCodes = document.querySelector('.model-school-codes');
+  if (schoolCodes) {
+    schoolCodes.replaceChildren(
+      node('span', 'UDISE+ code: ' + (schoolData.udiseCode || '36131100206')),
+      node('span', 'College code: ' + (schoolData.collegeCode || '15124'))
+    );
+  }
+
+  if (settings.authority) {
+    let line = document.querySelector('.managed-authority');
+    if (!line && document.querySelector('.brand h1')) {
+      line = node('p', null, 'managed-authority');
+      document.querySelector('.brand h1').after(line);
+    }
+    if (line) line.textContent = settings.authority;
+  }
+}
 function applyHomeSettings(){const settings=schoolData.settings||{},hero=document.querySelector('.hero');if(settings.welcomeTitle)hero.querySelector('h2').textContent=settings.welcomeTitle;if(settings.welcomeDescription)hero.querySelector('p').textContent=settings.welcomeDescription;if(settings.gradientStart&&settings.gradientEnd)hero.style.background='linear-gradient(120deg,'+settings.gradientStart+','+settings.gradientEnd+')';const id=managedYoutubeId(settings.youtubeUrl||'');if(id){const video=node('section',null,'managed-home-video');video.append(node('h2','School Video'));const iframe=node('iframe');iframe.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&loop=1&playlist='+id;iframe.title='TGMS Munagala school video';iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';iframe.allowFullscreen=true;video.append(iframe);hero.after(video);}}
 function managedYoutubeId(value){try{const u=new URL(value);if(u.protocol!=='https:')return '';const h=u.hostname.replace(/^www\./,'');let id='';if(h==='youtu.be')id=u.pathname.split('/')[1];else if(['youtube.com','m.youtube.com','youtube-nocookie.com'].includes(h))id=u.searchParams.get('v')||u.pathname.match(/^\/(?:shorts|embed)\/([^/]+)/)?.[1]||'';return /^[A-Za-z0-9_-]{11}$/.test(id)?id:'';}catch{return '';}}
 async function managedUpload(file,maxDim=1400){if(!file||!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10485760)throw Error('Choose JPG, PNG or WebP under 10 MB.');const img=await createImageBitmap(file),canvas=document.createElement('canvas'),scale=Math.min(1,maxDim/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);img.close();let blob;for(const quality of [.8,.65,.5,.35]){blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',quality));if(blob?.size<=786432)break;}if(!blob||blob.size>786432)throw Error('Compressed photo too large.');const r=await fetch('/api/photos',{method:'POST',headers:{'Content-Type':'image/jpeg'},body:blob});const result=await r.json();if(!r.ok)throw Error(result.error||'Upload failed');return result.url;}

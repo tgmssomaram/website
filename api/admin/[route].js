@@ -8,6 +8,8 @@ import inquiriesHandler from '../../lib/admin/inquiries.js';
 import profileHandler from '../../lib/admin/profile.js';
 import settingsHandler from '../../lib/admin/settings.js';
 import uploadHandler from '../../lib/admin/upload.js';
+import strengthHandler from '../../lib/admin/strength.js';
+import alumniHandler from '../../lib/admin/alumni.js';
 
 const routes = {
   login: loginHandler,
@@ -19,7 +21,9 @@ const routes = {
   inquiries: inquiriesHandler,
   profile: profileHandler,
   settings: settingsHandler,
-  upload: uploadHandler
+  upload: uploadHandler,
+  strength: strengthHandler,
+  alumni: alumniHandler
 };
 
 export const config = {

@@ -47,10 +47,128 @@ function twoStepCard(sheet){const card=node('form',null,'admin-form');card.appen
 
 render=function(){schoolRender();if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined')schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined')schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));if(!schoolData)return;renderNews();renderHeaderActions();applyManagedHeader();renderSchoolFooter();const id=location.hash.slice(1)||'home',sheet=document.querySelector('main .sheet');if(id==='calendar')calendarPage(sheet);else if(id==='books')booksPage(sheet);else if(['students','strength'].includes(id))strengthPage(sheet);else if(['portal','downloads'].includes(id))resourcesPage(sheet,id==='downloads'?'downloads':'portal');else if(id==='contact')addMap(sheet);else if(id==='admin'){adminPage(sheet);if(adminSignedIn){strengthEditor(sheet);admissionInbox(sheet);extendedAdminSettings(sheet);}}else if(id==='directory')schoolDirectoryPage(sheet);else if(id==='campus')campusFacilitiesPage(sheet);else if(id==='faculty'){if(typeof renderModernFacultyPage==='function')renderModernFacultyPage(sheet,schoolData);}else if(id==='notices'){sectionTitle(sheet,'Latest School Notices');if(!schoolData.notices.length)sheet.append(node('p','School announcements will appear here when published.'));for(const n of schoolData.notices){const article=node('article',null,'notice');article.append(node('time',n.date),node('h3',n.title),node('p',n.detail));sheet.append(article);}}else if(id==='academics'){if(typeof renderModernAcademicsPage==='function')renderModernAcademicsPage(sheet);else{if(schoolData.groups)sheet.append(node('h3','Intermediate Groups'),node('p',schoolData.groups));sheet.append(link('Academic Calendar 2026–27','#calendar','resource'),link('Student Learning Resources','#portal','resource'));}}else if(id==='results'){if(typeof renderModernResultsPage==='function')renderModernResultsPage(sheet);}else if(id==='admissions'){sectionTitle(sheet,'Admissions','Confirm current eligibility, groups, seat availability and application dates with the school office.');const applyInfo=node('section',null,'admission-apply-banner');applyInfo.append(node('h3','Telangana Model Schools · Online Admissions'),node('p','Applications, entrance-test notices, fee payment and hall tickets are handled by the official CGG portal. Check the latest admission notification and deadlines before applying.'),link('Apply on Official CGG Portal ↗','https://telanganams.cgg.gov.in/TGMSWEB20/#/','action apply-action'));sheet.append(applyInfo);admissionInquiryForm(sheet);sheet.append(link('Official Telangana Model Schools Admission Portal ↗','https://telanganams.cgg.gov.in/TGMSWEB20/#/','resource'),link('Contact the School Office','#contact','resource'));}if(id==='home'){applyHomeSettings();animateWelcomeTitle();startHomePhotoSlider();const heroActions=document.querySelector('.hero .actions');heroActions.prepend(link('Apply for Admission ↗','#admissions','action apply-action'));document.querySelector('main .hero').after(admissionSeatsPanel());const cards=document.querySelectorAll('.cards .card');cards.forEach(card=>{const href=card.getAttribute('href');const p=card.querySelector('p');p.textContent=href==='#academics'?'Subjects and vocational learning':href==='#gallery'?'School photographs and activities':href==='#calendar'?'Shared academic calendar and upcoming dates':'Official admission portal and school office';});}}
 async function syncCalendar(){if(!schoolData.calendarFeedUrl)return;try{const r=await fetch('/api/calendar?'+new URLSearchParams({source:schoolData.calendarFeedUrl,year:'2026'}));if(!r.ok)throw Error();const data=await r.json();if(Array.isArray(data.events)){academicEvents=data.events;calendarSourceStatus='Google Calendar connected';renderNews();if(location.hash==='#calendar')render();}}catch{calendarSourceStatus='Showing the supplied calendar snapshot; live sync temporarily unavailable';}}
-(async()=>{const [defaults,content,books,calendar,session]=await Promise.allSettled([fetch('data/school-data.json').catch(()=>fetch('/data/school-data.json')).then(r=>r.json()),fetch('api/content',{cache:'no-store'}).catch(()=>fetch('/api/content')).then(r=>r.json()),fetch('data/books.json').catch(()=>fetch('/data/books.json')).then(r=>r.json()),fetch('data/academic-calendar.json').catch(()=>fetch('/data/academic-calendar.json')).then(r=>r.json()),fetch('/api/admin/session').then(r=>r.json())]);if(defaults.status==='fulfilled'&&defaults.value)schoolData=defaults.value;else if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined')schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));if(content.status==='fulfilled'&&Number.isInteger(content.value.revision)){serverValues=content.value.values;contentRevision=content.value.revision;try{if(serverValues[PROFILE_KEY])schoolData=JSON.parse(serverValues[PROFILE_KEY]);}catch{}}if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined')schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined')schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));if(!schoolData)return;schoolData.notices||=[];schoolData.downloads||=[];schoolData.gallery||=[];if(books.status==='fulfilled')bookList=books.value;if(calendar.status==='fulfilled')academicEvents=calendar.value.events||[];if(session.status==='fulfilled')adminSignedIn=Boolean(session.value.authenticated);render();await syncCalendar();})();
+(async()=>{
+  try {
+    const cachedLive = localStorage.getItem('tgms_school_data_live');
+    if (cachedLive) {
+      const parsedLive = JSON.parse(cachedLive);
+      if (parsedLive && typeof parsedLive === 'object') {
+        schoolData = Object.assign({}, schoolData || {}, parsedLive);
+      }
+    }
+  } catch {}
+
+  const [defaults,content,books,calendar,session]=await Promise.allSettled([
+    fetch('data/school-data.json').catch(()=>fetch('/data/school-data.json')).then(r=>r.json()),
+    fetch('api/content',{cache:'no-store'}).catch(()=>fetch('/api/content',{cache:'no-store'})).then(r=>r.json()),
+    fetch('data/books.json').catch(()=>fetch('/data/books.json')).then(r=>r.json()),
+    fetch('data/academic-calendar.json').catch(()=>fetch('/data/academic-calendar.json')).then(r=>r.json()),
+    fetch('/api/admin/session').then(r=>r.json())
+  ]);
+
+  if(defaults.status==='fulfilled'&&defaults.value) {
+    schoolData = Object.assign({}, defaults.value, schoolData || {});
+  } else if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined') {
+    schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));
+  }
+
+  if(content.status==='fulfilled'&&Number.isInteger(content.value.revision)){
+    serverValues=content.value.values;
+    contentRevision=content.value.revision;
+    try{
+      let s = serverValues[PROFILE_KEY];
+      if (typeof s === 'string') s = JSON.parse(s);
+      if (s && typeof s === 'object') {
+        schoolData = Object.assign({}, schoolData || {}, s);
+      }
+    }catch{}
+  }
+
+  if(!schoolData&&typeof SOMARAM_DEFAULT_DATA!=='undefined')schoolData=JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA));
+  if(!schoolData)return;
+  schoolData.notices||=[];
+  schoolData.downloads||=[];
+  schoolData.gallery||=[];
+  if(books.status==='fulfilled')bookList=books.value;
+  if(calendar.status==='fulfilled')academicEvents=calendar.value.events||[];
+  if(session.status==='fulfilled')adminSignedIn=Boolean(session.value.authenticated);
+  render();
+  await syncCalendar();
+})();
+
+window.applyLiveAdminUpdate = function(updatedData) {
+  if (!updatedData || typeof updatedData !== 'object') return;
+  schoolData = Object.assign({}, schoolData || {}, updatedData);
+  if (updatedData.settings) {
+    schoolData.settings = Object.assign({}, schoolData.settings || {}, updatedData.settings);
+  }
+  if (updatedData.principal) {
+    if (typeof updatedData.principal === 'object') {
+      schoolData.principal = Object.assign({}, schoolData.principal || {}, updatedData.principal);
+    } else {
+      schoolData.principal = schoolData.principal || {};
+      schoolData.principal.name = updatedData.principal;
+    }
+  }
+  if (updatedData.strength) schoolData.strength = updatedData.strength;
+  if (updatedData.alumni) schoolData.alumni = updatedData.alumni;
+  if (updatedData.facultyList) schoolData.facultyList = updatedData.facultyList;
+  if (updatedData.notices) {
+    schoolData.notices = updatedData.notices;
+    schoolData.flashNews = updatedData.notices;
+  }
+  if (updatedData.gallery) schoolData.gallery = updatedData.gallery;
+
+  try {
+    localStorage.setItem('tgms_school_data_live', JSON.stringify(schoolData));
+  } catch {}
+
+  if (typeof render === 'function') render();
+  if (typeof renderNews === 'function') renderNews();
+  if (typeof applyManagedHeader === 'function') applyManagedHeader();
+  window.dispatchEvent(new CustomEvent('tgms-content'));
+};
+
+if (typeof BroadcastChannel !== 'undefined') {
+  try {
+    const syncChannel = new BroadcastChannel('tgms_admin_sync');
+    syncChannel.onmessage = function(e) {
+      if (e.data && e.data.data) {
+        window.applyLiveAdminUpdate(e.data.data);
+      }
+    };
+  } catch {}
+}
+
+window.addEventListener('storage', function(e) {
+  if (e.key === 'tgms_school_data_live' && e.newValue) {
+    try {
+      window.applyLiveAdminUpdate(JSON.parse(e.newValue));
+    } catch {}
+  }
+});
+
+window.addEventListener('focus', async function() {
+  try {
+    const r = await fetch('/api/content', { cache: 'no-store' });
+    if (r.ok) {
+      const data = await r.json();
+      if (data && data.values && data.values[PROFILE_KEY]) {
+        let p = data.values[PROFILE_KEY];
+        if (typeof p === 'string') p = JSON.parse(p);
+        window.applyLiveAdminUpdate(p);
+      }
+    }
+  } catch {}
+});
 setInterval(()=>{if(schoolData&&!document.hidden)void syncCalendar();},300000);
 
 function admissionSeatsPanel(){
+ if(schoolData?.showAdmissionSeats === false) {
+   const empty = node('div', null, 'admission-seats-hidden');
+   empty.style.display = 'none';
+   return empty;
+ }
  const section=node('section',null,'admission-seats');section.setAttribute('aria-labelledby','admission-seats-title');const title=node('h2','Admission Seats ');title.id='admission-seats-title';title.append(node('span','ప్రవేశాల సీట్ల వివరాలు'));section.append(title);
  for(const [heading,names,seats,gridClass] of [['Junior College / జూనియర్ కళాశాల',['MPC','BiPC','CEC','ACE'],40,'college-seat-grid'],['School / పాఠశాల',[6,7,8,9,10].map(n=>'Class '+n),100,'school-seat-grid']]){const group=node('div',null,'admission-seat-group');group.append(node('h3',heading));const grid=node('div',null,'admission-seat-grid '+gridClass);for(const name of names){const card=node('article',null,'admission-seat-card'),p=node('p');p.append(node('strong',String(seats)),node('span','Seats / సీట్లు'));card.append(node('h4',name),p);grid.append(card);}group.append(grid);section.append(group);}return section;
 }

@@ -77,6 +77,7 @@ window.AdminModules.notices = {
     if (res && res.data) {
       window.AdminAPI.showToast('Notice status updated', 'success');
       await this.loadNotices();
+      window.AdminAPI.broadcastUpdate({ notices: this.data, flashNews: this.data });
     } else {
       window.AdminAPI.showToast(res?.error || 'Failed to update status', 'error');
     }
@@ -88,6 +89,7 @@ window.AdminModules.notices = {
     if (res && res.success) {
       window.AdminAPI.showToast('Notice deleted', 'info');
       await this.loadNotices();
+      window.AdminAPI.broadcastUpdate({ notices: this.data, flashNews: this.data });
     } else {
       window.AdminAPI.showToast(res?.error || 'Failed to delete notice', 'error');
     }
@@ -165,6 +167,7 @@ window.AdminModules.notices = {
         window.AdminAPI.showToast(isEdit ? 'Notice updated' : 'Notice published', 'success');
         closeModal();
         await self.loadNotices();
+        window.AdminAPI.broadcastUpdate({ notices: self.data, flashNews: self.data });
       } else {
         window.AdminAPI.showToast(res?.error || 'Operation failed', 'error');
       }

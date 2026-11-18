@@ -360,5 +360,46 @@
     "Ch Mahendar": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656968120-7.-ch-mahender.jpeg",
     "Dr.Bandari Sampath Kumar": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg"
   },
-  "principalPhoto": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg"
+  "principalPhoto": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg",
+  "strength": {
+    "year": "2026–27",
+    "groups": [
+      {
+        "title": "School · Classes VI–X",
+        "rows": [
+          ["VI", 48, 33],
+          ["VII", 55, 21],
+          ["VIII", 63, 34],
+          ["IX", 51, 46],
+          ["X", 55, 39]
+        ]
+      },
+      {
+        "title": "Junior College · First Year (Intermediate)",
+        "rows": [
+          ["MPC", 18, 28],
+          ["BiPC", 4, 37],
+          ["CEC", 15, 16],
+          ["ACE", 7, 10]
+        ]
+      },
+      {
+        "title": "Junior College · Second Year (Intermediate)",
+        "rows": [
+          ["MPC", 16, 33],
+          ["BiPC", 0, 39],
+          ["CEC", 15, 11]
+        ]
+      }
+    ],
+    "sections": [
+      ["IX A", 49],
+      ["IX B", 50],
+      ["X A", 46],
+      ["X B", 48],
+      ["I CEC", 31],
+      ["II CEC", 25]
+    ]
+  },
+  "alumni": []
 }

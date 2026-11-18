@@ -59,6 +59,8 @@
     node('span','College code: '+(schoolData?.collegeCode||'15124'))
   );
   const activeTitle=schoolData?.settings?.schoolTitle||schoolData?.name;
+  const sAddr=menuName.querySelector('span:not(.model-school-codes span)');
+  if(sAddr&&schoolData?.address)sAddr.textContent=schoolData.address;
   if(activeTitle){
     const sTitle=menuName.querySelector('strong');
     if(sTitle)sTitle.textContent=activeTitle;

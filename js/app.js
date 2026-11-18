@@ -157,7 +157,20 @@ function photoCard(photo){
   article.append(b, node('h3', lang === 'te' ? (photo.te || photo.title) : (photo.title || '')), node('p', photo.category || 'School Activities'));
   return article;
 }
-function principalCard(){const card=node('div',null,'principal-card');const image=node('img');image.src=schoolData.principalPhoto||'images/principal-veerababu.jpg';image.alt='K. Veerababu, Principal FAC';card.append(image,node('span',schoolData.principal.designation),node('h3',schoolData.principal.name),node('p',schoolData.principal.qualification),link(schoolData.principal.phone,'tel:+91'+schoolData.principal.phone));return card;}
+function principalCard(){
+  const card=node('div',null,'principal-card');
+  const image=node('img');
+  const princ = (typeof schoolData?.principal === 'object' && schoolData?.principal) || {};
+  const pName = princ.name || (typeof schoolData?.principal === 'string' ? schoolData.principal : 'Dr.Bandari Sampath Kumar');
+  const pPhoto = schoolData?.principalPhoto || (schoolData?.staffPhotos && schoolData.staffPhotos[pName]) || 'images/principal-veerababu.jpg';
+  image.src = pPhoto;
+  image.alt = pName + ', Principal FAC';
+  const pDesig = princ.designation || 'Principal FAC';
+  const pQual = princ.qualification || 'Phd in chemistry, B.Ed.';
+  const pPhone = princ.phone || '08727-285222';
+  card.append(image,node('span',pDesig),node('h3',pName),node('p',pQual),link('☎ ' + pPhone,'tel:+91'+pPhone));
+  return card;
+}
 function createFacultyCard(member) {
   const card = document.createElement('article');
   card.className = 'faculty-card';

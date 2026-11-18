@@ -92,6 +92,7 @@ window.AdminModules.faculty = {
     if (res && res.data) {
       window.AdminAPI.showToast('Faculty status updated', 'success');
       await this.loadFaculty();
+      window.AdminAPI.broadcastUpdate({ facultyList: this.data });
     } else {
       window.AdminAPI.showToast(res?.error || 'Failed to update status', 'error');
     }
@@ -103,6 +104,7 @@ window.AdminModules.faculty = {
     if (res && res.success) {
       window.AdminAPI.showToast('Faculty member removed', 'info');
       await this.loadFaculty();
+      window.AdminAPI.broadcastUpdate({ facultyList: this.data });
     } else {
       window.AdminAPI.showToast(res?.error || 'Failed to delete faculty', 'error');
     }
@@ -343,6 +345,7 @@ window.AdminModules.faculty = {
         window.AdminAPI.showToast(isEdit ? 'Faculty member updated' : 'Faculty member added', 'success');
         closeModal();
         await self.loadFaculty();
+        window.AdminAPI.broadcastUpdate({ facultyList: self.data });
       } else {
         window.AdminAPI.showToast(res?.error || 'Operation failed', 'error');
       }

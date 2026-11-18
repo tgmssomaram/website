@@ -69,6 +69,8 @@ window.AdminApp = {
         notices: 'Flash News & Notices',
         faculty: 'Faculty Manager',
         gallery: 'Gallery Manager',
+        strength: 'Student Enrolment & School Strength',
+        alumni: 'Alumni Manager',
         inquiries: 'Inquiries & Feedback',
         profile: 'School Profile',
         settings: 'Admin Settings'

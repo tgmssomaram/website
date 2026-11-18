@@ -91,5 +91,25 @@ window.AdminAPI = {
       t.style.transition = 'all 0.3s';
       setTimeout(function() { t.remove(); }, 300);
     }, 3000);
+  },
+
+  broadcastUpdate(payload) {
+    try {
+      var current = {};
+      var raw = localStorage.getItem('tgms_school_data_live');
+      if (raw) {
+        try { current = JSON.parse(raw); } catch (e) {}
+      }
+      var merged = Object.assign({}, current, payload);
+      localStorage.setItem('tgms_school_data_live', JSON.stringify(merged));
+      localStorage.setItem('tgms_last_sync_timestamp', String(Date.now()));
+
+      if (typeof BroadcastChannel !== 'undefined') {
+        var ch = new BroadcastChannel('tgms_admin_sync');
+        ch.postMessage({ type: 'UPDATE', data: merged, timestamp: Date.now() });
+      }
+    } catch (e) {
+      console.warn('Admin broadcast sync notice:', e);
+    }
   }
 };
