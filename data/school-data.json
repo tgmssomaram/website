@@ -133,27 +133,9 @@
   ],
   "gallery": [
     {
-      "src": "images/parents-meeting.jpg",
-      "title": "Parent–teacher meeting",
-      "te": "తల్లిదండ్రుల సమావేశం",
-      "category": "School Activities"
-    },
-    {
-      "src": "images/yoga-session.jpg",
-      "title": "Yoga and well-being",
-      "te": "యోగా కార్యక్రమం",
-      "category": "Well-being"
-    },
-    {
-      "src": "images/meeting-address.jpg",
-      "title": "School–parent interaction",
-      "te": "పాఠశాల–తల్లిదండ్రుల ముఖాముఖి",
-      "category": "School Activities"
-    },
-    {
-      "src": "images/parents-participation.jpg",
-      "title": "Parents participating in school activities",
-      "te": "పాఠశాల కార్యక్రమంలో తల్లిదండ్రుల భాగస్వామ్యం",
+      "src": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/gallery/1794657019580-1.dr-b-sampath-kumar.jpeg",
+      "title": "abc",
+      "te": "abc",
       "category": "School Activities"
     }
   ],
@@ -167,7 +149,7 @@
   "calendarFeedUrl": "https://calendar.google.com/calendar/ical/9b6bd89b931449c6dab271ec3d5ec995dbb2a8235139220258a8161a39805386%40group.calendar.google.com/public/basic.ics",
   "udiseCode": "36131100206",
   "collegeCode": "15124",
-  "showAdmissionSeats": true,
+  "showAdmissionSeats": false,
   "settings": {
     "schoolTitle": "Telangana Model School & Junior College, Somaram",
     "teluguTitle": "తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం",
@@ -178,26 +160,7 @@
     "gradientEnd": "#ff983f",
     "youtubeUrl": ""
   },
-  "flashNews": [
-    {
-      "id": "somaram-welcome-1",
-      "title": "Welcome to Telangana Model School & Junior College, Somaram (Saidapur Mandal, Karimnagar Dist.)",
-      "detail": "Welcome to Telangana Model School & Junior College, Somaram. High quality English medium education from Class VI to XII.",
-      "date": "2026-11-01"
-    },
-    {
-      "id": "somaram-admissions-2",
-      "title": "సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.",
-      "detail": "సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.",
-      "date": "2026-11-05"
-    },
-    {
-      "id": "somaram-exams-3",
-      "title": "TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.",
-      "detail": "TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.",
-      "date": "2026-11-10"
-    }
-  ],
+  "flashNews": [],
   "facultyList": [
     {
       "id": "9a47356c-ef35-4df0-b472-d12bdc574277",
@@ -469,15 +432,15 @@
   },
   "alumni": [],
   "principalPress": {
-    "title": "Principal’s Message (Live Verified)",
+    "title": "Principal’s Message",
     "teluguTitle": "ప్రిన్సిపాల్ సందేశం",
-    "text": "Updated leadership message reflecting real-time sync across high school and junior college.",
+    "text": "Welcome to Telangana Model School & Junior College, Somaram. Our institution is dedicated to nurturing young minds with high-quality English medium education, modern scientific inquiry, and strong ethical values. With modern laboratories, digital classrooms, and 100% free education provided by the Government of Telangana, we empower every student to achieve excellence.",
     "teluguText": "",
     "importantTitle": "Principal FAC · Dr. Bandari Sampath Kumar",
     "importantText": "100% Free Education & admissions active.",
-    "image": "images/parents-meeting.jpg",
+    "image": "",
     "imageAlt": "",
-    "imageCaption": "Orientation with parents and teachers",
+    "imageCaption": "",
     "links": []
   }
 }

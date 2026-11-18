@@ -84,7 +84,7 @@ export default async function handler(req, res) {
         }
 
         // Live Gallery Sync
-        if (galleryRes.data && galleryRes.data.length > 0) {
+        if (Array.isArray(galleryRes.data)) {
           profileValues.gallery = galleryRes.data.map(g => ({
             src: g.image_url,
             title: g.title,
@@ -94,7 +94,7 @@ export default async function handler(req, res) {
         }
 
         // Live Notices & Flash News Sync
-        if (noticesRes.data && noticesRes.data.length > 0) {
+        if (Array.isArray(noticesRes.data)) {
           const mappedNotices = noticesRes.data.map(n => ({
             id: n.id,
             title: n.title,
@@ -103,6 +103,15 @@ export default async function handler(req, res) {
           }));
           profileValues.notices = mappedNotices;
           profileValues.flashNews = mappedNotices;
+        }
+
+        // Clean out any lingering false or mock data
+        profileValues.showAdmissionSeats = Boolean(profileValues.showAdmissionSeats && profileValues.seatsConfig);
+        if (Array.isArray(profileValues.flashNews)) {
+          profileValues.flashNews = profileValues.flashNews.filter(n => n && n.title && !String(n.id).startsWith('somaram-welcome-'));
+        }
+        if (Array.isArray(profileValues.notices)) {
+          profileValues.notices = profileValues.notices.filter(n => n && n.title && !String(n.id).startsWith('somaram-welcome-'));
         }
 
         // Ensure strength, alumni, and principalPress are present
