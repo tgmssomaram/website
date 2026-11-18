@@ -719,29 +719,13 @@ footer.munagala-site-footer {
   font-weight: 750 !important;
 }
 
-/* Side Action Rail Suppression on Smaller Screens */
-@media (max-width: 1200px) {
-  .school-cgg-apply,
-  .school-social-rail {
-    display: none !important;
-  }
-}
-
-@media (min-width: 1201px) {
-  .school-cgg-apply {
-    position: fixed !important;
-    right: 0 !important;
-    top: 35% !important;
-    z-index: 9999 !important;
-    transition: transform 0.25s ease !important;
-  }
-  .school-social-rail {
-    position: fixed !important;
-    right: 0 !important;
-    top: 45% !important;
-    z-index: 9999 !important;
-    transition: transform 0.25s ease !important;
-  }
+/* Permanently remove Floating Social Rail and Floating CGG Apply Button */
+.school-cgg-apply,
+.school-social-rail {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
 
 /* Tablet Adaptive Layout */
