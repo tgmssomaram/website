@@ -13,8 +13,7 @@ window.AdminModules.dashboard = {
             <p>Welcome to TGMS Somaram Central Administration. Manage academic data, faculty, news, and school media.</p>\
           </div>\
           <div style="display:flex;gap:10px;">\
-            <button type="button" class="btn btn-secondary-dash" id="dash-quick-sync">⚡ Sync & Verify Live Site</button>\
-            <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn-primary-dash">🌐 Open Live Website ↗</a>\
+            <button type="button" class="btn btn-secondary-dash" id="dash-quick-sync">⚡ Sync &amp; Verify Live Site</button>\
           </div>\
         </div>\
       </div>\
