@@ -149,6 +149,30 @@ create table if not exists public.admin_users (
 );
 
 -- --------------------------------------------------------------
+-- 11. Automatic Updated At Triggers
+-- --------------------------------------------------------------
+drop trigger if exists set_school_profiles_updated_at on public.school_profiles;
+create trigger set_school_profiles_updated_at before update on public.school_profiles for each row execute procedure public.handle_updated_at();
+
+drop trigger if exists set_principal_messages_updated_at on public.principal_messages;
+create trigger set_principal_messages_updated_at before update on public.principal_messages for each row execute procedure public.handle_updated_at();
+
+drop trigger if exists set_student_strength_updated_at on public.student_strength;
+create trigger set_student_strength_updated_at before update on public.student_strength for each row execute procedure public.handle_updated_at();
+
+drop trigger if exists set_gallery_items_updated_at on public.gallery_items;
+create trigger set_gallery_items_updated_at before update on public.gallery_items for each row execute procedure public.handle_updated_at();
+
+drop trigger if exists set_faculty_updated_at on public.faculty;
+create trigger set_faculty_updated_at before update on public.faculty for each row execute procedure public.handle_updated_at();
+
+drop trigger if exists set_notices_updated_at on public.notices;
+create trigger set_notices_updated_at before update on public.notices for each row execute procedure public.handle_updated_at();
+
+drop trigger if exists set_alumni_updated_at on public.alumni;
+create trigger set_alumni_updated_at before update on public.alumni for each row execute procedure public.handle_updated_at();
+
+-- --------------------------------------------------------------
 -- Row Level Security (RLS) Configuration
 -- Optimized for Zero Linter Warnings (InitPlan & Single Permissive Policy)
 -- --------------------------------------------------------------
