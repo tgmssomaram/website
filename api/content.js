@@ -77,6 +77,8 @@ export default async function handler(req, res) {
             profileValues.principal.name = princ.name;
             profileValues.principal.designation = princ.designation;
             profileValues.principal.qualification = princ.qualification;
+            profileValues.principal.email = profileValues.principal.email || 'tgmssomaram.knr@gmail.com';
+            profileValues.principal.phone = profileValues.principal.phone || '08727-285222';
             if (princ.photo_url) profileValues.principalPhoto = princ.photo_url;
           }
         }

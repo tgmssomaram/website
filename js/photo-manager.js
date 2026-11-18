@@ -17,8 +17,8 @@
    }
   }paint();sheet.append(panel);
  }
- const originalAdmin=adminPage;
- adminPage=function(sheet){originalAdmin(sheet);if(!adminSignedIn)return;for(const f of sheet.querySelectorAll('form'))if(f.querySelector('h3')?.textContent==='School Photo Gallery')f.hidden=true;manager(sheet);};
+ const originalAdmin=typeof adminPage==='function'?adminPage:null;
+ if(originalAdmin)adminPage=function(sheet){originalAdmin(sheet);if(!adminSignedIn)return;for(const f of sheet.querySelectorAll('form'))if(f.querySelector('h3')?.textContent==='School Photo Gallery')f.hidden=true;manager(sheet);};
  const originalRender=render;
  render=function(){originalRender();if(location.hash==='#admin'&&adminSignedIn&&schoolData){const sheet=document.querySelector('#main .sheet');if(sheet&&typeof facultyPhotoEditor==='function'&&![...sheet.querySelectorAll('h3')].some(h=>h.textContent==='Faculty Passport Photos'))facultyPhotoEditor(sheet);}if(location.hash!=='#gallery'||!schoolData)return;const sheet=document.querySelector('#main .sheet');if(!sheet)return;sheet.querySelectorAll('.gallery-grid').forEach(e=>e.remove());const albums=names(),filters=node('div',null,'filters'),list=node('div');const show=name=>{list.replaceChildren();for(const n of albums.filter(x=>!name||x===name)){const section=node('section');const photos=(schoolData.gallery||[]).filter(p=>(p.category||'School Activities')===n);section.append(node('h3',n));const grid=node('div',null,'gallery-grid');photos.forEach(p=>grid.append(photoCard(p)));section.append(grid);if(!photos.length)section.append(node('p','Photos will be added soon.'));list.append(section);}};filters.append(button('All galleries',()=>show('')),...albums.map(n=>button(n,()=>show(n))));sheet.append(filters,list);show('');};
  if(typeof schoolData==='object'&&schoolData)render();
