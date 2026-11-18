@@ -9,7 +9,7 @@
     ['Home','home','హోమ్','होम'],
     ['Our School','school','మా పాఠశాల','हमारा विद्यालय'],
     ['Faculty','faculty','సిబ్బంది','शिक्षक'],
-    ['Students','portal','విద్యార్థులు','छात्र'],
+    ['Students','students','విద్యార్థులు','छात्र'],
     ['Campus Gallery','gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],
     ['Contact Us','contact','సంప్రదించండి','संपर्क करें']
   ];
@@ -18,8 +18,9 @@
     const target=item[1];
     const a=link(title,'#'+target);
     const isActive=(target===current)||
-      (target==='portal'&&current==='students')||
-      (target==='school'&&['about-us','strength','campus','directory'].includes(current));
+      (target==='students'&&['students','strength','portal'].includes(current))||
+      (target==='portal'&&['students','strength','portal'].includes(current))||
+      (target==='school'&&['about-us','campus','directory'].includes(current));
     if(isActive)a.setAttribute('aria-current','page');
     nav.append(a);
   }
