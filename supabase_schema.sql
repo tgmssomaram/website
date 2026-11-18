@@ -149,7 +149,89 @@ create table if not exists public.admin_users (
 );
 
 -- --------------------------------------------------------------
--- 11. Automatic Updated At Triggers
+-- 11. Schema Migrations: Ensure All Columns Exist on Pre-existing Tables
+-- (Guarantees backward compatibility if tables were created previously)
+-- --------------------------------------------------------------
+alter table public.school_profiles add column if not exists profile_key text;
+alter table public.school_profiles add column if not exists "values" jsonb not null default '{}'::jsonb;
+alter table public.school_profiles add column if not exists revision integer not null default 1;
+alter table public.school_profiles add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.school_profiles add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.principal_messages add column if not exists title text not null default 'Principal’s Message';
+alter table public.principal_messages add column if not exists telugu_title text default 'ప్రిన్సిపాల్ సందేశం';
+alter table public.principal_messages add column if not exists message text default '';
+alter table public.principal_messages add column if not exists telugu_message text;
+alter table public.principal_messages add column if not exists important_title text default 'Principal Important Message';
+alter table public.principal_messages add column if not exists important_text text;
+alter table public.principal_messages add column if not exists image_url text;
+alter table public.principal_messages add column if not exists image_caption text;
+alter table public.principal_messages add column if not exists links jsonb default '[]'::jsonb;
+alter table public.principal_messages add column if not exists is_active boolean not null default true;
+alter table public.principal_messages add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.principal_messages add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.student_strength add column if not exists academic_year text not null default '2026–27';
+alter table public.student_strength add column if not exists group_type text default 'high_school';
+alter table public.student_strength add column if not exists class_name text default '';
+alter table public.student_strength add column if not exists boys integer not null default 0;
+alter table public.student_strength add column if not exists girls integer not null default 0;
+alter table public.student_strength add column if not exists order_index integer not null default 0;
+alter table public.student_strength add column if not exists is_active boolean not null default true;
+alter table public.student_strength add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.student_strength add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.gallery_items add column if not exists title text;
+alter table public.gallery_items add column if not exists image_url text;
+alter table public.gallery_items add column if not exists category text not null default 'Campus Gallery';
+alter table public.gallery_items add column if not exists gallery_type text not null default 'campus';
+alter table public.gallery_items add column if not exists caption text;
+alter table public.gallery_items add column if not exists order_index integer not null default 0;
+alter table public.gallery_items add column if not exists is_active boolean not null default true;
+alter table public.gallery_items add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.gallery_items add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+update public.gallery_items set gallery_type = 'campus' where gallery_type is null;
+
+alter table public.faculty add column if not exists name text;
+alter table public.faculty add column if not exists designation text;
+alter table public.faculty add column if not exists subject text;
+alter table public.faculty add column if not exists qualification text;
+alter table public.faculty add column if not exists photo_url text;
+alter table public.faculty add column if not exists order_index integer not null default 0;
+alter table public.faculty add column if not exists is_active boolean not null default true;
+alter table public.faculty add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.faculty add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.notices add column if not exists title text;
+alter table public.notices add column if not exists detail text;
+alter table public.notices add column if not exists date text not null default to_char(current_date, 'YYYY-MM-DD');
+alter table public.notices add column if not exists is_active boolean not null default true;
+alter table public.notices add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.notices add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.alumni add column if not exists name text;
+alter table public.alumni add column if not exists batch text;
+alter table public.alumni add column if not exists achievement text;
+alter table public.alumni add column if not exists photo_url text;
+alter table public.alumni add column if not exists approved boolean not null default true;
+alter table public.alumni add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+alter table public.alumni add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.feedback add column if not exists request_id text;
+alter table public.feedback add column if not exists name text;
+alter table public.feedback add column if not exists role text;
+alter table public.feedback add column if not exists contact text;
+alter table public.feedback add column if not exists message text;
+alter table public.feedback add column if not exists website text;
+alter table public.feedback add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+alter table public.admin_users add column if not exists email text;
+alter table public.admin_users add column if not exists password_hash text;
+alter table public.admin_users add column if not exists role text not null default 'admin';
+alter table public.admin_users add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
+
+-- --------------------------------------------------------------
+-- 12. Automatic Updated At Triggers
 -- --------------------------------------------------------------
 drop trigger if exists set_school_profiles_updated_at on public.school_profiles;
 create trigger set_school_profiles_updated_at before update on public.school_profiles for each row execute procedure public.handle_updated_at();
