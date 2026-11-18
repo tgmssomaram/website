@@ -103,14 +103,16 @@ export default async function handler(req, res) {
           profileValues.flashNews = mappedNotices;
         }
 
-        // Ensure strength and alumni are present
-        if (!profileValues.strength) {
-          const fallback = getFallbackData();
-          if (fallback && fallback.strength) profileValues.strength = fallback.strength;
+        // Ensure strength, alumni, and principalPress are present
+        const fallback = getFallbackData();
+        if (!profileValues.strength && fallback?.strength) {
+          profileValues.strength = fallback.strength;
         }
-        if (!profileValues.alumni) {
-          const fallback = getFallbackData();
-          if (fallback && Array.isArray(fallback.alumni)) profileValues.alumni = fallback.alumni;
+        if (!profileValues.alumni && Array.isArray(fallback?.alumni)) {
+          profileValues.alumni = fallback.alumni;
+        }
+        if (!profileValues.principalPress && fallback?.principalPress) {
+          profileValues.principalPress = fallback.principalPress;
         }
 
         return res.status(200).json({

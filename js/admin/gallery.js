@@ -11,8 +11,8 @@ window.AdminModules.gallery = {
     view.innerHTML = '\
       <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">\
         <div>\
-          <h1>🖼️ Gallery Manager</h1>\
-          <p>Upload campus photos, manage albums, and showcase school activities.</p>\
+          <h1>🖼️ Campus &amp; School Photo Gallery Manager</h1>\
+          <p>Upload and organize photos for both the <strong>Campus Gallery</strong> (Buildings, Labs, Facilities) and the <strong>School Photo Gallery</strong> (Activities, Yoga, Celebrations).</p>\
         </div>\
         <button id="add-gallery-btn" class="btn btn-primary-dash">\
           <span>+ Upload New Photo</span>\
@@ -22,10 +22,11 @@ window.AdminModules.gallery = {
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;" id="gallery-categories">\
           <span style="font-size:0.85rem;font-weight:700;color:var(--text-muted);margin-right:4px;">Filter:</span>\
           <button class="btn btn-sm btn-primary-dash" data-cat="">All Photos</button>\
-          <button class="btn btn-sm btn-secondary" data-cat="School Activities">School Activities</button>\
-          <button class="btn btn-sm btn-secondary" data-cat="Campus">Campus</button>\
-          <button class="btn btn-sm btn-secondary" data-cat="Events">Events</button>\
-          <button class="btn btn-sm btn-secondary" data-cat="Sports">Sports</button>\
+          <button class="btn btn-sm btn-secondary" data-cat="Campus Gallery">🏫 Campus Gallery</button>\
+          <button class="btn btn-sm btn-secondary" data-cat="School Photo Gallery">📸 School Photo Gallery</button>\
+          <button class="btn btn-sm btn-secondary" data-cat="Achievements">🏆 Achievements</button>\
+          <button class="btn btn-sm btn-secondary" data-cat="Events">🎉 Events</button>\
+          <button class="btn btn-sm btn-secondary" data-cat="Sports">🏃 Sports &amp; Yoga</button>\
         </div>\
       </div>\
       <div id="gallery-grid-container">\
@@ -73,6 +74,11 @@ window.AdminModules.gallery = {
     this.data = res.data;
     container.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">' +
       this.data.map(function(item) {
+        var cat = item.category || 'School Photo Gallery';
+        var isCampus = /campus/i.test(cat) || item.gallery_type === 'campus';
+        var isAchieve = /achieve/i.test(cat);
+        var badgeColor = isCampus ? 'background:#0284c7;color:#fff;' : isAchieve ? 'background:#d97706;color:#fff;' : 'background:#7c3aed;color:#fff;';
+        var badgeIcon = isCampus ? '🏫 ' : isAchieve ? '🏆 ' : '📸 ';
         return '\
           <div class="card" style="padding:0;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--border-color);transition:transform 0.2s, box-shadow 0.2s;">\
             <div style="position:relative;height:190px;background:#0f172a;overflow:hidden;">\
@@ -80,8 +86,8 @@ window.AdminModules.gallery = {
               <span class="badge ' + (item.is_active ? 'badge-success' : 'badge-danger') + '" style="position:absolute;top:12px;right:12px;box-shadow:0 2px 8px rgba(0,0,0,0.2);">\
                 ' + (item.is_active ? '● Live' : '○ Hidden') + '\
               </span>\
-              <span class="badge badge-purple" style="position:absolute;bottom:12px;left:12px;box-shadow:0 2px 8px rgba(0,0,0,0.2);">\
-                ' + (item.category || 'School Activities') + '\
+              <span class="badge" style="position:absolute;bottom:12px;left:12px;box-shadow:0 2px 8px rgba(0,0,0,0.2);' + badgeColor + 'font-weight:600;">\
+                ' + badgeIcon + cat + '\
               </span>\
             </div>\
             <div style="padding:18px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">\
@@ -105,7 +111,17 @@ window.AdminModules.gallery = {
     if (res && res.success) {
       window.AdminAPI.showToast('Photo deleted successfully', 'info');
       await this.loadGallery();
-      window.AdminAPI.broadcastUpdate({ gallery: this.data.map(function(g) { return { src: g.image_url, title: g.title, te: g.caption || g.title, category: g.category || 'School Activities' }; }) });
+      window.AdminAPI.broadcastUpdate({
+        gallery: this.data.map(function(g) {
+          return {
+            src: g.image_url,
+            title: g.title,
+            te: g.caption || g.title,
+            category: g.category || 'School Photo Gallery',
+            gallery_type: g.gallery_type || (/campus/i.test(g.category || '') ? 'campus' : 'school')
+          };
+        })
+      });
     } else {
       window.AdminAPI.showToast(res?.error || 'Failed to delete photo', 'error');
     }
@@ -163,12 +179,13 @@ window.AdminModules.gallery = {
             \
             <div class="form-row">\
               <div class="form-group-dash">\
-                <label for="gallery-cat">Category</label>\
+                <label for="gallery-cat">Gallery Section / Category *</label>\
                 <select id="gallery-cat">\
-                  <option value="School Activities"' + (item?.category === 'School Activities' ? ' selected' : '') + '>School Activities</option>\
-                  <option value="Campus"' + (item?.category === 'Campus' ? ' selected' : '') + '>Campus</option>\
-                  <option value="Events"' + (item?.category === 'Events' ? ' selected' : '') + '>Events</option>\
-                  <option value="Sports"' + (item?.category === 'Sports' ? ' selected' : '') + '>Sports</option>\
+                  <option value="Campus Gallery"' + (/campus/i.test(item?.category || '') ? ' selected' : '') + '>🏫 Campus Gallery (Campus Grounds, Buildings, Labs, Facilities)</option>\
+                  <option value="School Photo Gallery"' + (!item || /photo|activit/i.test(item?.category || '') ? ' selected' : '') + '>📸 School Photo Gallery (Student Activities, Meetings, Cultural)</option>\
+                  <option value="Achievements"' + (/achieve/i.test(item?.category || '') ? ' selected' : '') + '>🏆 Achievements &amp; Competitions</option>\
+                  <option value="Events"' + (/event/i.test(item?.category || '') ? ' selected' : '') + '>🎉 Events &amp; Celebrations</option>\
+                  <option value="Sports"' + (/sport|yoga/i.test(item?.category || '') ? ' selected' : '') + '>🏃 Sports &amp; Yoga</option>\
                 </select>\
               </div>\
               <div class="form-group-dash" style="display:flex;align-items:center;gap:10px;margin-top:28px;">\
@@ -319,10 +336,12 @@ window.AdminModules.gallery = {
         return;
       }
 
+      var gType = /campus/i.test(category) ? 'campus' : 'school';
       var payload = {
         title: title,
         image_url: image_url,
         category: category,
+        gallery_type: gType,
         caption: caption,
         is_active: is_active
       };
@@ -344,7 +363,17 @@ window.AdminModules.gallery = {
         window.AdminAPI.showToast(isEdit ? 'Photo updated' : 'Photo added to gallery', 'success');
         closeModal();
         await self.loadGallery();
-        window.AdminAPI.broadcastUpdate({ gallery: self.data.map(function(g) { return { src: g.image_url, title: g.title, te: g.caption || g.title, category: g.category || 'School Activities' }; }) });
+        window.AdminAPI.broadcastUpdate({
+          gallery: self.data.map(function(g) {
+            return {
+              src: g.image_url,
+              title: g.title,
+              te: g.caption || g.title,
+              category: g.category || 'School Photo Gallery',
+              gallery_type: g.gallery_type || (/campus/i.test(g.category || '') ? 'campus' : 'school')
+            };
+          })
+        });
       } else {
         window.AdminAPI.showToast(res?.error || 'Operation failed', 'error');
       }

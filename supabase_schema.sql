@@ -1,5 +1,6 @@
 -- ==============================================================
--- TGMS Somaram | Supabase Database Schema
+-- TGMS Somaram | Comprehensive Supabase Database Schema
+-- Production-Ready Schema for School Administration & Real-Time Sync
 -- Run this script in your Supabase SQL Editor:
 -- https://app.supabase.com/project/_/sql
 -- ==============================================================
@@ -7,7 +8,18 @@
 -- 1. Enable pgcrypto extension for UUID generation
 create extension if not exists "pgcrypto";
 
--- 2. School Profile / Content table
+-- Helper function for auto-updating timestamps
+create or replace function public.handle_updated_at()
+returns trigger as $$
+begin
+    new.updated_at = timezone('utc'::text, now());
+    return new;
+end;
+$$ language plpgsql;
+
+-- --------------------------------------------------------------
+-- 2. School Profile / Master Configuration Table
+-- --------------------------------------------------------------
 create table if not exists public.school_profiles (
     id text primary key,
     profile_key text unique not null,
@@ -17,102 +29,60 @@ create table if not exists public.school_profiles (
     updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- 3. Flash News & Announcements table
-create table if not exists public.notices (
+-- --------------------------------------------------------------
+-- 3. Principal's Message & Press Notes Table
+-- --------------------------------------------------------------
+create table if not exists public.principal_messages (
+    id uuid default gen_random_uuid() primary key,
+    title text not null default 'Principal’s Message',
+    telugu_title text default 'ప్రిన్సిపాల్ సందేశం',
+    message text not null,
+    telugu_message text,
+    important_title text default 'Principal Important Message',
+    important_text text,
+    image_url text,
+    image_caption text,
+    links jsonb default '[]'::jsonb,
+    is_active boolean not null default true,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- --------------------------------------------------------------
+-- 4. Student Enrolment & School Strength Table
+-- --------------------------------------------------------------
+create table if not exists public.student_strength (
+    id uuid default gen_random_uuid() primary key,
+    academic_year text not null default '2026–27',
+    group_type text not null, -- 'high_school', 'intermediate_1', 'intermediate_2', 'sections'
+    class_name text not null, -- 'VI', 'VII', 'VIII', 'IX', 'X', 'MPC', 'BiPC', 'CEC', 'ACE'
+    boys integer not null default 0 check (boys >= 0),
+    girls integer not null default 0 check (girls >= 0),
+    order_index integer not null default 0,
+    is_active boolean not null default true,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- --------------------------------------------------------------
+-- 5. Campus & School Photo Gallery Table
+-- --------------------------------------------------------------
+create table if not exists public.gallery_items (
     id uuid default gen_random_uuid() primary key,
     title text not null,
-    detail text,
-    date text not null default to_char(current_date, 'YYYY-MM-DD'),
+    image_url text not null,
+    category text not null default 'Campus Gallery', -- 'Campus Gallery', 'School Photo Gallery', 'Achievements', 'Events', 'Sports'
+    gallery_type text not null default 'campus',     -- 'campus' vs 'school'
+    caption text,
+    order_index integer not null default 0,
     is_active boolean not null default true,
-    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- 4. Inquiries & Feedback table (Contact form & Admission inquiries)
-create table if not exists public.feedback (
-    id uuid default gen_random_uuid() primary key,
-    request_id text,
-    name text,
-    role text,
-    contact text,
-    message text,
-    website text,
-    created_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
-
--- 5. Administrators table
-create table if not exists public.admin_users (
-    id uuid default gen_random_uuid() primary key,
-    email text unique not null,
-    password_hash text not null,
-    role text not null default 'admin',
-    created_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
-
--- Enable Row Level Security (RLS)
-alter table public.school_profiles enable row level security;
-alter table public.notices enable row level security;
-alter table public.feedback enable row level security;
-alter table public.admin_users enable row level security;
-
--- Policies for school_profiles
-drop policy if exists "Allow public read on school_profiles" on public.school_profiles;
-create policy "Allow public read on school_profiles"
-    on public.school_profiles for select
-    using (true);
-
-drop policy if exists "Allow service role full access on school_profiles" on public.school_profiles;
-create policy "Allow service role full access on school_profiles"
-    on public.school_profiles for all
-    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
-
--- Policies for notices
-drop policy if exists "Allow public read on notices" on public.notices;
-create policy "Allow public read on notices"
-    on public.notices for select
-    using (is_active = true);
-
-drop policy if exists "Allow service role full access on notices" on public.notices;
-create policy "Allow service role full access on notices"
-    on public.notices for all
-    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
-
--- Policies for feedback
-drop policy if exists "Allow public insert on feedback" on public.feedback;
-create policy "Allow public insert on feedback"
-    on public.feedback for insert
-    with check (true);
-
-drop policy if exists "Allow admin read on feedback" on public.feedback;
-create policy "Allow admin read on feedback"
-    on public.feedback for select
-    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
-
--- Seed initial data for TGMS Somaram
-insert into public.school_profiles (id, profile_key, values, revision)
-values (
-    'tgms_profile_tgms-somaram',
-    'tgms_profile_tgms-somaram',
-    '{"principal": {"name": "Farhana", "designation": "Principal FAC", "qualification": "M.Sc., B.Ed.", "phone": "08727-285222", "email": "tgmssomaram.knr@gmail.com"}, "address": "Somaram (Village), Saidapur Mandal, Karimnagar District, Telangana – 505490", "faculty": [["K. Veerababu", "PGT Mathematics / Principal FAC", "M.Sc., B.Ed."], ["Jamalapuram Ramakrishna", "PGT Economics", "M.Sc., Town Planning, SET"], ["Boora Saidaiah Goud", "PGT Civics", "M.A., B.Ed."], ["Bandi Saidulu", "PGT Botany", "M.Sc., B.Ed., SET"], ["Vutukuri Ravinder Reddy", "PGT Chemistry", "M.Sc., B.Ed."], ["Pokala Venkateswara Rao", "PGT Zoology", "M.Sc., B.Ed."], ["Shaik Sharief", "PGT Physics", "M.Sc., B.Ed."], ["Shaik Jani", "PGT English", "M.A., B.Ed."], ["Bommaganti Sushmitha", "PGT Mathematics", "M.Sc., B.Ed."], ["Chandala Vani Sree", "PGT Telugu", "M.A., B.Ed."], ["Shaik Jakir Hussain", "PGT Telugu", "M.A., B.Ed."], ["Kondeti Saidulu", "PGT English", "M.A., B.Ed."], ["Guttula G. S. Veera Subramaneswara Rao", "TGT Social Studies", "M.A., M.Ed."], ["Konkapaka Gayathri", "TGT Mathematics", "M.Sc., B.Ed."], ["Nagarjunapu Ramalinga Chary", "TGT Telugu", "M.A., B.Ed."], ["Shaik Ramjanbegam", "TGT Hindi", "M.A., HPT"]], "guest": [["Sk. Rajiya", "TGT Hindi", "M.A., HPT"], ["Ch. Ramesh", "TGT English", "M.A., B.Ed."], ["M. Venkateswarlu", "TGT Science", "M.Sc., B.Ed."], ["D. Renuka", "PGT Mathematics", "M.Sc., B.Ed."], ["Ch. Ramesh", "PGT Commerce", "M.Com., B.Ed."]], "vocational": [["K. Lakshmi", "Media and Entertainment", "B.Com. (Computers), DTP, PGDCA, Animation"], ["E. Vijaya Durga", "Health Care", "GNM Nursing"]], "support": [["Narra Kavitha", "Computer Operator"], ["Shaik Jan Pasha", "Physical Director (PD)"], ["Bobbili Padma", "Office Subordinate"], ["Kolukulapalli Pullaiah", "Night Watchman"]], "gallery": [{"src": "images/parents-meeting.jpg", "title": "Parent–teacher meeting", "te": "తల్లిదండ్రుల సమావేశం", "category": "School Activities"}, {"src": "images/yoga-session.jpg", "title": "Yoga and well-being", "te": "యోగా కార్యక్రమం", "category": "Well-being"}, {"src": "images/meeting-address.jpg", "title": "School–parent interaction", "te": "పాఠశాల–తల్లిదండ్రుల ముఖాముఖి", "category": "School Activities"}, {"src": "images/parents-participation.jpg", "title": "Parents participating in school activities", "te": "పాఠశాల కార్యక్రమంలో తల్లిదండ్రుల భాగస్వామ్యం", "category": "School Activities"}], "mapUrl": "https://maps.google.com/maps?q=18.240000,79.300000", "coordinates": {"lat": 18.24, "lng": 79.3}, "notices": [], "downloads": [], "calendarFeedUrl": "https://calendar.google.com/calendar/ical/9b6bd89b931449c6dab271ec3d5ec995dbb2a8235139220258a8161a39805386%40group.calendar.google.com/public/basic.ics", "udiseCode": "36131100206", "collegeCode": "15124", "showAdmissionSeats": true, "settings": {"schoolTitle": "Telangana Model School & Junior College, Somaram", "teluguTitle": "తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం", "authority": "School Education Department, Govt. of Telangana", "welcomeTitle": "Welcome to TGMS Somaram", "welcomeDescription": "A place to learn, explore and grow. Discover school information, educational resources and opportunities to connect with our learning community.", "gradientStart": "#fff0df", "gradientEnd": "#ff983f", "youtubeUrl": ""}, "flashNews": [{"id": "somaram-welcome-1", "title": "Welcome to Telangana Model School & Junior College, Somaram (Saidapur Mandal, Karimnagar Dist.)", "detail": "Welcome to Telangana Model School & Junior College, Somaram. High quality English medium education from Class VI to XII.", "date": "2026-11-01"}, {"id": "somaram-admissions-2", "title": "సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.", "detail": "సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.", "date": "2026-11-05"}, {"id": "somaram-exams-3", "title": "TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.", "detail": "TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.", "date": "2026-11-10"}]}'::jsonb,
-    1
-)
-on conflict (profile_key) do update
-set values = excluded.values,
-    updated_at = timezone('utc'::text, now());
-
--- Seed initial flash notices
-insert into public.notices (title, detail, date, is_active)
-values
-    ('Welcome to Telangana Model School & Junior College, Somaram (Saidapur Mandal, Karimnagar Dist.)', 'Welcome to Telangana Model School & Junior College, Somaram. High quality English medium education from Class VI to XII.', '2026-11-01', true),
-    ('సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.', 'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలలో ప్రవేశాలు, విద్యా సమాచారం | Admissions & Academic updates for TGMS Somaram.', '2026-11-05', true),
-    ('TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.', 'TGMSCET & INTERMEDIATE / SSC ACADEMIC CALENDAR & EXAMINATION UPDATES.', '2026-11-10', true)
-on conflict do nothing;
-
--- ==============================================================
--- ADMIN PORTAL ADDITIONS
--- Run these statements after the initial schema above
--- ==============================================================
-
--- Faculty table
+-- --------------------------------------------------------------
+-- 6. Faculty Members Table
+-- --------------------------------------------------------------
 create table if not exists public.faculty (
     id uuid default gen_random_uuid() primary key,
     name text not null,
@@ -126,51 +96,181 @@ create table if not exists public.faculty (
     updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- Gallery items table
-create table if not exists public.gallery_items (
+-- --------------------------------------------------------------
+-- 7. Flash News & Notices Table
+-- --------------------------------------------------------------
+create table if not exists public.notices (
     id uuid default gen_random_uuid() primary key,
     title text not null,
-    image_url text not null,
-    category text not null default 'School Activities',
-    caption text,
+    detail text,
+    date text not null default to_char(current_date, 'YYYY-MM-DD'),
     is_active boolean not null default true,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- --------------------------------------------------------------
+-- 8. Alumni Records Table
+-- --------------------------------------------------------------
+create table if not exists public.alumni (
+    id uuid default gen_random_uuid() primary key,
+    name text not null,
+    batch text,
+    achievement text,
+    photo_url text,
+    approved boolean not null default true,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- --------------------------------------------------------------
+-- 9. Inquiries & Feedback Table
+-- --------------------------------------------------------------
+create table if not exists public.feedback (
+    id uuid default gen_random_uuid() primary key,
+    request_id text,
+    name text,
+    role text,
+    contact text,
+    message text,
+    website text,
     created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
-alter table public.faculty enable row level security;
+-- --------------------------------------------------------------
+-- 10. Admin Users Table
+-- --------------------------------------------------------------
+create table if not exists public.admin_users (
+    id uuid default gen_random_uuid() primary key,
+    email text unique not null,
+    password_hash text not null,
+    role text not null default 'admin',
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- --------------------------------------------------------------
+-- Row Level Security (RLS) Configuration
+-- --------------------------------------------------------------
+alter table public.school_profiles enable row level security;
+alter table public.principal_messages enable row level security;
+alter table public.student_strength enable row level security;
 alter table public.gallery_items enable row level security;
+alter table public.faculty enable row level security;
+alter table public.notices enable row level security;
+alter table public.alumni enable row level security;
+alter table public.feedback enable row level security;
+alter table public.admin_users enable row level security;
+
+-- Public Read Policies
+drop policy if exists "Allow public read on school_profiles" on public.school_profiles;
+create policy "Allow public read on school_profiles" on public.school_profiles for select using (true);
+
+drop policy if exists "Allow public read on principal_messages" on public.principal_messages;
+create policy "Allow public read on principal_messages" on public.principal_messages for select using (is_active = true);
+
+drop policy if exists "Allow public read on student_strength" on public.student_strength;
+create policy "Allow public read on student_strength" on public.student_strength for select using (is_active = true);
+
+drop policy if exists "Allow public read on gallery_items" on public.gallery_items;
+create policy "Allow public read on gallery_items" on public.gallery_items for select using (is_active = true);
 
 drop policy if exists "Allow public read on faculty" on public.faculty;
 create policy "Allow public read on faculty" on public.faculty for select using (is_active = true);
 
-drop policy if exists "Allow service role full access on faculty" on public.faculty;
-create policy "Allow service role full access on faculty" on public.faculty for all
+drop policy if exists "Allow public read on notices" on public.notices;
+create policy "Allow public read on notices" on public.notices for select using (is_active = true);
+
+drop policy if exists "Allow public read on alumni" on public.alumni;
+create policy "Allow public read on alumni" on public.alumni for select using (approved = true);
+
+drop policy if exists "Allow public insert on feedback" on public.feedback;
+create policy "Allow public insert on feedback" on public.feedback for insert with check (true);
+
+-- Authenticated & Service Role Full Access Policies
+drop policy if exists "Allow service role full access on school_profiles" on public.school_profiles;
+create policy "Allow service role full access on school_profiles" on public.school_profiles for all
     using (auth.role() = 'service_role' or auth.role() = 'authenticated');
 
-drop policy if exists "Allow public read on gallery_items" on public.gallery_items;
-create policy "Allow public read on gallery_items" on public.gallery_items for select using (is_active = true);
+drop policy if exists "Allow service role full access on principal_messages" on public.principal_messages;
+create policy "Allow service role full access on principal_messages" on public.principal_messages for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+drop policy if exists "Allow service role full access on student_strength" on public.student_strength;
+create policy "Allow service role full access on student_strength" on public.student_strength for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
 
 drop policy if exists "Allow service role full access on gallery_items" on public.gallery_items;
 create policy "Allow service role full access on gallery_items" on public.gallery_items for all
     using (auth.role() = 'service_role' or auth.role() = 'authenticated');
 
-insert into public.faculty (name, designation, subject, qualification, order_index, is_active) values
-    ('Farhana', 'Principal FAC', 'Administration', 'M.Sc., B.Ed.', 0, true),
-    ('K. Veerababu', 'PGT Mathematics', 'Mathematics', 'M.Sc., B.Ed.', 1, true),
-    ('Jamalapuram Ramakrishna', 'PGT Economics', 'Economics', 'M.Sc., Town Planning, SET', 2, true),
-    ('Boora Saidaiah Goud', 'PGT Civics', 'Civics', 'M.A., B.Ed.', 3, true),
-    ('Bandi Saidulu', 'PGT Botany', 'Botany', 'M.Sc., B.Ed., SET', 4, true),
-    ('Vutukuri Ravinder Reddy', 'PGT Chemistry', 'Chemistry', 'M.Sc., B.Ed.', 5, true),
-    ('Pokala Venkateswara Rao', 'PGT Zoology', 'Zoology', 'M.Sc., B.Ed.', 6, true),
-    ('Shaik Sharief', 'PGT Physics', 'Physics', 'M.Sc., B.Ed.', 7, true),
-    ('Shaik Jani', 'PGT English', 'English', 'M.A., B.Ed.', 8, true),
-    ('Bommaganti Sushmitha', 'PGT Mathematics', 'Mathematics', 'M.Sc., B.Ed.', 9, true),
-    ('Chandala Vani Sree', 'PGT Telugu', 'Telugu', 'M.A., B.Ed.', 10, true),
-    ('Shaik Jakir Hussain', 'PGT Telugu', 'Telugu', 'M.A., B.Ed.', 11, true),
-    ('Kondeti Saidulu', 'PGT English', 'English', 'M.A., B.Ed.', 12, true)
+drop policy if exists "Allow service role full access on faculty" on public.faculty;
+create policy "Allow service role full access on faculty" on public.faculty for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+drop policy if exists "Allow service role full access on notices" on public.notices;
+create policy "Allow service role full access on notices" on public.notices for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+drop policy if exists "Allow service role full access on alumni" on public.alumni;
+create policy "Allow service role full access on alumni" on public.alumni for all
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+drop policy if exists "Allow admin read on feedback" on public.feedback;
+create policy "Allow admin read on feedback" on public.feedback for select
+    using (auth.role() = 'service_role' or auth.role() = 'authenticated');
+
+-- --------------------------------------------------------------
+-- Indexes for Performance
+-- --------------------------------------------------------------
+create index if not exists idx_gallery_type_active on public.gallery_items (gallery_type, is_active);
+create index if not exists idx_gallery_category on public.gallery_items (category);
+create index if not exists idx_student_strength_year on public.student_strength (academic_year, group_type);
+create index if not exists idx_faculty_order on public.faculty (order_index);
+create index if not exists idx_notices_date on public.notices (date desc);
+
+-- --------------------------------------------------------------
+-- Seed Default Data for TGMS Somaram
+-- --------------------------------------------------------------
+
+-- Seed Principal Message
+insert into public.principal_messages (title, telugu_title, message, telugu_message, important_title, important_text, image_url, image_caption)
+values (
+    'Principal’s Message',
+    'ప్రిన్సిపాల్ సందేశం',
+    'Welcome to Telangana Model School & Junior College, Somaram. Our institution is dedicated to nurturing young minds with high-quality English medium education, modern scientific inquiry, and strong ethical values. With modern laboratories, digital classrooms, and 100% free education provided by the Government of Telangana, we empower every student to achieve excellence.',
+    'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాలకు స్వాగతం. నాణ్యమైన ఆంగ్ల మాధ్యమ విద్య, నైతిక విలువలు, శాస్త్రీయ దృక్పథాన్ని పెంపొందించడమే మా లక్ష్యం. అత్యాధునిక ప్రయోగశాలలు, డిజిటల్ తరగతులు మరియు రాష్ట్ర ప్రభుత్వ 100% ఉచిత విద్యా సదుపాయాలతో విద్యార్థులను భావి భారత పౌరులుగా తీర్చిదిద్దుతున్నాము.',
+    'Principal FAC · Dr. Bandari Sampath Kumar',
+    'Admissions for Classes VI to XII are conducted through the state CGG entrance portal. Textbooks, uniforms, and mid-day meals are 100% free.',
+    'images/parents-meeting.jpg',
+    'Dr. Bandari Sampath Kumar, Principal FAC addressing parents and students.'
+) on conflict do nothing;
+
+-- Seed Student Strength
+insert into public.student_strength (academic_year, group_type, class_name, boys, girls, order_index) values
+    ('2026–27', 'high_school', 'VI', 48, 33, 1),
+    ('2026–27', 'high_school', 'VII', 55, 21, 2),
+    ('2026–27', 'high_school', 'VIII', 63, 34, 3),
+    ('2026–27', 'high_school', 'IX', 51, 46, 4),
+    ('2026–27', 'high_school', 'X', 55, 39, 5),
+    ('2026–27', 'intermediate_1', 'MPC', 18, 28, 6),
+    ('2026–27', 'intermediate_1', 'BiPC', 4, 37, 7),
+    ('2026–27', 'intermediate_1', 'CEC', 15, 16, 8),
+    ('2026–27', 'intermediate_1', 'ACE', 7, 10, 9),
+    ('2026–27', 'intermediate_2', 'MPC', 16, 33, 10),
+    ('2026–27', 'intermediate_2', 'BiPC', 0, 39, 11),
+    ('2026–27', 'intermediate_2', 'CEC', 15, 11, 12)
 on conflict do nothing;
 
--- Default admin user seed
+-- Seed Gallery Items (Campus Gallery vs School Photo Gallery)
+insert into public.gallery_items (title, image_url, category, gallery_type, caption, order_index, is_active) values
+    ('TGMS Somaram Campus Main Building', 'images/munagala-campus-blue-sky.jpg', 'Campus Gallery', 'campus', 'State-of-the-art Model School building and campus grounds at Somaram.', 1, true),
+    ('Parent–Teacher Orientation Meeting', 'images/parents-meeting.jpg', 'School Photo Gallery', 'school', 'Interactive session with parents discussing academic development.', 2, true),
+    ('Annual Yoga & Wellness Session', 'images/yoga-session.jpg', 'School Photo Gallery', 'school', 'Students participating in morning yoga and physical well-being activities.', 3, true),
+    ('Interactive Classroom & Staff Discussion', 'images/meeting-address.jpg', 'School Photo Gallery', 'school', 'Faculty and leadership addressing parents during the term review.', 4, true),
+    ('Community & Parent Participation', 'images/parents-participation.jpg', 'School Photo Gallery', 'school', 'Parents engaging actively in school community initiatives.', 5, true)
+on conflict do nothing;
+
+-- Seed Default Admin User
 insert into public.admin_users (email, password_hash, role)
 values ('tgmssomaram.knr@gmail.com', 'admin@123', 'superadmin')
 on conflict (email) do nothing;

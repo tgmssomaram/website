@@ -152,3 +152,19 @@ function principalPressEditor(sheet) {
   };
   sheet.append(form);
 }
+
+window.principalPressSection = principalPressSection;
+window.refreshPrincipalPress = function() {
+  const existing = document.querySelector('.principal-press');
+  if (existing) {
+    const updated = principalPressSection();
+    if (updated) {
+      existing.replaceWith(updated);
+    }
+  }
+};
+window.addEventListener('tgms-content', function() {
+  if (typeof window.refreshPrincipalPress === 'function') {
+    window.refreshPrincipalPress();
+  }
+});

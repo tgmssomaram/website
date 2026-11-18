@@ -28,11 +28,12 @@ window.AdminModules.dashboard = {
         <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:14px;color:var(--text-primary);">🚀 Quick Administration Actions</h3>\
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">\
           <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'strength\')">📈 Edit Student Strength</button>\
+          <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'message\')">📜 Edit Principal’s Message</button>\
           <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'notices\')">📢 Add Flash Notice</button>\
           <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'faculty\')">👨‍🏫 Manage Faculty</button>\
-          <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'gallery\')">🖼️ Add Campus Photo</button>\
+          <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'gallery\')">🖼️ Campus &amp; Photo Gallery</button>\
           <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'alumni\')">🎓 Manage Alumni Stories</button>\
-          <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'profile\')">🏫 School Profile & Photo</button>\
+          <button type="button" class="btn btn-secondary-dash" style="justify-content:flex-start;padding:12px 14px;" onclick="window.AdminApp.navigate(\'profile\')">🏫 School Profile &amp; Photo</button>\
         </div>\
       </div>\
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:4px" class="dashboard-grid">\

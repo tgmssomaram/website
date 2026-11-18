@@ -10,6 +10,7 @@ import settingsHandler from '../../lib/admin/settings.js';
 import uploadHandler from '../../lib/admin/upload.js';
 import strengthHandler from '../../lib/admin/strength.js';
 import alumniHandler from '../../lib/admin/alumni.js';
+import principalMessageHandler from '../../lib/admin/principal-message.js';
 
 const routes = {
   login: loginHandler,
@@ -23,7 +24,9 @@ const routes = {
   settings: settingsHandler,
   upload: uploadHandler,
   strength: strengthHandler,
-  alumni: alumniHandler
+  alumni: alumniHandler,
+  message: principalMessageHandler,
+  'principal-message': principalMessageHandler
 };
 
 export const config = {

@@ -1023,6 +1023,87 @@ function renderModernResultsPage(sheet) {
 }
 window.renderModernResultsPage = renderModernResultsPage;
 
+function renderModernGalleryPage(sheet, d) {
+  const isTe = lang === 'te';
+  const allPhotos = (d && Array.isArray(d.gallery)) ? d.gallery : [];
+
+  const container = document.createElement('div');
+  container.className = 'modern-gallery-container';
+
+  const title = document.createElement('h2');
+  title.textContent = isTe ? 'క్యాంపస్ & పాఠశాల ఫొటో గ్యాలరీ' : 'Campus & School Photo Gallery';
+
+  const subtitle = document.createElement('p');
+  subtitle.textContent = isTe
+    ? 'తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల ప్రాంగణం, ల్యాబ్‌లు, విద్యార్థుల కార్యక్రమాలు మరియు వేడుకల చిత్రాలు.'
+    : 'Explore official photographs of TGMS Somaram campus facilities, science laboratories, student celebrations, and academic milestones.';
+
+  container.append(title, subtitle);
+
+  const filterBar = document.createElement('div');
+  filterBar.className = 'gallery-filter-tabs';
+
+  const filters = [
+    { id: 'all', en: 'All Photos', te: 'అన్ని చిత్రాలు' },
+    { id: 'campus', en: '🏫 Campus Gallery', te: '🏫 క్యాంపస్ & ల్యాబ్స్' },
+    { id: 'school', en: '📸 School Photo Gallery', te: '📸 పాఠశాల కార్యక్రమాలు' },
+    { id: 'achieve', en: '🏆 Achievements', te: '🏆 విద్యార్థుల విజయాలు' }
+  ];
+
+  let currentFilter = 'all';
+  const grid = document.createElement('div');
+  grid.className = 'gallery-grid';
+
+  function renderGrid() {
+    grid.replaceChildren();
+    const filtered = allPhotos.filter(photo => {
+      if (currentFilter === 'all') return true;
+      const cat = ((photo.category || '') + ' ' + (photo.title || '')).toLowerCase();
+      const type = photo.gallery_type || '';
+      if (currentFilter === 'campus') {
+        return type === 'campus' || /campus|building|gate|ground|lab|infrastructure/i.test(cat);
+      }
+      if (currentFilter === 'school') {
+        return type === 'school' || /school|photo|activit|meeting|yoga|parent|celebrat|event/i.test(cat);
+      }
+      if (currentFilter === 'achieve') {
+        return /achieve|award|prize|felicit/i.test(cat);
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'gallery-empty-notice';
+      empty.textContent = isTe
+        ? 'ఈ విభాగంలో ఫొటోలు త్వరలో జోడిస్తాము.'
+        : 'Photographs in this category will appear here after school confirmation.';
+      grid.append(empty);
+    } else {
+      filtered.forEach(photo => grid.append(photoCard(photo)));
+    }
+  }
+
+  filters.forEach(f => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gallery-filter-btn' + (f.id === currentFilter ? ' active' : '');
+    btn.textContent = isTe ? f.te : f.en;
+    btn.onclick = () => {
+      currentFilter = f.id;
+      filterBar.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGrid();
+    };
+    filterBar.append(btn);
+  });
+
+  container.append(filterBar, grid);
+  sheet.replaceChildren(container);
+  renderGrid();
+}
+window.renderModernGalleryPage = renderModernGalleryPage;
+
 function staffTable(title,rows){const section=node('section');section.append(node('h3',title));const wrap=node('div',null,'table-scroll');wrap.tabIndex=0;const table=node('table');const head=node('thead');const tr=node('tr');for(const h of ['Name','Designation / Subject','Qualification'])tr.append(node('th',h));head.append(tr);const body=node('tbody');rows.forEach(row=>{const r=node('tr');for(const value of row)r.append(node('td',value));body.append(r);});table.append(head,body);wrap.append(table);section.append(wrap);return section;}
 render=function(){originalRender();if(!schoolData)return;
 const d=schoolData;document.querySelector('.preview').textContent=lang==='te'?'సోమారం స్కూల్ వెబ్‌సైట్ ప్రివ్యూ · డొమైన్ కనెక్షన్ పెండింగ్':'TGMS SOMARAM WEBSITE PREVIEW · Domain connection pending';document.querySelector('[data-text="location"]').textContent=lang==='te'?'సోమారం (గ్రామం), సైదాపూర్ మండలం · కరీంనగర్ జిల్లా · తెలంగాణ':d.address;
@@ -1039,8 +1120,7 @@ if(id==='achievements'){
  sheet.replaceChildren(node('h2',lang==='te'?'విద్యార్థుల విజయాలు':'Student Achievements'));
  if(photos.length){const grid=node('div',null,'gallery-grid');photos.forEach(photo=>grid.append(photoCard(photo)));sheet.append(grid);}else sheet.append(node('p',lang==='te'?'విజయాల ఫొటోలు అందిన తర్వాత ఇక్కడ ప్రచురిస్తాము.':'Achievement photographs will appear here when supplied by the school.'));
 }else if(id==='gallery'||id==='events'){
- sheet.replaceChildren(node('h2',id==='gallery'?(lang==='te'?'ఫొటో గ్యాలరీ':'School Photo Gallery'):(lang==='te'?'పాఠశాల కార్యక్రమాలు':'Events & Activities')),node('p',lang==='te'?'తల్లిదండ్రుల సమావేశాలు, యోగా, పాఠశాల కార్యక్రమాల చిత్రాలు.':'Parent–teacher interaction, yoga and school community activities.'));
- const grid=node('div',null,'gallery-grid');d.gallery.forEach(photo=>grid.append(photoCard(photo)));sheet.append(grid);
+ renderModernGalleryPage(sheet, d);
 }else if(id==='contact'){
  sheet.replaceChildren(node('h2',t('contact')),node('h3','School Office'),node('p',d.address),node('h3',d.principal.name+' · Principal FAC'),node('p',d.principal.qualification),link('☎ '+d.principal.phone,'tel:+91'+d.principal.phone,'resource'),link('✉ '+d.principal.email,'mailto:'+d.principal.email,'resource'));
 }else if(id==='faculty'){
@@ -1063,7 +1143,22 @@ if(id==='achievements'){
    const btn=link(sLabel,'#'+sTarget,'school-subnav-btn'+(id===sTarget?' active':''));
    subnav.append(btn);
  }
- sheet.replaceChildren(subnav,node('h2',id==='school'?'Our School & Principal':t('about')),node('p',lang==='te'?'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల కరీంనగర్ జిల్లా, సైదాపూర్ మండలంలో ఉంది. విద్య, సహపాఠ్య కార్యక్రమాలు, పాఠశాల–తల్లిదండ్రుల భాగస్వామ్యాన్ని ఈ వెబ్‌సైట్ పరిచయం చేస్తుంది.':'Telangana Model School & Junior College, Somaram is located in Saidapur Mandal, Karimnagar District, Telangana. This website introduces the school’s teaching team, academic areas and school community activities.'),principalCard(),node('h3',t('vision')),node('p',t('visionBody')),node('h3',t('mission')),node('p',t('missionBody')));
+ const princMessageNode = node('div', null, 'school-principal-message-card');
+ const pm = d.principalPress || {};
+ const pmTitle = lang === 'te' ? (pm.teluguTitle || pm.title || 'ప్రిన్సిపాల్ సందేశం') : (pm.title || 'Principal’s Message');
+ const pmText = lang === 'te' ? (pm.teluguText || pm.text) : (pm.text || pm.teluguText);
+ if (pmText) {
+   princMessageNode.append(node('h3', '📜 ' + pmTitle));
+   pmText.split(/\n{2,}/).forEach(para => {
+     if (para.trim()) princMessageNode.append(node('p', para.trim()));
+   });
+   if (pm.importantText) {
+     const q = node('div', null, 'pm-quote');
+     q.append(node('strong', (pm.importantTitle || 'Note') + ': '), document.createTextNode(pm.importantText));
+     princMessageNode.append(q);
+   }
+ }
+ sheet.replaceChildren(subnav,node('h2',id==='school'?'Our School & Principal':t('about')),node('p',lang==='te'?'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల కరీంనగర్ జిల్లా, సైదాపూర్ మండలంలో ఉంది. విద్య, సహపాఠ్య కార్యక్రమాలు, పాఠశాల–తల్లిదండ్రుల భాగస్వామ్యాన్ని ఈ వెబ్‌సైట్ పరిచయం చేస్తుంది.':'Telangana Model School & Junior College, Somaram is located in Saidapur Mandal, Karimnagar District, Telangana. This website introduces the school’s teaching team, academic areas and school community activities.'),principalCard(),princMessageNode,node('h3',t('vision')),node('p',t('visionBody')),node('h3',t('mission')),node('p',t('missionBody')));
  if(id==='about-us'){
  const messages={
  en:{title:'Dream. Learn. Grow.',intro:'Every student brings curiosity, talent and the ability to grow. At TGMS Somaram, let your education be a journey of discovery: ask questions, practise with purpose and take one positive step every day.',items:[['Believe in your potential','Your present marks do not define your future. Set a realistic goal, recognise your strengths and build confidence through steady effort.'],['Small steps, lasting progress','Follow a daily study plan, revise regularly and ask for help when a concept is difficult. Mistakes are opportunities to understand and improve.'],['Learn beyond the textbook','Read widely, explore science and technology, express yourself through art and take part in sports. Curiosity and creativity help you discover new possibilities.'],['Grow together','Respect others, support your classmates and work honestly. Kindness, teamwork and responsibility are as valuable as academic knowledge.'],['Care for yourself','Make time for sleep, movement and rest. Share your concerns with a trusted teacher, parent or guardian; asking for support is a strength.']],closing:'Your next chapter begins with what you choose to learn today.'},
