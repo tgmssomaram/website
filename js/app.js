@@ -318,7 +318,14 @@ function renderModernFacultyPage(sheet, d) {
 
   let allActive = [];
   if (Array.isArray(d.facultyList) && d.facultyList.length > 0) {
-    allActive = d.facultyList.filter(f => f && f.is_active !== false);
+    const seenFaculty = new Set();
+    d.facultyList.forEach(f => {
+      if (!f || f.is_active === false) return;
+      const key = (f.name || f.id || '').trim().toLowerCase();
+      if (!key || seenFaculty.has(key)) return;
+      seenFaculty.add(key);
+      allActive.push(f);
+    });
   }
 
   let teachingList = [];

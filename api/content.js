@@ -59,7 +59,15 @@ export default async function handler(req, res) {
 
         // Live Faculty Sync
         if (facultyRes.data && facultyRes.data.length > 0) {
-          const facultyRows = facultyRes.data.filter(f => f && f.is_active !== false);
+          const rawRows = facultyRes.data.filter(f => f && f.is_active !== false);
+          const seenFaculty = new Set();
+          const facultyRows = [];
+          for (const f of rawRows) {
+            const key = (f.name || f.id || '').trim().toLowerCase();
+            if (!key || seenFaculty.has(key)) continue;
+            seenFaculty.add(key);
+            facultyRows.push(f);
+          }
 
           function normalizeCategory(cat, des) {
             if (cat && ['teaching', 'guest', 'vocational', 'support'].includes(cat)) return cat;
