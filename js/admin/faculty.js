@@ -312,7 +312,24 @@ window.AdminModules.faculty = {
 
     modal.classList.remove('hidden');
 
-    var closeModal = function() { modal.classList.add('hidden'); };
+    var prevActive = document.activeElement;
+    var closeModal = function() {
+      modal.classList.add('hidden');
+      document.removeEventListener('keydown', handleModalKey);
+      if (prevActive && typeof prevActive.focus === 'function') {
+        try { prevActive.focus(); } catch(e) {}
+      }
+    };
+    var handleModalKey = function(e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+    document.addEventListener('keydown', handleModalKey);
+    modal.onclick = function(e) {
+      if (e.target === modal) closeModal();
+    };
     document.getElementById('close-faculty-modal-btn').onclick = closeModal;
     document.getElementById('cancel-faculty-modal-btn').onclick = closeModal;
 

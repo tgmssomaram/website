@@ -8,7 +8,40 @@ function node(tag,content,cls){const n=document.createElement(tag);if(content)n.
 function link(title,href,cls){const a=node('a',title,cls);a.href=href;if(href.startsWith('https:')){a.target='_blank';a.rel='noopener noreferrer';}return a;}
 function render(){document.documentElement.lang=lang;document.querySelectorAll('[data-text]').forEach(el=>el.textContent=t(el.dataset.text));document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));const id=location.hash.slice(1)||'home',selected=menu.find(m=>m[0]===id)||menu[0];const nav=document.querySelector('#menu');nav.replaceChildren(...navMenu.map(item=>{const a=link(label(item),'#'+item[0]);if(item[0]===id||(item[0]==='portal'&&['students','portal','strength'].includes(id))||(item[0]==='admissions'&&id==='admissions')||(item[0]==='directory'&&id==='directory')||(item[0]==='school'&&['about-us','campus'].includes(id)))a.setAttribute('aria-current','page');return a;}));const main=document.querySelector('#main');main.replaceChildren();if(selected[0]==='home'){const hero=node('section',null,'hero');const content=node('div');content.append(node('span','TGMS SOMARAM','eyebrow'));const h=node('h2');h.append(document.createTextNode(t('welcome')+' '),node('span','TGMS Somaram'));content.append(h,node('p',t('intro')));const actions=node('div',null,'actions');actions.append(link(t('explore'),'#academics','action'),link(t('more'),'#about-us','action secondary'));content.append(actions);const art=node('div',null,'illustration');art.innerHTML='<svg viewBox="0 0 460 320" role="img" aria-label="School building illustration"><circle cx="235" cy="145" r="140" fill="#dceafa"/><circle cx="380" cy="57" r="28" fill="#ffdf7f"/><path d="M20 285h420" stroke="#c1d6df" stroke-width="4"/><path d="M56 122h348v160H56z" fill="#fff9e7" stroke="#254e7f" stroke-width="3"/><path d="M42 122l188-78 188 78" fill="#d6e5f7" stroke="#254e7f" stroke-width="3"/><path d="M199 205h62v77h-62z" fill="#194b7f"/><g fill="#82add7" stroke="#254e7f" stroke-width="2"><path d="M80 150h42v40H80zm72 0h42v40h-42zm115 0h42v40h-42zm72 0h42v40h-42zM80 213h42v40H80zm72 0h42v40h-42zm115 0h42v40h-42zm72 0h42v40h-42z"/></g><path d="M230 47V15m0 0h50v23h-50" fill="#febd0d" stroke="#254e7f" stroke-width="3"/><text x="230" y="110" text-anchor="middle" font-size="18" fill="#173e78" font-family="sans-serif" font-weight="bold">TGMS SOMARAM</text></svg>';art.append(node('small',t('illustration')));hero.append(content,art);main.append(hero);const cards=node('div',null,'cards');for(const [id,symbol]of [['academics','✦'],['admissions','↗'],['gallery','▧'],['calendar','▦']]){const item=menu.find(m=>m[0]===id),a=link('','#'+id,'card');a.append(node('span',symbol,'symbol'),node('h3',label(item)),node('p',t('pending')));cards.append(a);}main.append(cards);const sheet=node('section',null,'sheet');sheet.append(node('h2',t('learning')),node('p',t('learningBody')));main.append(sheet);return;}
 main.append(node('div','TGMS SOMARAM / '+label(selected).toUpperCase(),'breadcrumb'));const sheet=node('section',null,'sheet');sheet.append(node('h2',label(selected)));if(['about-us','school'].includes(selected[0])){sheet.append(node('p',t('learningBody')),node('h3',t('vision')),node('p',t('visionBody')),node('h3',t('mission')),node('p',t('missionBody')),node('p',t('review'),'pending'));}else if(['books','downloads','directory'].includes(selected[0])){sheet.append(node('p',t('pending')),link('SCERT Telangana — Educational Resources ↗','https://scert.telangana.gov.in/','resource'),link('Telangana Model Schools — CGG Portal ↗','https://telanganams.cgg.gov.in/TGMSWEB20/#/','resource'));}else if(selected[0]==='faculty'&&typeof renderModernFacultyPage==='function'){renderModernFacultyPage(sheet,typeof schoolData==='object'&&schoolData?schoolData:SOMARAM_DEFAULT_DATA);}else{sheet.append(node('p',selected[0]==='admin'?t('admin'):t('pending'),'pending'));if(selected[0]==='contact')sheet.append(node('p',t('location')));}main.append(sheet);}
-document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('somaram-language',lang);}catch{}render();}));window.addEventListener('hashchange',()=>{render();document.querySelector('#main').focus({preventScroll:true});});document.querySelector('#privacy').addEventListener('click',()=>document.querySelector('#policy').showModal());document.querySelector('#close-policy').addEventListener('click',()=>document.querySelector('#policy').close());render();
+function debounce(fn, waitMs = 300) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), waitMs);
+  };
+}
+window.debounce = debounce;
+
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('somaram-language',lang);}catch{}render();}));
+window.addEventListener('hashchange',()=>{render();document.querySelector('#main').focus({preventScroll:true});});
+
+const privacyTrigger = document.querySelector('#privacy');
+const policyDialog = document.querySelector('#policy');
+const closePolicyBtn = document.querySelector('#close-policy');
+if (privacyTrigger && policyDialog) {
+  privacyTrigger.addEventListener('click', () => {
+    policyDialog.showModal();
+    if (closePolicyBtn) closePolicyBtn.focus();
+  });
+  if (closePolicyBtn) {
+    closePolicyBtn.addEventListener('click', () => {
+      policyDialog.close();
+      privacyTrigger.focus();
+    });
+  }
+  policyDialog.addEventListener('click', (e) => {
+    if (e.target === policyDialog) {
+      policyDialog.close();
+      privacyTrigger.focus();
+    }
+  });
+}
+render();
 
 let schoolData=(typeof SOMARAM_DEFAULT_DATA!=='undefined'?JSON.parse(JSON.stringify(SOMARAM_DEFAULT_DATA)):null);
 const originalRender=render;
@@ -17,6 +50,8 @@ function openLightbox(activePhoto, list) {
   let currentIndex = photos.findIndex(p => p.src === activePhoto.src);
   if (currentIndex < 0) currentIndex = 0;
 
+  const prevActive = document.activeElement;
+
   let dialog = document.querySelector('#photo-view');
   if (!dialog) {
     dialog = document.createElement('dialog');
@@ -24,6 +59,12 @@ function openLightbox(activePhoto, list) {
     dialog.className = 'ag-lightbox';
     document.body.append(dialog);
   }
+
+  dialog.addEventListener('close', () => {
+    if (prevActive && typeof prevActive.focus === 'function') {
+      try { prevActive.focus(); } catch {}
+    }
+  }, { once: true });
 
   function renderSlide(index) {
     currentIndex = (index + photos.length) % photos.length;
@@ -129,6 +170,9 @@ function openLightbox(activePhoto, list) {
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
       renderSlide(currentIndex + 1);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      dialog.close();
     }
   };
 
@@ -870,7 +914,15 @@ function renderModernFacultyPage(sheet, d) {
     }
   }
 
-  searchInput.addEventListener('input', applyFilter);
+  const debouncedApplyFilter = debounce(applyFilter, 250);
+  searchInput.addEventListener('input', debouncedApplyFilter);
+  searchInput.addEventListener('search', applyFilter);
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      applyFilter();
+    }
+  });
 
   sheet.replaceChildren(container);
 }

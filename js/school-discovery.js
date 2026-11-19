@@ -29,7 +29,15 @@ export async function renderSchoolDirectory(sheet) {
         for(const s of entries){const li=make('li',null,'directory-school');const href=safeWebsite(s.website),body=href?anchor(s.location+' ↗',href):make('strong',s.location);body.classList.add('directory-school-name');li.append(body);const address=make('address',s.address||[s.location,s.mandal?s.mandal+' Mandal':null,s.district+' District','Telangana'].filter(Boolean).join(', '),'directory-address');li.append(address);const url=href?anchor(href,href):make('span',label('Website link not available','వెబ్‌సైట్ లింక్ అందుబాటులో లేదు','वेबसाइट लिंक उपलब्ध नहीं'));url.className=href?'directory-domain':'directory-unavailable';li.append(url);grid.append(li);}
         group.append(heading,grid);results.append(group);
       }
-    };search.addEventListener('input',fill);select.addEventListener('change',fill);only.addEventListener('change',fill);fill();
+    };
+    const debouncedFill = (typeof window !== 'undefined' && typeof window.debounce === 'function')
+      ? window.debounce(fill, 250)
+      : ((fn, ms = 250) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; })(fill, 250);
+    search.addEventListener('input', debouncedFill);
+    search.addEventListener('search', fill);
+    select.addEventListener('change', fill);
+    only.addEventListener('change', fill);
+    fill();
   } catch {count.textContent=label('Directory could not be loaded. Please try again.','డైరెక్టరీ లోడ్ కాలేదు. మళ్లీ ప్రయత్నించండి.','निर्देशिका लोड नहीं हुई। फिर प्रयास करें।');results.append(anchor('View source directory ↗','https://telanganamodelschool.com/schools'));}
 }
 if(typeof schoolDirectoryPage==='function')schoolDirectoryPage=renderSchoolDirectory;
