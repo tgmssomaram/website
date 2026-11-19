@@ -14,19 +14,9 @@
       "Phd in chemistry, B.Ed."
     ],
     [
-      "Ch Mahendar",
-      "PGT Mathematics / Mathematics",
+      "B.Kumar",
+      "Vice principal / Botany",
       "M.Sc., B.Ed."
-    ],
-    [
-      "Jamalapuram Ramakrishna",
-      "PGT Economics / Economics",
-      "M.Sc., Town Planning, SET"
-    ],
-    [
-      "Boora Saidaiah Goud",
-      "PGT Civics / Civics",
-      "M.A., B.Ed."
     ],
     [
       "Bandi Saidulu",
@@ -34,103 +24,14 @@
       "M.Sc., B.Ed., SET"
     ],
     [
-      "Vutukuri Ravinder Reddy",
-      "PGT Chemistry / Chemistry",
-      "M.Sc., B.Ed."
-    ],
-    [
-      "Pokala Venkateswara Rao",
-      "PGT Zoology / Zoology",
-      "M.Sc., B.Ed."
-    ],
-    [
-      "Shaik Sharief",
-      "PGT Physics / Physics",
-      "M.Sc., B.Ed."
-    ],
-    [
-      "Shaik Jani",
-      "PGT English / English",
-      "M.A., B.Ed."
-    ],
-    [
-      "Bommaganti Sushmitha",
-      "PGT Mathematics / Mathematics",
-      "M.Sc., B.Ed."
-    ],
-    [
-      "Chandala Vani Sree",
-      "PGT Telugu / Telugu",
-      "M.A., B.Ed."
-    ],
-    [
-      "Shaik Jakir Hussain",
-      "PGT Telugu / Telugu",
-      "M.A., B.Ed."
-    ],
-    [
       "Kondeti Saidulu",
       "PGT English / English",
       "M.A., B.Ed."
     ]
   ],
-  "guest": [
-    [
-      "Sk. Rajiya",
-      "TGT Hindi",
-      "M.A., HPT"
-    ],
-    [
-      "Ch. Ramesh",
-      "TGT English",
-      "M.A., B.Ed."
-    ],
-    [
-      "M. Venkateswarlu",
-      "TGT Science",
-      "M.Sc., B.Ed."
-    ],
-    [
-      "D. Renuka",
-      "PGT Mathematics",
-      "M.Sc., B.Ed."
-    ],
-    [
-      "Ch. Ramesh",
-      "PGT Commerce",
-      "M.Com., B.Ed."
-    ]
-  ],
-  "vocational": [
-    [
-      "K. Lakshmi",
-      "Media and Entertainment",
-      "B.Com. (Computers), DTP, PGDCA, Animation"
-    ],
-    [
-      "E. Vijaya Durga",
-      "Health Care",
-      "GNM Nursing"
-    ]
-  ],
-  "support": [
-    [
-      "Narra Kavitha",
-      "Computer Operator"
-    ],
-    [
-      "Shaik Jan Pasha",
-      "Physical Director (PD)"
-    ],
-    [
-      "Bobbili Padma",
-      "Office Subordinate"
-    ],
-    [
-      "Kolukulapalli Pullaiah",
-      "Night Watchman"
-    ]
-  ],
+  "guest": [],
+  "vocational": [],
+  "support": [],
   "gallery": [
     {
       "src": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/gallery/1794657019580-1.dr-b-sampath-kumar.jpeg",
@@ -170,45 +71,17 @@
       "qualification": "Phd in chemistry, B.Ed.",
       "photo_url": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg",
       "order_index": 0,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
+      "is_active": true
     },
     {
       "id": "60b5d262-af6e-4961-b65b-5b2d40d146d7",
-      "name": "Ch Mahendar",
-      "designation": "PGT Mathematics",
-      "subject": "Mathematics",
+      "name": "B.Kumar",
+      "designation": "Vice principal",
+      "subject": "Botany",
       "qualification": "M.Sc., B.Ed.",
       "photo_url": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656968120-7.-ch-mahender.jpeg",
       "order_index": 1,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "78566720-7905-4b02-84fd-75829b1b52b4",
-      "name": "Jamalapuram Ramakrishna",
-      "designation": "PGT Economics",
-      "subject": "Economics",
-      "qualification": "M.Sc., Town Planning, SET",
-      "photo_url": null,
-      "order_index": 2,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "6c8003fb-562d-47f8-a2b0-ed7d2dc2e85e",
-      "name": "Boora Saidaiah Goud",
-      "designation": "PGT Civics",
-      "subject": "Civics",
-      "qualification": "M.A., B.Ed.",
-      "photo_url": null,
-      "order_index": 3,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
+      "is_active": true
     },
     {
       "id": "0d58d520-8f19-457e-94dd-09b7ccfa9598",
@@ -218,93 +91,7 @@
       "qualification": "M.Sc., B.Ed., SET",
       "photo_url": null,
       "order_index": 4,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "9046a53f-ee04-4a87-a79a-78b7802b5345",
-      "name": "Vutukuri Ravinder Reddy",
-      "designation": "PGT Chemistry",
-      "subject": "Chemistry",
-      "qualification": "M.Sc., B.Ed.",
-      "photo_url": null,
-      "order_index": 5,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "502c1e95-29d4-4933-ade9-7873b6756d5a",
-      "name": "Pokala Venkateswara Rao",
-      "designation": "PGT Zoology",
-      "subject": "Zoology",
-      "qualification": "M.Sc., B.Ed.",
-      "photo_url": null,
-      "order_index": 6,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "cc8f73b3-f10f-4537-821e-33f59e37121c",
-      "name": "Shaik Sharief",
-      "designation": "PGT Physics",
-      "subject": "Physics",
-      "qualification": "M.Sc., B.Ed.",
-      "photo_url": null,
-      "order_index": 7,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "590a9c6e-a367-4c2a-8395-ec7f9401554e",
-      "name": "Shaik Jani",
-      "designation": "PGT English",
-      "subject": "English",
-      "qualification": "M.A., B.Ed.",
-      "photo_url": null,
-      "order_index": 8,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "24c8fb47-15fb-4389-8e83-348a066baeb5",
-      "name": "Bommaganti Sushmitha",
-      "designation": "PGT Mathematics",
-      "subject": "Mathematics",
-      "qualification": "M.Sc., B.Ed.",
-      "photo_url": null,
-      "order_index": 9,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "63b94baf-d3d4-40c4-9934-70ae31446849",
-      "name": "Chandala Vani Sree",
-      "designation": "PGT Telugu",
-      "subject": "Telugu",
-      "qualification": "M.A., B.Ed.",
-      "photo_url": null,
-      "order_index": 10,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
-    },
-    {
-      "id": "9f1ce427-4177-4d66-a506-f92c3dbcf6c4",
-      "name": "Shaik Jakir Hussain",
-      "designation": "PGT Telugu",
-      "subject": "Telugu",
-      "qualification": "M.A., B.Ed.",
-      "photo_url": null,
-      "order_index": 11,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
+      "is_active": true
     },
     {
       "id": "a8140954-2c86-4f05-9563-196001e2dcd1",
@@ -314,14 +101,12 @@
       "qualification": "M.A., B.Ed.",
       "photo_url": null,
       "order_index": 12,
-      "is_active": true,
-      "created_at": "2026-11-14T06:53:28.118648+00:00",
-      "updated_at": "2026-11-14T06:53:28.118648+00:00"
+      "is_active": true
     }
   ],
   "staffPhotos": {
-    "Ch Mahendar": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656968120-7.-ch-mahender.jpeg",
-    "Dr.Bandari Sampath Kumar": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg"
+    "Dr.Bandari Sampath Kumar": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg",
+    "B.Kumar": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656968120-7.-ch-mahender.jpeg"
   },
   "principalPhoto": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg",
   "strength": {

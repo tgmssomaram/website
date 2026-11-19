@@ -16,13 +16,20 @@ function renderNews(target){
   const bar=target;
   const isFlash=bar.dataset.newsKind==='flash';
   const isLatest=bar.dataset.newsKind==='latest';
+  if(isLatest){
+    bar.style.display='none';
+    bar.replaceChildren();
+    if(bar.parentNode) bar.remove();
+    return;
+  }
   const validFlash=(Array.isArray(schoolData?.flashNews)?schoolData.flashNews:[]).filter(n=>n&&n.title&&n.title.trim()&&!String(n.id).startsWith('somaram-welcome-'));
   const validNotices=(Array.isArray(schoolData?.notices)?schoolData.notices:[]).filter(n=>n&&n.title&&n.title.trim()&&!String(n.id).startsWith('somaram-welcome-'));
-  let items=isFlash?validFlash:(isLatest?validNotices:(validNotices.length?validNotices:validFlash));
+  let items=isFlash?validFlash:(validNotices.length?validNotices:validFlash);
 
   if(!items.length){
     bar.style.display='none';
     bar.replaceChildren();
+    if(bar.parentNode) bar.remove();
     return;
   }
 

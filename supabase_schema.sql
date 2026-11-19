@@ -184,13 +184,24 @@ alter table public.student_strength add column if not exists updated_at timestam
 alter table public.gallery_items add column if not exists title text;
 alter table public.gallery_items add column if not exists image_url text;
 alter table public.gallery_items add column if not exists category text not null default 'Campus Gallery';
-alter table public.gallery_items add column if not exists gallery_type text not null default 'campus';
 alter table public.gallery_items add column if not exists caption text;
 alter table public.gallery_items add column if not exists order_index integer not null default 0;
 alter table public.gallery_items add column if not exists is_active boolean not null default true;
 alter table public.gallery_items add column if not exists created_at timestamp with time zone default timezone('utc'::text, now()) not null;
 alter table public.gallery_items add column if not exists updated_at timestamp with time zone default timezone('utc'::text, now()) not null;
-update public.gallery_items set gallery_type = 'campus' where gallery_type is null;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_schema = 'public' 
+    AND table_name = 'gallery_items' 
+    AND column_name = 'gallery_type'
+  ) THEN
+    ALTER TABLE public.gallery_items ADD COLUMN gallery_type text NOT NULL DEFAULT 'campus';
+  END IF;
+  EXECUTE 'UPDATE public.gallery_items SET gallery_type = ''campus'' WHERE gallery_type IS NULL';
+END $$;
 
 alter table public.faculty add column if not exists name text;
 alter table public.faculty add column if not exists designation text;
@@ -569,7 +580,12 @@ create policy "admin_users_service_role" on public.admin_users
 -- --------------------------------------------------------------
 -- Indexes for Performance
 -- --------------------------------------------------------------
-create index if not exists idx_gallery_type_active on public.gallery_items (gallery_type, is_active);
+DO $$
+BEGIN
+  EXECUTE 'CREATE INDEX IF NOT EXISTS idx_gallery_type_active ON public.gallery_items (gallery_type, is_active)';
+EXCEPTION WHEN OTHERS THEN
+  NULL;
+END $$;
 create index if not exists idx_gallery_category on public.gallery_items (category);
 create index if not exists idx_student_strength_year on public.student_strength (academic_year, group_type);
 create index if not exists idx_faculty_order on public.faculty (order_index);
@@ -606,15 +622,6 @@ insert into public.student_strength (academic_year, group_type, class_name, boys
     ('2026–27', 'intermediate_2', 'MPC', 16, 33, 10),
     ('2026–27', 'intermediate_2', 'BiPC', 0, 39, 11),
     ('2026–27', 'intermediate_2', 'CEC', 15, 11, 12)
-on conflict do nothing;
-
--- Seed Gallery Items (Campus Gallery vs School Photo Gallery)
-insert into public.gallery_items (title, image_url, category, gallery_type, caption, order_index, is_active) values
-    ('TGMS Somaram Campus Main Building', 'images/munagala-campus-blue-sky.jpg', 'Campus Gallery', 'campus', 'State-of-the-art Model School building and campus grounds at Somaram.', 1, true),
-    ('Parent–Teacher Orientation Meeting', 'images/parents-meeting.jpg', 'School Photo Gallery', 'school', 'Interactive session with parents discussing academic development.', 2, true),
-    ('Annual Yoga & Wellness Session', 'images/yoga-session.jpg', 'School Photo Gallery', 'school', 'Students participating in morning yoga and physical well-being activities.', 3, true),
-    ('Interactive Classroom & Staff Discussion', 'images/meeting-address.jpg', 'School Photo Gallery', 'school', 'Faculty and leadership addressing parents during the term review.', 4, true),
-    ('Community & Parent Participation', 'images/parents-participation.jpg', 'School Photo Gallery', 'school', 'Parents engaging actively in school community initiatives.', 5, true)
 on conflict do nothing;
 
 -- Seed Default Admin User

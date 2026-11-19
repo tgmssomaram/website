@@ -59,7 +59,7 @@ export default async function handler(req, res) {
 
         // Live Faculty Sync
         if (facultyRes.data && facultyRes.data.length > 0) {
-          const facultyRows = facultyRes.data;
+          const facultyRows = facultyRes.data.filter(f => f && f.is_active !== false);
           profileValues.facultyList = facultyRows;
           profileValues.faculty = facultyRows.map(f => [
             f.name,
@@ -82,6 +82,11 @@ export default async function handler(req, res) {
             if (princ.photo_url) profileValues.principalPhoto = princ.photo_url;
           }
         }
+
+        // Purge any dummy or mock faculty/staff subcategories
+        profileValues.guest = [];
+        profileValues.vocational = [];
+        profileValues.support = [];
 
         // Live Gallery Sync
         if (Array.isArray(galleryRes.data)) {
