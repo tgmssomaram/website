@@ -318,16 +318,12 @@ footer.munagala-site-footer {
   margin: 40px 0 0 0 !important;
   border-radius: 0 !important;
   box-sizing: border-box !important;
-  padding-left: var(--site-side-padding) !important;
-  padding-right: var(--site-side-padding) !important;
-  padding-top: 36px !important;
-  padding-bottom: 30px !important;
-  background: #ffffff !important;
-  border-top: 1px solid rgba(18, 77, 64, 0.12) !important;
-  display: grid !important;
-  grid-template-columns: 1fr auto !important;
-  align-items: center !important;
-  gap: 20px !important;
+  padding: 44px clamp(20px, 5vw, 60px) 28px !important;
+  background: linear-gradient(180deg, #07221b 0%, #051914 100%) !important;
+  color: #e5f2eb !important;
+  border-top: 3px solid #10b981 !important;
+  display: block !important;
+  position: relative !important;
 }
 
 /* Floating spatial background mesh orbs */
@@ -876,18 +872,8 @@ footer.munagala-site-footer {
 
   footer,
   footer.munagala-site-footer {
-    grid-template-columns: 1fr !important;
-    text-align: center !important;
-    gap: 16px !important;
-  }
-  footer > div:nth-child(2) {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 10px !important;
-  }
-  footer a, footer button {
-    margin: 0 !important;
+    display: block !important;
+    text-align: left !important;
   }
 }
 

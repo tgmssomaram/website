@@ -15,7 +15,7 @@
         }
       }
 
-      if (footer.querySelector("[data-developer-name='Chippa Rishikesh']")) continue;
+      if (footer.querySelector("[data-developer-name='Chippa Rishikesh']") || footer.querySelector('.school-footer-bottom')) continue;
 
       // Clean up previous developer credits
       footer.querySelectorAll('.developer-credit, [data-developer-name]').forEach(e => e.remove());

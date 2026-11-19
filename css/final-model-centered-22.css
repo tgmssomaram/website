@@ -32,8 +32,8 @@ body.final-school-model{--blue:#124d40;--ink:#193d34;--line:#d3e1da;background:#
 /* Large English school identity and clearly defined, equal-sized tab buttons. */
 .model-menu-school-name strong{font-size:clamp(30px,2.8vw,40px);line-height:1.25;font-weight:800;letter-spacing:-.4px}.model-menu-school-name>span{font-size:clamp(23px,2vw,29px);font-weight:750}.final-school-model .masthead>#menu{grid-auto-rows:44px;gap:6px;padding:8px;align-items:stretch}.final-school-model .masthead>#menu>a,.final-school-model .masthead>#menu>.school-dropdown>a{display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:100%!important;height:44px!important;min-height:44px!important;max-height:44px!important;margin:0!important;padding:5px 4px!important;background:#eef4ef!important;color:#124d40!important;border:1px solid #c7d9cd!important;border-radius:5px!important;box-shadow:none!important;font-size:11px!important;line-height:1.2!important;font-weight:650!important;text-align:center!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;text-shadow:none!important}.final-school-model .masthead>#menu>.school-dropdown{height:44px!important;margin:0!important}.final-school-model .masthead>#menu>.school-dropdown>a{padding-right:16px!important}.final-school-model .masthead>#menu a[aria-current=page]{background:#d4e7d8!important;color:#103d30!important;border:2px solid #76aa88!important;outline:none!important}.final-school-model .masthead>#menu .school-dropdown-toggle{color:#124d40!important;height:44px!important;width:17px!important;top:0!important;right:0!important}.final-school-model .masthead>#menu>a:hover,.final-school-model .masthead>#menu>.school-dropdown>a:hover{background:#d4e7d8!important}@media(max-width:700px){.final-school-model .masthead>#menu{grid-auto-rows:44px;grid-template-columns:repeat(10,100px)}.model-menu-school-name strong{font-size:27px}.model-menu-school-name>span{font-size:22px}}@media(max-width:400px){.model-menu-school-name strong{font-size:24px}.model-menu-school-name>span{font-size:20px}}
 @media(max-width:700px){.final-school-model .masthead>#menu{overflow:visible!important;min-width:0;max-width:100%}}
-/* Navigation: exactly 6 tabs (Home, Our School, Faculty, Students, Campus Gallery, Contact Us) */
-.final-school-model .masthead>#menu{display:grid!important;grid-template-columns:repeat(6,minmax(110px,1fr))!important;grid-template-rows:38px!important;grid-auto-rows:38px!important;gap:6px!important;padding:8px!important;overflow:visible!important}.final-school-model .masthead>#menu>a{height:38px!important;min-height:38px!important;max-height:38px!important;box-sizing:border-box!important;font-size:13px!important;white-space:nowrap!important;display:flex!important;align-items:center!important;justify-content:center!important}.final-school-model .masthead>#menu a[aria-current=page]{background:#0b382a!important;color:#fff!important;border:1px solid #a8c2a5!important}@media(max-width:850px){.final-school-model .masthead>#menu{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:auto!important;grid-auto-rows:38px!important}}@media(max-width:520px){.final-school-model .masthead>#menu{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto!important;grid-auto-rows:36px!important}.final-school-model .masthead>#menu>a{font-size:12px!important;min-height:36px!important;height:36px!important}}
+/* Navigation: 8 tabs including 194 Schools, Student Portal, Apply */
+.final-school-model .masthead>#menu{display:grid!important;grid-template-columns:repeat(8,minmax(0,1fr))!important;grid-template-rows:38px!important;grid-auto-rows:38px!important;gap:6px!important;padding:8px!important;overflow:visible!important}.final-school-model .masthead>#menu>a{height:38px!important;min-height:38px!important;max-height:38px!important;box-sizing:border-box!important;font-size:12.5px!important;white-space:nowrap!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:4px 6px!important}.final-school-model .masthead>#menu a[aria-current=page]{background:#0b382a!important;color:#fff!important;border:1px solid #a8c2a5!important}@media(max-width:1150px){.final-school-model .masthead>#menu{grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:auto!important;grid-auto-rows:38px!important}}@media(max-width:700px){.final-school-model .masthead>#menu{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto!important;grid-auto-rows:36px!important}.final-school-model .masthead>#menu>a{font-size:12px!important;min-height:36px!important;height:36px!important}}
 @media(max-width:700px){.model-school-media{grid-template-columns:1fr;padding:20px 12px 8px;gap:12px}.model-school-media .model-school-overview{padding:16px}.model-school-media .model-live-gallery .home-gallery-track img{aspect-ratio:16/10}}
 /* Compact gallery viewport with supporting photographs beside it. */
 .model-school-media{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:start;padding:20px 32px;gap:22px}.model-school-media .model-live-gallery{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;margin:0;align-self:start}.model-school-media .model-live-gallery h2{font-size:22px;margin:0 0 12px}.model-school-media .illustration{margin:0;max-width:none}.model-school-media .home-gallery-viewport{aspect-ratio:16/9!important;border:0;border-radius:8px;box-shadow:none;background:#eff4ef}.model-school-media .home-gallery-track{height:100%}.model-school-media .illustration .home-gallery-track img{height:100%!important;aspect-ratio:auto!important;object-fit:contain!important}.model-school-media .illustration small{margin-top:7px;font-size:11px}.model-school-media .home-gallery-pause{margin-top:6px;padding:5px 10px}.model-school-media .model-photo-highlights{padding:0;min-width:0}.model-school-media .model-photo-highlights h2{font-size:22px;margin:0 0 12px}.model-school-media .model-photo-highlights .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}.model-school-media .model-photo-highlights img{aspect-ratio:16/9;height:auto;object-fit:cover}.model-school-media .model-photo-highlights .photo-card h3{font-size:11px;line-height:1.3;margin:7px}.model-school-media .model-photo-highlights .photo-card{border-radius:7px}
@@ -54,3 +54,158 @@ body.final-school-model{--blue:#124d40;--ink:#193d34;--line:#d3e1da;background:#
 .final-school-model .model-menu-school-name{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;width:100%!important;padding:0!important;margin:0!important}
 .final-school-model .masthead>#menu{width:100%!important;max-width:100%!important}
 @media(max-width:700px){.final-school-model .masthead{padding:10px 8px 6px!important}.final-school-model .model-menu-school-name{text-align:center!important;align-items:center!important}}
+
+/* Highly Legible, Spacious, Beautiful School Footer */
+footer,
+footer.munagala-site-footer {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 44px 0 0 0 !important;
+  padding: 48px clamp(20px, 5vw, 64px) 32px !important;
+  background: linear-gradient(180deg, #07221b 0%, #051914 100%) !important;
+  color: #e5f2eb !important;
+  border-top: 3px solid #10b981 !important;
+  position: relative !important;
+}
+
+.school-footer-grid {
+  display: grid !important;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.4fr !important;
+  gap: 36px !important;
+  max-width: 1240px !important;
+  margin: 0 auto 36px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.school-footer-grid section {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 9px !important;
+  min-width: 0 !important;
+}
+
+.school-footer-grid h2 {
+  color: #ffdb72 !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
+  margin: 0 0 14px !important;
+  border-bottom: 2px solid rgba(255, 219, 114, 0.25) !important;
+  padding-bottom: 6px !important;
+  text-transform: uppercase !important;
+}
+
+.school-footer-office {
+  display: flex !important;
+  gap: 16px !important;
+  align-items: flex-start !important;
+}
+
+.school-footer-office img {
+  width: 72px !important;
+  height: 72px !important;
+  flex-shrink: 0 !important;
+  object-fit: contain !important;
+}
+
+.school-footer-grid p,
+.school-footer-grid a,
+.school-footer-grid button {
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  white-space: normal !important;
+  color: #d1fae5 !important;
+  text-decoration: none !important;
+  background: none !important;
+  border: 0 !important;
+  padding: 2px 0 !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+
+.school-footer-grid a:hover,
+.school-footer-grid button:hover {
+  color: #ffdb72 !important;
+  transform: translateX(2px) !important;
+}
+
+.school-footer-grid small {
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  margin-top: 8px !important;
+}
+
+.school-footer-bottom {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding-top: 24px !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+.school-footer-bottom p {
+  margin: 2px 0 !important;
+  font-size: 13px !important;
+  color: #a7f3d0 !important;
+}
+
+.school-footer-bottom strong {
+  color: #fef3c7 !important;
+  font-size: 15px !important;
+}
+
+.school-footer-bottom a {
+  color: #6ee7b7 !important;
+  text-decoration: underline !important;
+  font-size: 13px !important;
+}
+
+/* Suppress unwanted elements & duplicate credits */
+footer > .developer-credit,
+.school-motion-toggle,
+.home-gallery-pause,
+.header-quick-actions,
+.header-ai {
+  display: none !important;
+}
+
+/* Distinct Highlight for Apply ↗ in Navigation Bar */
+.final-school-model .masthead>#menu>a[href="#admissions"] {
+  background: #ffdb72 !important;
+  color: #0b382a !important;
+  font-weight: 800 !important;
+  border: 1px solid #f6c845 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+.final-school-model .masthead>#menu>a[href="#admissions"]:hover {
+  background: #ffe58f !important;
+  color: #062319 !important;
+}
+
+@media (max-width: 960px) {
+  .school-footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+  }
+}
+@media (max-width: 600px) {
+  .school-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .school-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+}

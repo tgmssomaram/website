@@ -32,14 +32,7 @@
   "guest": [],
   "vocational": [],
   "support": [],
-  "gallery": [
-    {
-      "src": "https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/gallery/1794657019580-1.dr-b-sampath-kumar.jpeg",
-      "title": "abc",
-      "te": "abc",
-      "category": "School Activities"
-    }
-  ],
+  "gallery": [],
   "mapUrl": "https://maps.google.com/maps?q=18.240000,79.300000",
   "coordinates": {
     "lat": 18.24,
