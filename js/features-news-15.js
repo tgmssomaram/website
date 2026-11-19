@@ -61,7 +61,37 @@ function renderNews(target){
 }
 function calendarPage(sheet){sectionTitle(sheet,lang==='te'?'విద్యా క్యాలెండర్ 2026–27':'Academic Calendar 2026–27','Shared Telangana Model Schools calendar · '+calendarSourceStatus);const actions=node('div',null,'actions');actions.append(link('Open Google Calendar ↗',GOOGLE_CALENDAR_URL,'action'),link('Subscribe to calendar ↗','https://calendar.google.com/calendar/u/0/r?cid='+encodeURIComponent(GOOGLE_CALENDAR_ID),'action secondary'),link('Download calendar (Excel)','/downloads/Academic_Calendar_2026-27_DATEWISE.xlsx','action secondary'),link('Download Google calendar (ICS)',schoolData.calendarFeedUrl,'action secondary'));sheet.append(actions);const controls=node('div',null,'filters');const month=node('select');month.setAttribute('aria-label','Filter calendar month');month.append(node('option','All months'));month.firstChild.value='';for(let i=0;i<12;i++){const o=node('option',new Intl.DateTimeFormat(lang,{month:'long'}).format(new Date(2026,i,1)));o.value=String(i+1).padStart(2,'0');month.append(o);}const search=node('input');search.placeholder='Search events';search.setAttribute('aria-label','Search calendar events');controls.append(month,search);sheet.append(controls);const list=node('div',null,'calendar-events');const fill=()=>{list.replaceChildren();const filtered=academicEvents.filter(e=>(!month.value||isoDate(e.date).slice(5,7)===month.value)&&((e.event||'')+' '+(e.eventTe||'')).toLowerCase().includes(search.value.toLowerCase()));sheet.querySelector('.calendar-count')?.remove();controls.after(node('p',filtered.length+' dated events','calendar-count'));for(const e of filtered){const row=node('article',null,'calendar-event');row.append(node('time',e.date),node('div',lang==='te'?e.eventTe||e.event:e.event));list.append(row);}};month.addEventListener('change',fill);search.addEventListener('input',fill);sheet.append(list);fill();}
 function booksPage(sheet){sectionTitle(sheet,lang==='te'?'పుస్తకాలు డౌన్‌లోడ్':'Books Download','Same public textbook collection used on the existing school websites. Publisher controls availability.');sheet.append(link('Download original textbook list (PDF)','/downloads/textbooks-2025-26-draft.pdf','resource'));const controls=node('div',null,'filters');const level=node('select');level.setAttribute('aria-label','Class');level.append(node('option','All classes'));level.firstChild.value='';for(let n=1;n<=10;n++){const o=node('option','Class '+n);o.value=String(n);level.append(o);}const search=node('input');search.placeholder='Search book code or subject';search.setAttribute('aria-label','Search books');controls.append(level,search);const list=node('div',null,'book-grid');const fill=()=>{const rows=bookList.filter(b=>(!level.value||b.classLevel===level.value)&&b.label.toLowerCase().includes(search.value.toLowerCase()));list.replaceChildren(...rows.map(b=>link('Class '+b.classLevel+' · '+b.label+' ↗',safeUrl(b.url)||'#books','resource')));};level.addEventListener('change',fill);search.addEventListener('input',fill);sheet.append(controls,list);fill();completeLearningLibrary(sheet).catch(()=>{});}
-function resourcesPage(sheet,id){sectionTitle(sheet,id==='portal'?'Student Portal / విద్యార్థుల పోర్టల్':'Downloads / డౌన్‌లోడ్స్',id==='portal'?'Official learning resources, textbooks and exam preparation.':'Academic calendar, textbook list and school-published download links.');const links=id==='portal'?[['SCERT Telangana — State Textbooks','https://scert.telangana.gov.in/'],['NCERT Textbooks · Classes I–XII','https://ncert.nic.in/textbook.php'],['NCERT Exemplar / Objective Practice','https://ncert.nic.in/exemplar-problems.php?ln=en'],['NEET UG — Official portal','https://neet.nta.nic.in/'],['JEE Main — Official portal','https://jeemain.nta.nic.in/'],['TG EAPCET — Official portal','https://eapcet.tgche.ac.in/'],['NTA Abhyas — Practice tests','https://www.nta.ac.in/Abhyas/started']]:[['Academic Calendar 2026–27 (Excel)','/downloads/Academic_Calendar_2026-27_DATEWISE.xlsx'],['Textbook list (PDF)','/downloads/textbooks-2025-26-draft.pdf'],['Google Calendar ↗',GOOGLE_CALENDAR_URL],...(schoolData.downloads||[]).filter(x=>safeUrl(x.url)).map(x=>[x.title,x.url])];const resourceGrid=node('div',null,id==='portal'?'portal-link-grid':'download-link-grid');for(const [title,url]of links)resourceGrid.append(link(title,url,'resource'));sheet.append(resourceGrid);if(id==='portal'){resourceGrid.append(link('Browse all textbook links','#books','resource'));completeLearningLibrary(sheet).catch(()=>{});}}
+function resourcesPage(sheet,id){
+  const isPortal = id === 'portal', isTe = lang === 'te', isHi = lang === 'hi';
+  const heading = isPortal
+    ? (isTe ? 'విద్యార్థుల పోర్టల్' : (isHi ? 'विद्यार्थी पोर्टल' : 'Student Portal / విద్యార్థుల పోర్టల్'))
+    : (isTe ? 'డౌన్‌లోడ్స్' : (isHi ? 'डाउनलोड' : 'Downloads / డౌన్‌లోడ్స్'));
+  const subheading = isPortal
+    ? (isTe ? 'అధికారిక అభ్యాస వనరులు, పాఠ్యపుస్తకాలు మరియు పరీక్షల సన్నద్ధత.' : (isHi ? 'आधिकारिक अध्ययन संसाधन, पाठ्यपुस्तकें और परीक्षा की तैयारी।' : 'Official learning resources, textbooks and exam preparation.'))
+    : (isTe ? 'విద్యా క్యాలెండర్, పాఠ్యపుస్తకాల జాబితా మరియు పాఠశాల డౌన్‌లోడ్ లింకులు.' : (isHi ? 'शैक्षणिक कैलेंडर, पाठ्यपुस्तक सूची और स्कूल डाउनलोड लिंक।' : 'Academic calendar, textbook list and school-published download links.'));
+  sectionTitle(sheet, heading, subheading);
+  const links = isPortal ? [
+    ['SCERT Telangana — State Textbooks', 'https://scert.telangana.gov.in/'],
+    ['NCERT Textbooks · Classes I–XII', 'https://ncert.nic.in/textbook.php'],
+    ['NCERT Exemplar / Objective Practice', 'https://ncert.nic.in/exemplar-problems.php?ln=en'],
+    ['NEET UG — Official portal', 'https://neet.nta.nic.in/'],
+    ['JEE Main — Official portal', 'https://jeemain.nta.nic.in/'],
+    ['TG EAPCET — Official portal', 'https://eapcet.tgche.ac.in/'],
+    ['NTA Abhyas — Practice tests', 'https://www.nta.ac.in/Abhyas/started']
+  ] : [
+    ['Academic Calendar 2026–27 (Excel)', '/downloads/Academic_Calendar_2026-27_DATEWISE.xlsx'],
+    ['Textbook list (PDF)', '/downloads/textbooks-2025-26-draft.pdf'],
+    ['Google Calendar ↗', GOOGLE_CALENDAR_URL],
+    ...(schoolData.downloads || []).filter(x => safeUrl(x.url)).map(x => [x.title, x.url])
+  ];
+  const resourceGrid = node('div', null, isPortal ? 'portal-link-grid' : 'download-link-grid');
+  for (const [title, url] of links) resourceGrid.append(link(title, url, 'resource resource-portal-tile'));
+  sheet.append(resourceGrid);
+  if (isPortal) {
+    resourceGrid.append(link(isTe ? 'అన్ని పాఠ్యపుస్తకాల లింకులు బ్రౌజ్ చేయండి ↗' : (isHi ? 'सभी पाठ्यपुस्तक लिंक देखें ↗' : 'Browse all textbook links ↗'), '#books', 'resource resource-portal-tile browse-all-tile'));
+    completeLearningLibrary(sheet).catch(() => {});
+  }
+}
 function addMap(sheet){const card=node('section',null,'map-card');card.append(node('h3','Official School Location · TGMS Somaram'));const actions=node('div',null,'actions');actions.append(link('Open in Google Maps ↗',schoolData.mapUrl,'action'),link('Get Directions ↗','https://www.google.com/maps/dir/?api=1&destination=18.240000,79.300000','action secondary'));card.append(actions);const frame=node('iframe');frame.title='TGMS Somaram campus map';frame.src='https://maps.google.com/maps?q=18.240000,79.300000&hl=en&z=16&output=embed';frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.allowFullscreen=true;card.append(frame,node('p','18.240000° N, 79.300000° E · Somaram, Saidapur, Karimnagar, Telangana 505490'));sheet.append(card);}
 function field(form,label,value='',type='text'){const wrap=node('label',label),input=node(type==='textarea'?'textarea':'input');if(type!=='textarea')input.type=type;input.value=value;input.maxLength=type==='textarea'?4000:300;wrap.append(input);form.append(wrap);return input;}
 function submitButton(form,label){const b=node('button',label,'action');b.type='submit';form.append(b);return b;}
@@ -241,11 +271,46 @@ function admissionSeatsPanel(){
 }
 
 async function completeLearningLibrary(sheet){
- const [resources,papers]=await Promise.all([fetch('data/learning-resources.json').catch(()=>fetch('/data/learning-resources.json')).then(r=>r.json()),fetch('data/neet-papers.json').catch(()=>fetch('/data/neet-papers.json')).then(r=>r.json())]);
+ const [resources,papers]=await Promise.all([
+  fetch('data/learning-resources.json').catch(()=>fetch('/data/learning-resources.json')).then(r=>r.json()),
+  fetch('data/neet-papers.json').catch(()=>fetch('/data/neet-papers.json')).then(r=>r.json())
+ ]);
  if(!sheet.isConnected)return;
- const section=node('section',null,'complete-learning-library');section.append(node('h3','Books & Competitive Exam Resources'));
- const grid=node('div',null,'book-grid');for(const resource of resources){const card=node('article',null,'resource');card.append(node('h4',resource.title),node('p',resource.te),node('p',resource.description));for(const [label,url]of resource.links)card.append(link(label+' ↗',url,'resource'));grid.append(card);}section.append(grid,node('h3','NEET / AIPMT Previous Papers · 2012–2026'),node('p','Independent archives: AglaSem, Resonance and Target Publications. These are not NTA websites. Download options are provided by the source.'));
- const archive=node('div',null,'book-grid');for(let year=2026;year>=2012;year--){const card=node('article',null,'resource');card.append(node('h4',String(year)));for(const paper of papers.filter(p=>p.year===year))card.append(link(paper.label+' · '+paper.source+' ↗',paper.url,'resource'));archive.append(card);}section.append(archive);sheet.append(section);
+ const isTe = lang === 'te', isHi = lang === 'hi';
+ const section=node('section',null,'complete-learning-library');
+ section.append(node('h3',isTe?'పుస్తకాలు & పోటీ పరీక్షల వనరులు':(isHi?'पुस्तकें और प्रतियोगी परीक्षा संसाधन':'Books & Competitive Exam Resources')));
+ const grid=node('div',null,'book-grid');
+ for(const resource of resources){
+  const card=node('article',null,'resource library-resource-card');
+  const head=node('div',null,'resource-card-header');
+  head.append(node('h4',resource.title));
+  if(resource.te)head.append(node('span',resource.te,'resource-te-badge'));
+  const desc=node('p',resource.description,'resource-desc');
+  const linksWrap=node('div',null,'resource-links');
+  for(const [label,url] of (resource.links||[])){
+    linksWrap.append(link(label+' ↗',url,'resource-link-btn'));
+  }
+  card.append(head,desc,linksWrap);
+  grid.append(card);
+ }
+ const neetTitle = isTe?'NEET / AIPMT మునుపటి ప్రశ్నపత్రాలు · 2012–2026':(isHi?'नीट / एआईपीएमटी पिछले वर्ष के प्रश्न पत्र · 2012–2026':'NEET / AIPMT Previous Papers · 2012–2026');
+ const neetDesc = isTe?'స్వతంత్ర ఆర్కైవ్‌లు: అగ్లాసెమ్, రెజోనెన్స్ మరియు టార్గెట్ పబ్లికేషన్స్. ఇవి ఎన్‌టీఏ వెబ్‌సైట్లు కావు.':'Independent archives: AglaSem, Resonance and Target Publications. These are not NTA websites. Download options are provided by the source.';
+ section.append(grid,node('h3',neetTitle),node('p',neetDesc));
+ const archive=node('div',null,'book-grid neet-archive-grid');
+ for(let year=2026;year>=2012;year--){
+  const yearPapers=papers.filter(p=>p.year===year);
+  if(!yearPapers.length)continue;
+  const card=node('article',null,'resource library-resource-card archive-resource-card');
+  card.append(node('h4',String(year)+' NEET / AIPMT Papers'));
+  const linksWrap=node('div',null,'resource-links');
+  for(const paper of yearPapers){
+    linksWrap.append(link(paper.label+' · '+paper.source+' ↗',paper.url,'resource-link-btn'));
+  }
+  card.append(linksWrap);
+  archive.append(card);
+ }
+ section.append(archive);
+ sheet.append(section);
 }
 
 const INITIAL_STRENGTH={year:'2026–27',groups:[{title:'School · Classes VI–X',rows:[['VI',48,33],['VII',55,21],['VIII',63,34],['IX',51,46],['X',55,39]]},{title:'Junior College · First Year',rows:[['MPC',18,28],['BiPC',4,37],['CEC',15,16],['ACE',7,10]]},{title:'Junior College · Second Year',rows:[['MPC',16,33],['BiPC',0,39],['CEC',15,11]]}],sections:[['IX A',49],['IX B',50],['X A',46],['X B',48],['I CEC',31],['II CEC',25]]};
