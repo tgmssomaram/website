@@ -154,6 +154,19 @@ window.AdminModules.message = {
         window.AdminAPI.showToast('Please select a valid image file', 'error');
         return;
       }
+
+      if (window.AdminCropper && typeof window.AdminCropper.crop === 'function') {
+        var cropped = await window.AdminCropper.crop(file, {
+          title: '✂️ Crop Press / Message Photo',
+          defaultAspect: 'free'
+        });
+        if (!cropped) {
+          fileInput.value = '';
+          return;
+        }
+        file = cropped;
+      }
+
       var reader = new FileReader();
       reader.onload = function(e) {
         previewImg.src = e.target.result;

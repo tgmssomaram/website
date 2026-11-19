@@ -287,6 +287,18 @@ window.AdminModules.gallery = {
         return;
       }
 
+      if (window.AdminCropper && typeof window.AdminCropper.crop === 'function') {
+        var cropped = await window.AdminCropper.crop(file, {
+          title: '✂️ Crop Gallery Photo',
+          defaultAspect: '16:9'
+        });
+        if (!cropped) {
+          fileInput.value = '';
+          return;
+        }
+        file = cropped;
+      }
+
       // Show immediate local preview
       var localReader = new FileReader();
       localReader.onload = function(e) {

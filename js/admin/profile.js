@@ -116,9 +116,21 @@ window.AdminModules.profile = {
     // Image preview hooks
     var princFileInput = document.getElementById('prof-principal-photo-file');
     if (princFileInput) {
-      princFileInput.onchange = function(e) {
+      princFileInput.onchange = async function(e) {
         var file = e.target.files[0];
         if (file) {
+          if (window.AdminCropper && typeof window.AdminCropper.crop === 'function') {
+            var cropped = await window.AdminCropper.crop(file, {
+              title: '✂️ Crop Principal Photo',
+              defaultAspect: '1:1'
+            });
+            if (!cropped) {
+              princFileInput.value = '';
+              return;
+            }
+            file = cropped;
+            princFileInput._croppedFile = cropped;
+          }
           var reader = new FileReader();
           reader.onload = function(evt) {
             var img = document.getElementById('princ-photo-preview');
@@ -131,9 +143,21 @@ window.AdminModules.profile = {
 
     var campusFileInput = document.getElementById('prof-campus-photo-file');
     if (campusFileInput) {
-      campusFileInput.onchange = function(e) {
+      campusFileInput.onchange = async function(e) {
         var file = e.target.files[0];
         if (file) {
+          if (window.AdminCropper && typeof window.AdminCropper.crop === 'function') {
+            var cropped = await window.AdminCropper.crop(file, {
+              title: '✂️ Crop Campus Photo',
+              defaultAspect: '16:9'
+            });
+            if (!cropped) {
+              campusFileInput.value = '';
+              return;
+            }
+            file = cropped;
+            campusFileInput._croppedFile = cropped;
+          }
           var reader = new FileReader();
           reader.onload = function(evt) {
             var img = document.getElementById('campus-photo-preview');
@@ -151,10 +175,11 @@ window.AdminModules.profile = {
       btn.textContent = 'Saving...';
 
       var princPhotoUrl = document.getElementById('prof-principal-photo').value;
-      if (princFileInput && princFileInput.files[0]) {
+      var princFile = (princFileInput && princFileInput._croppedFile) || (princFileInput && princFileInput.files[0]);
+      if (princFile) {
         try {
           btn.textContent = 'Uploading Principal Photo...';
-          var upRes = await window.AdminAPI.uploadImage(princFileInput.files[0], 'faculty');
+          var upRes = await window.AdminAPI.uploadImage(princFile, 'faculty');
           if (upRes && upRes.url) princPhotoUrl = upRes.url;
         } catch (upErr) {
           console.warn('Principal photo upload warning:', upErr);
@@ -162,10 +187,11 @@ window.AdminModules.profile = {
       }
 
       var campusPhotoUrl = document.getElementById('prof-campus-photo').value;
-      if (campusFileInput && campusFileInput.files[0]) {
+      var campusFile = (campusFileInput && campusFileInput._croppedFile) || (campusFileInput && campusFileInput.files[0]);
+      if (campusFile) {
         try {
           btn.textContent = 'Uploading Campus Photo...';
-          var upCampRes = await window.AdminAPI.uploadImage(campusFileInput.files[0], 'campus');
+          var upCampRes = await window.AdminAPI.uploadImage(campusFile, 'campus');
           if (upCampRes && upCampRes.url) campusPhotoUrl = upCampRes.url;
         } catch (upCampErr) {
           console.warn('Campus photo upload warning:', upCampErr);

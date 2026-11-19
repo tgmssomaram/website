@@ -784,8 +784,8 @@ function renderModernFacultyPage(sheet, d) {
   const filterOptions = [
     ['all', lang === 'te' ? 'అందరూ' : (lang === 'hi' ? 'सभी' : 'All')],
     ['role-principal', lang === 'te' ? 'ప్రిన్సిపాల్' : (lang === 'hi' ? 'प्रधानाचार्य' : 'Principal')],
-    ['role-pgt', lang === 'te' ? 'పి.జి.టి (ఇంటర్)' : (lang === 'hi' ? 'पी.जी.टी (इंटर)' : 'PGT (Junior College)')],
-    ['role-tgt', lang === 'te' ? 'టి.జి.టి (హైస్కూల్)' : (lang === 'hi' ? 'टी.जी.टी (हाई स्कूल)' : 'TGT (High School)')],
+    ['role-pgt', lang === 'te' ? 'పి.జి.టి' : (lang === 'hi' ? 'पी.जी.टी' : 'PGT')],
+    ['role-tgt', lang === 'te' ? 'టి.జి.టి' : (lang === 'hi' ? 'टी.जी.टी' : 'TGT')],
     ['role-guest', lang === 'te' ? 'గెస్ట్ అధ్యాపకులు' : (lang === 'hi' ? 'अतिथि शिक्षक' : 'HBT / Guest Faculty')],
     ['role-vocational', lang === 'te' ? 'వృత్తి విద్య' : (lang === 'hi' ? 'व्यावसायिक' : 'Vocational')],
     ['role-staff', lang === 'te' ? 'సిబ్బంది' : (lang === 'hi' ? 'सहायक कर्मचारी' : 'Support Staff')]

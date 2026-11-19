@@ -435,6 +435,18 @@ window.AdminModules.faculty = {
         return;
       }
 
+      if (window.AdminCropper && typeof window.AdminCropper.crop === 'function') {
+        var cropped = await window.AdminCropper.crop(file, {
+          title: '✂️ Crop Faculty Photo',
+          defaultAspect: '1:1'
+        });
+        if (!cropped) {
+          fileInput.value = '';
+          return;
+        }
+        file = cropped;
+      }
+
       var localReader = new FileReader();
       localReader.onload = function(e) {
         previewImg.src = e.target.result;

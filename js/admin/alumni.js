@@ -83,9 +83,21 @@ window.AdminModules.alumni = {
 
     var fileInput = document.getElementById('alm-photo-file');
     if (fileInput) {
-      fileInput.onchange = function(e) {
+      fileInput.onchange = async function(e) {
         var file = e.target.files[0];
         if (file) {
+          if (window.AdminCropper && typeof window.AdminCropper.crop === 'function') {
+            var cropped = await window.AdminCropper.crop(file, {
+              title: '✂️ Crop Alumni Photo',
+              defaultAspect: '1:1'
+            });
+            if (!cropped) {
+              fileInput.value = '';
+              return;
+            }
+            file = cropped;
+            fileInput._croppedFile = cropped;
+          }
           var reader = new FileReader();
           reader.onload = function(evt) {
             var prevBox = document.getElementById('alm-photo-preview');
@@ -115,7 +127,7 @@ window.AdminModules.alumni = {
         var approved = document.getElementById('alm-approved').checked;
         var photoUrl = document.getElementById('alm-photo-url').value;
 
-        var file = fileInput && fileInput.files[0];
+        var file = (fileInput && fileInput._croppedFile) || (fileInput && fileInput.files[0]);
         if (file) {
           try {
             submitBtn.textContent = 'Uploading photo...';
