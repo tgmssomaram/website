@@ -336,6 +336,11 @@ window.AdminModules.gallery = {
         return;
       }
 
+      if (image_url.toLowerCase().includes('/school-media/faculty/') || image_url.toLowerCase().includes('/faculty/')) {
+        alert('Faculty portrait photos cannot be added to Campus Gallery. Please choose a campus or school facility photo.');
+        return;
+      }
+
       var gType = /campus/i.test(category) ? 'campus' : 'school';
       var payload = {
         title: title,

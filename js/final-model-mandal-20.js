@@ -9,11 +9,11 @@
     ['Home','home','హోమ్','होम'],
     ['Our School','school','మా పాఠశాల','हमारा विद्यालय'],
     ['Faculty','faculty','సిబ్బంది','शिक्षक'],
+    ['Campus Gallery','gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],
     ['194 Schools','directory','194 పాఠశాలలు','194 विद्यालय'],
     ['Student Portal','portal','విద్యార్థుల పోర్టల్','छात्र पोर्टल'],
-    ['Apply ↗','admissions','దరఖాస్తు ↗','आवेदन ↗'],
-    ['Campus Gallery','gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],
-    ['Contact Us','contact','సంప్రదించండి','संपर्क करें']
+    ['Contact Us','contact','సంప్రదించండి','संपर्क करें'],
+    ['Apply ↗','admissions','దరఖాస్తు ↗','आवेदन ↗']
   ];
   for(const item of navItems){
     const title=lang==='te'?item[2]:(lang==='hi'?item[3]:item[0]);
@@ -78,13 +78,35 @@
     masthead.append(visibleTabs);
     groupedSchoolNavigation(visibleTabs);
   }
+  function getCleanGallery(gallery, data) {
+    if (!Array.isArray(gallery)) return [];
+    const facultyUrls = new Set();
+    if (Array.isArray(data?.facultyList)) {
+      data.facultyList.forEach(f => { if (f && f.photo_url) facultyUrls.add(String(f.photo_url).trim().toLowerCase()); });
+    }
+    if (data?.principalPhoto) facultyUrls.add(String(data.principalPhoto).trim().toLowerCase());
+    if (data?.staffPhotos) {
+      Object.values(data.staffPhotos).forEach(u => { if (u) facultyUrls.add(String(u).trim().toLowerCase()); });
+    }
+    return gallery.filter(photo => {
+      if (!photo || (!photo.src && !photo.image_url)) return false;
+      const s = String(photo.src || photo.image_url).trim().toLowerCase();
+      if (facultyUrls.has(s)) return false;
+      if (s.includes('/school-media/faculty/') || s.includes('/faculty/')) return false;
+      const meta = ((photo.category || '') + ' ' + (photo.title || '')).toLowerCase();
+      if (/^(faculty|teacher|staff|principal)/i.test(meta)) return false;
+      return true;
+    });
+  }
+
   const isHome=(location.hash.slice(1)||'home')==='home';
   document.body.classList.toggle('model-home',isHome);
   const disclosure=masthead.querySelector('details');if(disclosure){disclosure.querySelectorAll('a').forEach(a=>{if(!a.dataset.closeMenu){a.dataset.closeMenu='true';a.addEventListener('click',()=>disclosure.open=false);}});}
   if(!isHome||!schoolData)return;
+  const cleanGallery = getCleanGallery(schoolData.gallery, schoolData);
   const main=document.querySelector('#main');const oldHero=main.querySelector('.hero');
   if(oldHero){
-    if(Array.isArray(schoolData.gallery)&&schoolData.gallery.length>0){
+    if(cleanGallery.length>0){
       const gallery=oldHero.querySelector('.illustration');
       oldHero.className='model-live-gallery';
       oldHero.replaceChildren(node('h2',lang==='te'?'ఫొటో గ్యాలరీ':'School Photo Gallery'));
@@ -96,12 +118,12 @@
   }
   if(main.querySelector('.model-campus-hero')){
     const highlights=main.querySelector('.model-photo-highlights');
-    if(schoolData.gallery&&Array.isArray(schoolData.gallery)&&schoolData.gallery.length>0){
+    if(cleanGallery.length>0){
       if(highlights){
         const photosGrid=highlights.querySelector('.gallery-grid');
         if(photosGrid){
           photosGrid.replaceChildren();
-          for(const photo of schoolData.gallery.slice(0,6))photosGrid.append(photoCard(photo));
+          for(const photo of cleanGallery.slice(0,6))photosGrid.append(photoCard(photo));
         }
       }
     } else {
@@ -114,20 +136,25 @@
     }
     document.querySelectorAll('.model-latest-news, .news-bulletin-latest, [data-news-kind="latest"]').forEach(el => el.remove());
     const flash=main.querySelector('.model-flash-news');
-    const hasNotices = (Array.isArray(schoolData?.notices) && schoolData.notices.length > 0) || (Array.isArray(schoolData?.flashNews) && schoolData.flashNews.length > 0);
+    const validNotices = (Array.isArray(schoolData?.notices) ? schoolData.notices : []).filter(n => n && n.title && n.title.trim() && !String(n.id).startsWith('somaram-welcome-'));
+    const validFlash = (Array.isArray(schoolData?.flashNews) ? schoolData.flashNews : []).filter(n => n && n.title && n.title.trim() && !String(n.id).startsWith('somaram-welcome-'));
+    const hasNotices = validNotices.length > 0 || validFlash.length > 0;
     if(flash) {
       if(hasNotices && typeof renderNews==='function') renderNews(flash);
       else flash.remove();
+    }
+    if (!hasNotices) {
+      document.querySelectorAll('.bulletin, .model-home-bulletin, .model-flash-news, .model-latest-news').forEach(el => el.remove());
     }
     return;
   }
   const hero=node('section',null,'model-campus-hero');const campus=node('img');campus.src=schoolData.campusPhotoUrl||'images/munagala-campus-blue-sky.jpg';campus.alt='Telangana Model School and Junior College, Somaram campus';campus.width=1868;campus.height=842;campus.fetchPriority='high';const badge=node('div',null,'model-campus-badge');badge.innerHTML='<span class="badge-dot"></span><span>PM SHRI · Telangana Model School &amp; Junior College, Somaram</span>';hero.append(campus,badge);main.prepend(hero);
   const overview=node('section',null,'model-school-overview');const intro=node('div');intro.append(node('span','OUR SCHOOL · మన పాఠశాల','eyebrow'),node('h2',lang==='te'?'విద్యతో ఎదుగుదల':'Learning today. Growing for tomorrow.'),node('p',lang==='te'?'కరీంనగర్ జిల్లాలోని సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల విద్యార్థులకు స్వాగతం. విద్యా సమాచారం, సిబ్బంది, అభ్యాస వనరులు, పాఠశాల కార్యక్రమాలను తెలుసుకోండి.':'Welcome to our school community in Somaram, Karimnagar district. Explore academic information, meet our teaching team and discover resources that support every step of your learning journey.'),link('Explore our school →','#school','model-text-link'),link('Find a Model School →','#directory','model-text-link'));const stats=node('div',null,'model-school-stats');const statItems=[[lang==='te'?'6 - 12వ తరగతి':'Classes VI – XII',lang==='te'?'కో-ఎడ్యుకేషన్ & జూనియర్ కళాశాల':'High School & Junior College'],[lang==='te'?'ఇంగ్లీష్ మీడియం':'English Medium',lang==='te'?'రాష్ట్ర ప్రభుత్వ విద్యా ప్రమాణాలు':'State Curriculum & Quality Learning'],[lang==='te'?'సైన్స్ & ఐటీ ల్యాబ్స్':'Modern Labs & Library',lang==='te'?'డిజిటల్ తరగతులు & ప్రయోగశాలలు':'Science, Computer & STEM Facilities'],[lang==='te'?'100% ఉచిత విద్య':'Free Education',lang==='te'?'పాఠ్యపుస్తకాలు, యూనిఫాం & మధ్యాహ్న భోజనం':'Textbooks, Uniforms & Nutritious Meals']];for(const [num,lbl]of statItems){const card=node('div',null,'model-stat-card');card.append(node('span',num,'model-stat-num'),node('span',lbl,'model-stat-label'));stats.append(card);}intro.append(stats);const ppSection=typeof principalPressSection==='function'?principalPressSection():null;if(ppSection){overview.append(intro);overview.classList.add('intro-only');hero.after(ppSection,overview);}else{overview.append(principalCard(),intro);hero.after(overview);}
-  if(Array.isArray(schoolData.gallery)&&schoolData.gallery.length>0){
+  if(cleanGallery.length>0){
     const highlights=node('section',null,'model-photo-highlights');
     highlights.append(node('h2',lang==='te'?'మన పాఠశాల ఫొటోలు':'Our School'));
     const photos=node('div',null,'gallery-grid');
-    for(const photo of (schoolData.gallery||[]).slice(0,6))photos.append(photoCard(photo));
+    for(const photo of cleanGallery.slice(0,6))photos.append(photoCard(photo));
     highlights.append(photos);
     const media=node('div',null,'model-school-media');
     const live=main.querySelector('.model-live-gallery');
@@ -138,8 +165,17 @@
     document.querySelectorAll('.model-school-media, .model-photo-highlights, .model-live-gallery').forEach(el => el.remove());
   }
   document.querySelectorAll('.model-latest-news, .news-bulletin-latest, [data-news-kind="latest"]').forEach(el => el.remove());
-  const hasNotices=(Array.isArray(schoolData?.notices)&&schoolData.notices.length>0)||(Array.isArray(schoolData?.flashNews)&&schoolData.flashNews.length>0);
-  if(hasNotices){const flash=node('div',null,'bulletin model-home-bulletin model-flash-news');flash.dataset.newsKind='flash';hero.after(flash);if(typeof renderNews==='function')renderNews(flash);}
+  const validNotices=(Array.isArray(schoolData?.notices)?schoolData.notices:[]).filter(n=>n&&n.title&&n.title.trim()&&!String(n.id).startsWith('somaram-welcome-'));
+  const validFlash=(Array.isArray(schoolData?.flashNews)?schoolData.flashNews:[]).filter(n=>n&&n.title&&n.title.trim()&&!String(n.id).startsWith('somaram-welcome-'));
+  const hasNotices=validNotices.length>0||validFlash.length>0;
+  if(hasNotices){
+    const flash=node('div',null,'bulletin model-home-bulletin model-flash-news');
+    flash.dataset.newsKind='flash';
+    hero.after(flash);
+    if(typeof renderNews==='function')renderNews(flash);
+  } else {
+    document.querySelectorAll('.bulletin, .model-home-bulletin, .model-flash-news, .model-latest-news').forEach(el => el.remove());
+  }
  }
  render=function(){previousRender();finalSchoolModel();};
  finalSchoolModel();

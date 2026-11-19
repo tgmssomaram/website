@@ -131,19 +131,43 @@ export default async function handler(req, res) {
             if (princ.photo_url) profileValues.principalPhoto = princ.photo_url;
           }
         } else {
-          profileValues.guest = profileValues.guest || [];
-          profileValues.vocational = profileValues.vocational || [];
-          profileValues.support = profileValues.support || [];
+          profileValues.guest = [];
+          profileValues.vocational = [];
+          profileValues.support = [];
         }
 
-        // Live Gallery Sync
+        // Live Gallery Sync (Strictly separate from faculty photos)
         if (Array.isArray(galleryRes.data)) {
-          profileValues.gallery = galleryRes.data.map(g => ({
-            src: g.image_url,
-            title: g.title,
-            te: g.caption || g.title,
-            category: g.category || 'School Activities'
-          }));
+          const facultyPhotoUrls = new Set();
+          if (Array.isArray(profileValues.facultyList)) {
+            profileValues.facultyList.forEach(f => {
+              if (f && f.photo_url) facultyPhotoUrls.add(String(f.photo_url).trim().toLowerCase());
+            });
+          }
+          if (profileValues.principalPhoto) facultyPhotoUrls.add(String(profileValues.principalPhoto).trim().toLowerCase());
+          if (profileValues.staffPhotos) {
+            Object.values(profileValues.staffPhotos).forEach(u => {
+              if (u) facultyPhotoUrls.add(String(u).trim().toLowerCase());
+            });
+          }
+
+          profileValues.gallery = galleryRes.data
+            .filter(g => {
+              if (!g || !g.image_url) return false;
+              const url = String(g.image_url).trim().toLowerCase();
+              if (facultyPhotoUrls.has(url)) return false;
+              if (url.includes('/school-media/faculty/') || url.includes('/faculty/')) return false;
+              const meta = ((g.category || '') + ' ' + (g.title || '')).toLowerCase();
+              if (/^(faculty|teacher|staff|principal)/i.test(meta)) return false;
+              return true;
+            })
+            .map(g => ({
+              src: g.image_url,
+              title: g.title,
+              te: g.caption || g.title,
+              category: g.category || 'Campus Gallery',
+              gallery_type: g.gallery_type || (/campus|building|gate|ground|lab/i.test((g.category || '') + ' ' + (g.title || '')) ? 'campus' : 'school')
+            }));
         }
 
         // Live Notices & Flash News Sync

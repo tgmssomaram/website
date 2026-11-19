@@ -1,5 +1,5 @@
 var SOMARAM_DEFAULT_DATA = window.SOMARAM_DEFAULT_DATA || {"principal":{"name":"Dr.Bandari Sampath Kumar","email":"tgmssomaram.knr@gmail.com","phone":"08727-285222","designation":"Principal FAC","qualification":"Phd in chemistry, B.Ed."},"address":"Somaram (Village), Saidapur Mandal, Karimnagar District, Telangana – 505490","faculty":[["Dr.Bandari Sampath Kumar","Principal FAC / Chemistry","Phd in chemistry, B.Ed."],["B.Kumar","Vice principal / Botany","M.Sc., B.Ed."],["Bandi Saidulu","PGT Botany / Botany","M.Sc., B.Ed., SET"],["Kondeti Saidulu","PGT English / English","M.A., B.Ed."]],"guest":[],"vocational":[],"support":[],"gallery":[],"mapUrl":"https://maps.google.com/maps?q=18.240000,79.300000","coordinates":{"lat":18.24,"lng":79.3},"notices":[],"downloads":[],"calendarFeedUrl":"https://calendar.google.com/calendar/ical/9b6bd89b931449c6dab271ec3d5ec995dbb2a8235139220258a8161a39805386%40group.calendar.google.com/public/basic.ics","udiseCode":"36131100206","collegeCode":"15124","showAdmissionSeats":false,"settings":{"schoolTitle":"Telangana Model School & Junior College, Somaram","teluguTitle":"తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం","authority":"School Education Department, Govt. of Telangana","welcomeTitle":"Welcome to TGMS Somaram","welcomeDescription":"A place to learn, explore and grow. Discover school information, educational resources and opportunities to connect with our learning community.","gradientStart":"#fff0df","gradientEnd":"#ff983f","youtubeUrl":""},"flashNews":[],"facultyList":[{"id":"9a47356c-ef35-4df0-b472-d12bdc574277","name":"Dr.Bandari Sampath Kumar","category":"teaching","designation":"Principal FAC","subject":"Chemistry","qualification":"Phd in chemistry, B.Ed.","photo_url":"https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg","order_index":0,"is_active":true},{"id":"60b5d262-af6e-4961-b65b-5b2d40d146d7","name":"B.Kumar","category":"teaching","designation":"Vice principal","subject":"Botany","qualification":"M.Sc., B.Ed.","photo_url":"https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656968120-7.-ch-mahender.jpeg","order_index":1,"is_active":true},{"id":"0d58d520-8f19-457e-94dd-09b7ccfa9598","name":"Bandi Saidulu","category":"teaching","designation":"PGT Botany","subject":"Botany","qualification":"M.Sc., B.Ed., SET","photo_url":null,"order_index":4,"is_active":true},{"id":"a8140954-2c86-4f05-9563-196001e2dcd1","name":"Kondeti Saidulu","category":"teaching","designation":"PGT English","subject":"English","qualification":"M.A., B.Ed.","photo_url":null,"order_index":12,"is_active":true}],"staffPhotos":{"Dr.Bandari Sampath Kumar":"https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg","B.Kumar":"https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656968120-7.-ch-mahender.jpeg"},"principalPhoto":"https://xnhwikekashrkjivimdb.supabase.co/storage/v1/object/public/school-media/faculty/1794656715779-1.dr-b-sampath-kumar.jpeg","strength":{"year":"2026–27","groups":[{"title":"School · Classes VI–X","rows":[["VI",48,33],["VII",55,21],["VIII",63,34],["IX",51,46],["X",55,39]]},{"title":"Junior College · First Year (Intermediate)","rows":[["MPC",18,28],["BiPC",4,37],["CEC",15,16],["ACE",7,10]]},{"title":"Junior College · Second Year (Intermediate)","rows":[["MPC",16,33],["BiPC",0,39],["CEC",15,11]]}],"sections":[["IX A",49],["IX B",50],["X A",46],["X B",48],["I CEC",31],["II CEC",25]]},"alumni":[],"principalPress":{"title":"Principal’s Message","teluguTitle":"ప్రిన్సిపాల్ సందేశం","text":"Welcome to Telangana Model School & Junior College, Somaram. Our institution is dedicated to nurturing young minds with high-quality English medium education, modern scientific inquiry, and strong ethical values. With modern laboratories, digital classrooms, and 100% free education provided by the Government of Telangana, we empower every student to achieve excellence.","teluguText":"","importantTitle":"Principal FAC · Dr. Bandari Sampath Kumar","importantText":"100% Free Education & admissions active.","image":"","imageAlt":"","imageCaption":"","links":[]}};
-const navMenu=[['home','Home','హోమ్','होम'],['school','Our School','మా పాఠశాల','हमारा विद्यालय'],['faculty','Faculty','సిబ్బంది','शिक्षक'],['directory','194 Schools','194 పాఠశాలలు','194 विद्यालय'],['portal','Student Portal','విద్యార్థుల పోర్టల్','छात्र पोर्टल'],['admissions','Apply ↗','దరఖాస్తు ↗','आवेदन ↗'],['gallery','Campus Gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],['contact','Contact Us','సంప్రదించండి','संपर्क करें']];
+const navMenu=[['home','Home','హోమ్','होम'],['school','Our School','మా పాఠశాల','हमारा विद्यालय'],['faculty','Faculty','సిబ్బంది','शिक्षक'],['gallery','Campus Gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],['directory','194 Schools','194 పాఠశాలలు','194 विद्यालय'],['portal','Student Portal','విద్యార్థుల పోర్టల్','छात्र पोर्टल'],['contact','Contact Us','సంప్రదించండి','संपर्क करें'],['admissions','Apply ↗','దరఖాస్తు ↗','आवेदन ↗']];
 const menu=[['home','Home','హోమ్','होम'],['school','Our School','మా పాఠశాల','हमारा विद्यालय'],['faculty','Faculty','సిబ్బంది','शिक्षक'],['portal','Students','విద్యార్థులు','छात्र'],['gallery','Campus Gallery','క్యాంపస్ గ్యాలరీ','परिसर गैलरी'],['contact','Contact Us','సంప్రదించండి','संपर्क करें'],['students','Students','విద్యార్థులు','छात्र'],['achievements','Achievements','విజయాలు','उपलब्धियाँ'],['results','Results','ఫలితాలు','परिणाम'],['academics','Academics','విద్య','शिक्षा'],['calendar','Academic calendar','విద్యా క్యాలెండర్','शैक्षणिक कैलेंडर'],['admissions','Admissions','ప్రవేశాలు','ప్రవేశ'],['notices','Notice board','ప్రకటనలు','सूचना पट्ट'],['about-us','About us','మా గురించి','हमारे बारे में'],['strength','School strength','విద్యార్థుల సంఖ్య','छात्र संख्या'],['campus','Campus & labs','ప్రాంగణం & ల్యాబ్‌లు','परिसर एवं प्रयोगशालाएँ'],['events','Events & activities','కార్యక్రమాలు','कार्यक्रम'],['books','Books download','పుస్తకాలు','पुस्तकें'],['downloads','Downloads','డౌన్‌లోడ్స్','डाउनलोड'],['admin','Administration','అడ్మినిస్ట్రేషన్','प्रशासन'],['directory','School directory','పాఠశాలల వివరాలు','विद्यालय सूची']];
 const text={en:{preview:'WEBSITE PREVIEW · School details awaiting confirmation',school:'Telangana Model School & Junior College, Somaram',location:'Somaram · Telangana',tag:'LEARN · EXPLORE · GROW',latest:'LATEST',news:'School-approved announcements and important dates will appear here.',footer:'Telangana Model School & Junior College, Somaram',about:'About us',contact:'Contact us',privacy:'Privacy policy',close:'Close',draft:'School photos, contact details, enrolment and staff information will be added after confirmation.',privacyBody:'This preview does not collect student information. External educational websites follow their own privacy policies. Do not send identity documents, student records, passwords or payment information through this preview.',pending:'School-approved details will be added here once the school confirms them.',welcome:'Welcome to',intro:'A place to learn, explore and grow. Discover school information, educational resources and opportunities to connect with our learning community.',explore:'Explore academics',more:'About our school',illustration:'CAMPUS ILLUSTRATION · SCHOOL PHOTOGRAPH TO BE ADDED',learning:'Learning. Opportunity. Community.',learningBody:'This website is being prepared for Telangana Model School & Junior College, Somaram. The final school profile, photographs and updates will be added after review by the school.',vision:'Our vision',visionBody:'To encourage curious, confident and responsible learners who are prepared for continued education and lifelong learning.',mission:'Our mission',missionBody:'To support understanding, creativity, communication, teamwork and respect through purposeful learning.',review:'This introduction is a draft for school review.',admin:'Administrator accounts and publishing will be configured after school ownership and handover details are confirmed.'},te:{preview:'వెబ్‌సైట్ ప్రివ్యూ · పాఠశాల వివరాల ధృవీకరణ పెండింగ్',school:'తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం',location:'సోమారం · తెలంగాణ',tag:'నేర్చుకోండి · అన్వేషించండి · ఎదగండి',latest:'తాజా సమాచారం',news:'పాఠశాల ఆమోదించిన ప్రకటనలు, ముఖ్యమైన తేదీలు ఇక్కడ చూపిస్తాము.',footer:'తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారం',about:'మా గురించి',contact:'సంప్రదించండి',privacy:'గోప్యతా విధానం',close:'మూసివేయండి',draft:'లోగో, ఫొటోలు, సిబ్బంది, విద్యార్థుల వివరాలు పాఠశాల ధృవీకరణ తర్వాత జోడిస్తాము.',privacyBody:'ఈ ప్రివ్యూలో విద్యార్థుల సమాచారం సేకరించము. వ్యక్తిగత పత్రాలు, పాస్‌వర్డ్‌లు, చెల్లింపు వివరాలు పంపవద్దు.',pending:'పాఠశాల ధృవీకరించిన వివరాలు త్వరలో జోడిస్తాము.',welcome:'స్వాగతం',intro:'నేర్చుకోవడానికి, అన్వేషించడానికి, ఎదగడానికి ఒక వేదిక. పాఠశాల సమాచారం, విద్యా వనరులు, కార్యక్రమాలు తెలుసుకోండి.',explore:'విద్యా వివరాలు',more:'మా పాఠశాల గురించి',illustration:'నమూనా భవనం · అసలు పాఠశాల ఫొటో జోడించాలి',learning:'విద్య. అవకాశాలు. సమాజం.',learningBody:'సోమారం తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల కోసం ఈ వెబ్‌సైట్ సిద్ధం చేస్తున్నాము. పాఠశాల సమీక్ష తర్వాత సమాచారం, ఫొటోలు జోడిస్తాము.',vision:'మా దృక్పథం',visionBody:'ఆసక్తి, ఆత్మవిశ్వాసం, బాధ్యత కలిగిన విద్యార్థులను ప్రోత్సహించడం; ఉన్నత విద్య, నిరంతర అభ్యాసానికి సిద్ధం చేయడం.',mission:'మా లక్ష్యం',missionBody:'అవగాహన, సృజనాత్మకత, సంభాషణా నైపుణ్యాలు, సహకారం, పరస్పర గౌరవాన్ని పెంపొందించడం.',review:'ఈ పరిచయం పాఠశాల సమీక్ష కోసం సిద్ధం చేసిన ముసాయిదా.',admin:'స్కూల్ యాజమాన్యం, హ్యాండోవర్ వివరాలు ధృవీకరించిన తర్వాత అడ్మిన్ ఖాతా, పబ్లిషింగ్ అమర్చుతాము.'},hi:{preview:'वेबसाइट पूर्वावलोकन · विद्यालय विवरण की पुष्टि बाकी',school:'तेलंगाना मॉडल स्कूल एवं जूनियर कॉलेज, सोमाराम',location:'सोमाराम · तेलंगाना',tag:'सीखें · खोजें · आगे बढ़ें',latest:'नवीनतम',news:'विद्यालय द्वारा स्वीकृत सूचनाएँ और महत्वपूर्ण तिथियाँ यहाँ दिखाई जाएँगी।',footer:'तेलंगाना मॉडल स्कूल एवं जूनियर कॉलेज, सोमाराम',about:'हमारे बारे में',contact:'संपर्क करें',privacy:'गोपनीयता नीति',close:'बंद करें',draft:'विद्यालय की पुष्टि के बाद तस्वीरें, संपर्क और छात्र विवरण जोड़े जाएँगे।',privacyBody:'यह पूर्वावलोकन छात्र जानकारी एकत्र नहीं करता। पहचान दस्तावेज, पासवर्ड या भुगतान विवरण साझा न करें।',pending:'विद्यालय द्वारा पुष्टि किए गए विवरण जल्द जोड़े जाएँगे।',welcome:'स्वागत है',intro:'सीखने, खोजने और आगे बढ़ने का स्थान। विद्यालय की जानकारी और शैक्षिक संसाधनों का अन्वेषण करें।',explore:'शैक्षणिक जानकारी',more:'हमारे विद्यालय के बारे में',illustration:'परिसर का चित्रण · विद्यालय की तस्वीर जोड़ी जानी है',learning:'शिक्षा. अवसर. समुदाय.',learningBody:'यह वेबसाइट तेलंगाना मॉडल स्कूल एवं जूनियर कॉलेज, सोमाराम के लिए तैयार की जा रही है। समीक्षा के बाद विद्यालय के विवरण जोड़े जाएँगे।',vision:'हमारी दृष्टि',visionBody:'जिज्ञासु, आत्मविश्वासी और जिम्मेदार शिक्षार्थियों को आगे की शिक्षा और आजीवन सीखने के लिए प्रोत्साहित करना।',mission:'हमारा उद्देश्य',missionBody:'समझ, रचनात्मकता, संवाद, सहयोग और सम्मान को बढ़ावा देना।',review:'यह परिचय विद्यालय की समीक्षा के लिए प्रारूप है।',admin:'विद्यालय स्वामित्व और हस्तांतरण विवरण की पुष्टि के बाद व्यवस्थापक खाते और प्रकाशन स्थापित किए जाएँगे।'}};
 let lang='en';try{const saved=localStorage.getItem('somaram-language');if(text[saved])lang=saved;}catch{}
@@ -354,39 +354,6 @@ function renderModernFacultyPage(sheet, d) {
       photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null,
       order_index: idx,
       category: 'teaching'
-    }));
-  }
-
-  if (guestList.length === 0 && Array.isArray(d.guest) && d.guest.length > 0) {
-    guestList = d.guest.map(row => ({
-      name: row[0],
-      designation: row[1] || 'Guest Teacher',
-      qualification: row[2] || '',
-      subject: '',
-      photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null,
-      category: 'guest'
-    }));
-  }
-
-  if (vocationalList.length === 0 && Array.isArray(d.vocational) && d.vocational.length > 0) {
-    vocationalList = d.vocational.map(row => ({
-      name: row[0],
-      designation: row[1] || 'Vocational Trainer',
-      qualification: row[2] || '',
-      subject: '',
-      photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null,
-      category: 'vocational'
-    }));
-  }
-
-  if (supportList.length === 0 && Array.isArray(d.support) && d.support.length > 0) {
-    supportList = d.support.map(row => ({
-      name: row[0],
-      designation: row[1] || 'Support Staff',
-      qualification: row[2] || '',
-      subject: '',
-      photo_url: (d.staffPhotos && d.staffPhotos[row[0]]) || null,
-      category: 'support'
     }));
   }
 
@@ -1085,7 +1052,27 @@ window.renderModernResultsPage = renderModernResultsPage;
 
 function renderModernGalleryPage(sheet, d) {
   const isTe = lang === 'te';
-  const allPhotos = (d && Array.isArray(d.gallery)) ? d.gallery : [];
+
+  // Strictly filter out any faculty photos from the gallery
+  const facultyUrls = new Set();
+  if (Array.isArray(d?.facultyList)) {
+    d.facultyList.forEach(f => { if (f && f.photo_url) facultyUrls.add(String(f.photo_url).trim().toLowerCase()); });
+  }
+  if (d?.principalPhoto) facultyUrls.add(String(d.principalPhoto).trim().toLowerCase());
+  if (d?.staffPhotos) {
+    Object.values(d.staffPhotos).forEach(u => { if (u) facultyUrls.add(String(u).trim().toLowerCase()); });
+  }
+
+  const rawPhotos = (d && Array.isArray(d.gallery)) ? d.gallery : [];
+  const allPhotos = rawPhotos.filter(photo => {
+    if (!photo || !photo.src) return false;
+    const s = String(photo.src).trim().toLowerCase();
+    if (facultyUrls.has(s)) return false;
+    if (s.includes('/school-media/faculty/') || s.includes('/faculty/')) return false;
+    const meta = ((photo.category || '') + ' ' + (photo.title || '')).toLowerCase();
+    if (/^(faculty|teacher|staff|principal)/i.test(meta)) return false;
+    return true;
+  });
 
   const container = document.createElement('div');
   container.className = 'modern-gallery-container';

@@ -1775,7 +1775,11 @@ footer.munagala-site-footer::before {
   -webkit-backdrop-filter: blur(16px) !important;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
   transition: all var(--ag-transition) !important;
-  display: inline-block;
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  gap: 2px !important;
 }
 
 .developer-credit:hover {
@@ -1785,22 +1789,48 @@ footer.munagala-site-footer::before {
   box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25) !important;
 }
 
+.developer-credit p {
+  margin: 0 0 2px 0 !important;
+  display: block !important;
+  font-size: 13px !important;
+  color: #94a3b8 !important;
+}
+
+.developer-credit strong,
 .developer-credit [data-developer-name="Chippa Rishikesh"] {
+  display: block !important;
+  margin: 0 0 4px 0 !important;
   color: #fef3c7 !important;
   font-size: 18px !important;
   font-weight: 850 !important;
   letter-spacing: -0.3px;
+  line-height: 1.25 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.developer-credit a[href^="mailto:"] {
+.developer-credit a[href^="mailto:"],
+.developer-credit a {
+  display: block !important;
+  margin-top: 2px !important;
   color: #a7f3d0 !important;
   font-weight: 650 !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  text-decoration: underline !important;
+  word-break: break-all !important;
   transition: color var(--ag-transition);
 }
 
 .developer-credit a[href^="mailto:"]:hover {
   color: #fde68a !important;
+}
+
+/* Hide Veda AI Assistant */
+.school-help-launch,
+#school-help-panel {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Floating Back-to-Top Button */

@@ -63,33 +63,7 @@ let hoverTimer;
 document.addEventListener('pointerover',e=>{const group=e.target.closest('.final-nav-group,.model-nav-group');if(!group||group.contains(e.relatedTarget)||!matchMedia('(hover: hover) and (pointer: fine)').matches)return;clearTimeout(hoverTimer);const b=group.querySelector('.final-nav-trigger,.model-nav-trigger');if(b?.getAttribute('aria-expanded')==='false')b.click();});
 document.addEventListener('pointerout',e=>{const group=e.target.closest('.final-nav-group,.model-nav-group');if(!group||group.contains(e.relatedTarget))return;hoverTimer=setTimeout(()=>{const b=group.querySelector('.final-nav-trigger,.model-nav-trigger');if(!group.matches(':hover')&&!group.contains(document.activeElement)&&b?.getAttribute('aria-expanded')==='true')b.click();},180);});
 function installAssistant() {
-  const launch=make('button','Ask Veda','school-help-launch');launch.type='button';launch.setAttribute('aria-expanded','false');launch.setAttribute('aria-controls','school-help-panel');
-  launch.setAttribute('translate','no');
-  const panel=make('section',null,'school-help-panel');panel.id='school-help-panel';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','false');panel.setAttribute('aria-labelledby','school-help-title');
-  panel.setAttribute('translate','no');
-  const head=make('div',null,'school-help-heading');const title=make('h2','Ask Veda');title.id='school-help-title';const close=make('button','×');close.type='button';close.setAttribute('aria-label','Close Ask Veda');head.append(title,close);
-  const intro=make('p',label('A guide to this school’s published information. Source-based answers, not a live AI service. Do not share passwords, OTPs or personal student data.','స్కూల్ ప్రచురించిన సమాచారం ఆధారంగా సహాయం. ఇది లైవ్ AI సేవ కాదు. పాస్‌వర్డ్‌లు, OTPలు, విద్యార్థుల వ్యక్తిగత వివరాలు పంపవద్దు.','विद्यालय की प्रकाशित जानकारी का मार्गदर्शक। यह लाइव AI सेवा नहीं है। पासवर्ड, OTP या निजी छात्र विवरण न भेजें।'),'school-help-intro');
-  const log=make('div',null,'school-help-log');log.setAttribute('role','log');log.setAttribute('aria-live','polite');log.setAttribute('aria-label','Ask Veda conversation');
-  const suggestions=make('div',null,'school-help-suggestions');
-  const form=make('form');const questionLabel=make('label',label('Your question','మీ ప్రశ్న','आपका प्रश्न'));questionLabel.htmlFor='school-help-question';const input=make('input');input.id='school-help-question';input.maxLength=500;input.required=true;input.autocomplete='off';const send=make('button',label('Ask','అడగండి','पूछें'));send.type='submit';const clear=make('button',label('Clear chat','చాట్ తొలగించండి','चैट साफ़ करें'));clear.type='button';clear.addEventListener('click',()=>{log.replaceChildren();input.value='';input.focus();});form.append(questionLabel,input,send,clear);
-  panel.append(head,intro,suggestions,log,form);document.body.append(panel,launch);
-  function toggle(open){panel.hidden=!open;launch.setAttribute('aria-expanded',String(open));if(open)input.focus();else launch.focus();}
-  launch.addEventListener('click',()=>toggle(panel.hidden));close.addEventListener('click',()=>toggle(false));panel.addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
-  let busy=false;
-  async function ask(value) {
-    const q=value.trim();if(!q||q.length>500||busy)return;busy=true;send.disabled=true;input.value='';
-    log.append(make('p',q,'school-help-user'));
-    try {
-      let schools=[];try{schools=await directory();}catch{}
-      const data=await publicSchoolContext();
-      const response=schoolAnswer(q,data,schools,language());const message=make('div',null,'school-help-answer');message.append(make('p',response.body));
-      const sources=make('div',null,'school-help-sources');for(const [name,href]of response.links){if(href.startsWith('#')||safeWebsite(href))sources.append(anchor(name,href));}message.append(sources);log.append(message);log.scrollTop=log.scrollHeight;
-      // Keep only a short in-memory display; no localStorage or server chat history.
-      while(log.children.length>20)log.firstElementChild.remove();
-    } finally {busy=false;send.disabled=false;input.focus();}
-  }
-  for(const q of [label('How do I apply for admission?','ప్రవేశానికి దరఖాస్తు ఎలా?','प्रवेश के लिए आवेदन कैसे करें?'),label('194 schools directory','194 స్కూల్స్ డైరెక్టరీ','194 विद्यालयों की निर्देशिका'),label('Principal details','ప్రిన్సిపాల్ వివరాలు','प्रधानाचार्य विवरण')]){const b=make('button',q);b.type='button';b.addEventListener('click',()=>ask(q));suggestions.append(b);}
-  form.addEventListener('submit',e=>{e.preventDefault();ask(input.value);});
+  document.querySelectorAll('.school-help-launch, #school-help-panel').forEach(el => el.remove());
 }
 function installDirectoryButton(){
  return;

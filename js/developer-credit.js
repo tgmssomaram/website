@@ -27,23 +27,23 @@
 
       const credit = document.createElement('div');
       credit.className = 'developer-credit';
-      credit.style.cssText = 'margin:14px 0 6px;font-size:14px;color:#374151;line-height:1.6;';
+      credit.style.cssText = 'margin:14px 0 6px;font-size:14px;color:#374151;line-height:1.6;display:flex;flex-direction:column;align-items:flex-start;';
 
       const label = document.createElement('div');
       label.textContent = 'Designed & developed by';
-      label.style.cssText = 'color:#6b7280;font-size:13px;';
+      label.style.cssText = 'color:#6b7280;font-size:13px;display:block;margin-bottom:2px;';
 
       const author = document.createElement('strong');
       author.dataset.developerName = 'Chippa Rishikesh';
       author.textContent = name;
       author.translate = false;
       author.className = 'notranslate';
-      author.style.cssText = 'display:block;font-size:17px;font-weight:750;color:#0f3b2d;margin-top:2px;';
+      author.style.cssText = 'display:block;font-size:17px;font-weight:750;color:#0f3b2d;margin:2px 0 4px;';
 
       const emailLink = document.createElement('a');
       emailLink.href = 'mailto:' + email;
       emailLink.textContent = email;
-      emailLink.style.cssText = 'display:inline-block;margin-top:4px;color:#15543e;font-weight:600;text-decoration:underline;font-size:13px;';
+      emailLink.style.cssText = 'display:block;margin-top:2px;color:#15543e;font-weight:600;text-decoration:underline;font-size:13px;';
 
       credit.append(label, author, emailLink);
       footer.append(credit);
