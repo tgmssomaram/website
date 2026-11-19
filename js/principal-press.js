@@ -39,26 +39,56 @@ function principalPressSection() {
   const d = ppData(), te = typeof lang === 'string' && lang === 'te';
   const section = document.createElement('section');
   section.className = 'principal-press';
-  section.setAttribute('aria-label', te ? 'ప్రిన్సిపల్ సందేశం మరియు ప్రెస్ నోట్' : 'Principal message and press note');
+  section.setAttribute('aria-label', te ? 'ప్రిన్సిపాల్ సందేశం మరియు ప్రెస్ నోట్' : 'Principal message and press note');
   const left = document.createElement('div');
   left.className = 'pp-principal';
   left.append(principalCard());
   const important = document.createElement('section');
   important.className = 'pp-important';
   const importantHeading = document.createElement('h3');
-  importantHeading.textContent = String(d.importantTitle || '').trim() || (te ? 'ప్రిన్సిపల్ ముఖ్య సందేశం' : 'Principal Important Message');
+  let impHead = String(d.importantTitle || '').trim();
+  if (te) {
+    if (!impHead || impHead === 'Principal Important Message') {
+      impHead = 'ప్రిన్సిపాల్ ముఖ్య సందేశం';
+    } else if (impHead.includes('Principal FAC') && impHead.includes('Bandari Sampath Kumar')) {
+      impHead = 'ప్రిన్సిపాల్ FAC · డా. బండారి సంపత్ కుమార్';
+    }
+  } else {
+    impHead = impHead || 'Principal Important Message';
+  }
+  importantHeading.textContent = impHead;
   important.append(importantHeading);
-  ppAppendText(important, String(d.importantText || '').trim() || (te ? 'ప్రిన్సిపల్ ముఖ్య సందేశం ఇంకా ప్రచురించలేదు.' : 'The principal has not yet published an important message.'));
+
+  let impBody = String(d.importantText || '').trim();
+  if (te) {
+    if (!impBody) {
+      impBody = 'ప్రిన్సిపాల్ ముఖ్య సందేశం ఇంకా ప్రచురించలేదు.';
+    } else if (impBody.includes('100% Free Education & admissions active')) {
+      impBody = '100% ఉచిత విద్య & ప్రవేశాలు ప్రారంభమైనవి.';
+    }
+  } else {
+    impBody = impBody || 'The principal has not yet published an important message.';
+  }
+  ppAppendText(important, impBody);
   left.append(important);
   section.append(left);
+
   const text = String(d.text || '').trim(), links = ppLinks(d);
   if (true) {
     const box = document.createElement('article');
     box.className = 'pp-note';
     const h = document.createElement('h2');
-    h.textContent = String(d.title || '').trim() || (te ? 'ప్రిన్సిపల్ సందేశం' : 'Principal’s Message');
+    h.textContent = te ? (d.teluguTitle || 'ప్రిన్సిపాల్ సందేశం') : (String(d.title || '').trim() || 'Principal’s Message');
     box.append(h);
-    ppAppendText(box, text || (te ? 'ప్రిన్సిపల్ సందేశం ప్రచురించిన తర్వాత ఇక్కడ కనిపిస్తుంది.' : 'The principal’s message will appear here after publication.'));
+    let noteContent = te ? (d.teluguText || '') : text;
+    if (te && !noteContent) {
+      if (text.includes('Welcome to Telangana Model School') || text.includes('Somaram')) {
+        noteContent = 'తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారానికి స్వాగతం. మా సంస్థ నాణ్యమైన ఆంగ్ల మాధ్యమ విద్య, ఆధునిక శాస్త్రీయ దృక్పథం మరియు ఉన్నతమైన నైతిక విలువలతో విద్యార్థుల భవిష్యత్తును తీర్చిదిద్దుటకు అంకితభావంతో పనిచేస్తుంది. ఆధునిక ప్రయోగశాలలు, డిజిటల్ తరగతి గదులు మరియు తెలంగాణ ప్రభుత్వం అందించే 100% ఉచిత విద్యతో, ప్రతి విద్యార్థి ప్రతిభను చాటుకునేలా మేము ప్రోత్సహిస్తున్నాము.';
+      } else {
+        noteContent = text;
+      }
+    }
+    ppAppendText(box, noteContent || (te ? 'ప్రిన్సిపాల్ సందేశం ప్రచురించిన తర్వాత ఇక్కడ కనిపిస్తుంది.' : 'The principal’s message will appear here after publication.'));
     if (links.length) {
       const ul = document.createElement('ul');
       ul.className = 'pp-links';

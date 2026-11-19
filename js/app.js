@@ -157,18 +157,362 @@ function photoCard(photo){
   article.append(b, node('h3', lang === 'te' ? (photo.te || photo.title) : (photo.title || '')), node('p', photo.category || 'School Activities'));
   return article;
 }
+// Localization dictionaries for Faculty & Staff
+const FACULTY_NAMES_I18N = {
+  // Dr. Bandari Sampath Kumar
+  'dr.bandari sampath kumar': { te: 'డా. బండారి సంపత్ కుమార్', hi: 'डॉ. बंडारी संपत कुमार' },
+  'dr. bandari sampath kumar': { te: 'డా. బండారి సంపత్ కుమార్', hi: 'डॉ. बंडारी संपत कुमार' },
+  'dr bandari sampath kumar': { te: 'డా. బండారి సంపత్ కుమార్', hi: 'डॉ. बंडारी संपत कुमार' },
+  'bandari sampath kumar': { te: 'బండారి సంపత్ కుమార్', hi: 'बंडारी संपत कुमार' },
+  'dr.b.sampath kumar': { te: 'డా. బి. సంపత్ కుమార్', hi: 'डॉ. बी. संपत कुमार' },
+
+  // B.Kumar
+  'b.kumar': { te: 'బి. కుమార్', hi: 'बी. कुमार' },
+  'b. kumar': { te: 'బి. కుమార్', hi: 'बी. कुमार' },
+  'b kumar': { te: 'బి. కుమార్', hi: 'बी. कुमार' },
+
+  // Bandi Saidulu
+  'bandi saidulu': { te: 'బండి సైదులు', hi: 'बंडी सैदुलु' },
+  'b. saidulu': { te: 'బి. సైదులు', hi: 'बी. सैदुलु' },
+  'b saidulu': { te: 'బి. సైదులు', hi: 'बी. सैदुलु' },
+
+  // Kondeti Saidulu
+  'kondeti saidulu': { te: 'కొండేటి సైదులు', hi: 'कोंडेटी सैदुलु' },
+  'k. saidulu': { te: 'కె. సైదులు', hi: 'के. सैदुलु' },
+  'k saidulu': { te: 'కె. సైదులు', hi: 'के. सैदुलु' },
+
+  // Ch Mahendar
+  'ch mahendar': { te: 'సిహెచ్. మహేందర్', hi: 'सी.एच. महेंदर' },
+  'ch. mahendar': { te: 'సిహెచ్. మహేందర్', hi: 'सी.एच. महेंदर' },
+  'ch mahender': { te: 'సిహెచ్. మహేందర్', hi: 'सी.एच. महेंदर' },
+  'ch. mahender': { te: 'సిహెచ్. మహేందర్', hi: 'सी.एच. महेंदर' },
+
+  // Jamalapuram Ramakrishna
+  'jamalapuram ramakrishna': { te: 'జమాలపురం రామకృష్ణ', hi: 'जमालापुरम रामकृष्ण' },
+  'j. ramakrishna': { te: 'జె. రామకృష్ణ', hi: 'जे. रामकृष्ण' },
+
+  // Boora Saidaiah Goud
+  'boora saidaiah goud': { te: 'బూర సైదయ్య గౌడ్', hi: 'बूरा सैदय्या गौड़' },
+  'b. saidaiah goud': { te: 'బి. సైదయ్య గౌడ్', hi: 'बी. సైదయ్య గౌడ్' },
+
+  // Vutukuri Ravinder Reddy
+  'vutukuri ravinder reddy': { te: 'వుతుకూరి రవీందర్ రెడ్డి', hi: 'वुतुकूरी रवींदर रेड्डी' },
+  'v. ravinder reddy': { te: 'వి. రవీందర్ రెడ్డి', hi: 'वी. रवींदर रेड्डी' },
+
+  // Pokala Venkateswara Rao
+  'pokala venkateswara rao': { te: 'పోకల వెంకటేశ్వర రావు', hi: 'पोकला वेंकटेश्वर राव' },
+  'p. venkateswara rao': { te: 'పి. వెంకటేశ్వర రావు', hi: 'पी. वेंकटेश्वर राव' },
+
+  // Shaik Sharief
+  'shaik sharief': { te: 'షేక్ షరీఫ్', hi: 'शेख शरीफ' },
+  'sk. sharief': { te: 'షేక్ షరీఫ్', hi: 'शेख शरीफ' },
+  'sk sharief': { te: 'షేక్ షరీఫ్', hi: 'शेख शरीफ' },
+
+  // Shaik Jani
+  'shaik jani': { te: 'షేక్ జానీ', hi: 'शेख जानी' },
+  'sk. jani': { te: 'షేక్ జానీ', hi: 'शेख जानी' },
+
+  // Bommaganti Sushmitha
+  'bommaganti sushmitha': { te: 'బొమ్మగంటి సుస్మిత', hi: 'बोम्मगंटी सुष्मिता' },
+  'b. sushmitha': { te: 'బి. సుస్మిత', hi: 'बी. सुष्मिता' },
+
+  // Chandala Vani Sree
+  'chandala vani sree': { te: 'చందాల వాణీశ్రీ', hi: 'चंदाला वाणी श्री' },
+  'c. vani sree': { te: 'సి. వాణీశ్రీ', hi: 'सी. वाणी श्री' },
+
+  // Shaik Jakir Hussain
+  'shaik jakir hussain': { te: 'షేక్ జాకీర్ హుస్సేన్', hi: 'शेख जाकिर हुसैन' },
+  'sk. jakir hussain': { te: 'షేక్ జాకీర్ హుస్సేన్', hi: 'शेख जाकिर हुसैन' },
+
+  // Sk. Rajiya
+  'sk. rajiya': { te: 'షేక్ రజియా', hi: 'शेख रजिया' },
+  'sk rajiya': { te: 'షేక్ రజియా', hi: 'शेख रजिया' },
+  'shaik rajiya': { te: 'షేక్ రజియా', hi: 'शेख रजिया' },
+
+  // Ch. Ramesh
+  'ch. ramesh': { te: 'సిహెచ్. రమేష్', hi: 'सी.एच. रमेश' },
+  'ch ramesh': { te: 'సిహెచ్. రమేష్', hi: 'सी.एच. रमेश' },
+
+  // M. Venkateswarlu
+  'm. venkateswarlu': { te: 'ఎం. వెంకటేశ్వర్లు', hi: 'एम. वेंकटेश्वरलू' },
+  'm venkateswarlu': { te: 'ఎం. వెంకటేశ్వర్లు', hi: 'एम. వెంకటేశ్వర్లు' },
+
+  // D. Renuka
+  'd. renuka': { te: 'డి. రేణుక', hi: 'डी. रेणुका' },
+  'd renuka': { te: 'డి. రేణుక', hi: 'डी. रेणुका' },
+
+  // K. Lakshmi
+  'k. lakshmi': { te: 'కె. లక్ష్మి', hi: 'के. लक्ष्मी' },
+  'k lakshmi': { te: 'కె. లక్ష్మి', hi: 'के. लक्ष्मी' },
+
+  // E. Vijaya Durga
+  'e. vijaya durga': { te: 'ఇ. విజయదుర్గ', hi: 'ई. विजया दुर्गा' },
+  'e vijaya durga': { te: 'ఇ. విజయదుర్గ', hi: 'ई. विजया दुर्गा' },
+
+  // Narra Kavitha
+  'narra kavitha': { te: 'నర్రా కవిత', hi: 'नर्रा कविता' },
+  'n. kavitha': { te: 'ఎన్. కవిత', hi: 'एन. कविता' },
+
+  // Shaik Jan Pasha
+  'shaik jan pasha': { te: 'షేక్ జాన్ పాషా', hi: 'शेख जान पाशा' },
+  'sk. jan pasha': { te: 'షేక్ జాన్ పాషా', hi: 'शेख जान पाशा' },
+
+  // Bobbili Padma
+  'bobbili padma': { te: 'బొబ్బిలి పద్మ', hi: 'बोब्बिली पद्मा' },
+  'b. padma': { te: 'బి. పద్మ', hi: 'बी. पद्मा' },
+
+  // Kolukulapalli Pullaiah
+  'kolukulapalli pullaiah': { te: 'కొలుకులపల్లి పుల్లయ్య', hi: 'कोलुकुलपल्ली पुल्लैया' },
+  'k. pullaiah': { te: 'కె. పుల్లయ్య', hi: 'के. పుల్లయ్య' }
+};
+
+const COMMON_NAME_PARTS_TE = {
+  'dr.': 'డా.', 'dr': 'డా.', 'ch.': 'సిహెచ్.', 'ch': 'సిహెచ్.', 'sk.': 'షేక్', 'sk': 'షేక్',
+  'shaik': 'షేక్', 'kumar': 'కుమార్', 'saidulu': 'సైదులు', 'reddy': 'రెడ్డి', 'rao': 'రావు',
+  'goud': 'గౌడ్', 'ramakrishna': 'రామకృష్ణ', 'mahendar': 'మహేందర్', 'mahender': 'మహేందర్',
+  'venkateswara': 'వెంకటేశ్వర', 'venkateswarlu': 'వెంకటేశ్వర్లు', 'ramesh': 'రమేష్',
+  'sampath': 'సంపత్', 'bandari': 'బండారి', 'bandi': 'బండి', 'kondeti': 'కొండేటి',
+  'sushmitha': 'సుస్మిత', 'padma': 'పద్మ', 'kavitha': 'కవిత', 'lakshmi': 'లక్ష్మి',
+  'renuka': 'రేణుక', 'pullaiah': 'పుల్లయ్య', 'jani': 'జానీ', 'sharief': 'షరీఫ్',
+  'rajiya': 'రజియా', 'durga': 'దుర్గ', 'vijaya': 'విజయ'
+};
+
+const COMMON_INITIALS_TE = {
+  'a.': 'ఎ.', 'b.': 'బి.', 'c.': 'సి.', 'd.': 'డి.', 'e.': 'ఇ.', 'f.': 'ఎఫ్.',
+  'g.': 'జి.', 'h.': 'హెచ్.', 'i.': 'ఐ.', 'j.': 'జె.', 'k.': 'కె.', 'l.': 'ఎల్.',
+  'm.': 'ఎం.', 'n.': 'ఎన్.', 'o.': 'ఒ.', 'p.': 'పి.', 'q.': 'క్యూ.', 'r.': 'ఆర్.',
+  's.': 'ఎస్.', 't.': 'టి.', 'u.': 'యు.', 'v.': 'వి.', 'w.': 'డబ్ల్యూ.', 'x.': 'ఎక్స్.',
+  'y.': 'వై.', 'z.': 'జెడ్.'
+};
+
+function getLocalizedFacultyName(name, currentLang) {
+  if (!name) return '';
+  if (currentLang !== 'te' && currentLang !== 'hi') return name;
+
+  const key = String(name).trim().toLowerCase().replace(/\s+/g, ' ');
+  if (FACULTY_NAMES_I18N[key] && FACULTY_NAMES_I18N[key][currentLang]) {
+    return FACULTY_NAMES_I18N[key][currentLang];
+  }
+
+  const noDots = key.replace(/\./g, ' ').replace(/\s+/g, ' ').trim();
+  if (FACULTY_NAMES_I18N[noDots] && FACULTY_NAMES_I18N[noDots][currentLang]) {
+    return FACULTY_NAMES_I18N[noDots][currentLang];
+  }
+
+  if (currentLang === 'te') {
+    const tokens = String(name).trim().split(/\s+/);
+    const converted = tokens.map(token => {
+      const lower = token.toLowerCase();
+      if (COMMON_INITIALS_TE[lower]) return COMMON_INITIALS_TE[lower];
+      if (COMMON_NAME_PARTS_TE[lower]) return COMMON_NAME_PARTS_TE[lower];
+      return token;
+    });
+    return converted.join(' ');
+  }
+
+  return name;
+}
+
+const SUBJECTS_I18N = {
+  'chemistry': { te: 'రసాయన శాస్త్రం', hi: 'रसायन विज्ञान' },
+  'botany': { te: 'వృక్ష శాస్త్రం (బాటనీ)', hi: 'वनस्पति विज्ञान' },
+  'english': { te: 'ఇంగ్లీష్', hi: 'अंग्रेजी' },
+  'mathematics': { te: 'గణితం', hi: 'गणित' },
+  'maths': { te: 'గణితం', hi: 'गणित' },
+  'physics': { te: 'భౌతిక శాస్త్రం', hi: 'भौतिक विज्ञान' },
+  'zoology': { te: 'జంతు శాస్త్రం', hi: 'जंतु विज्ञान' },
+  'economics': { te: 'అర్థశాస్త్రం', hi: 'अर्थशास्त्र' },
+  'civics': { te: 'పౌరశాస్త్రం', hi: 'नागरिक शास्त्र' },
+  'commerce': { te: 'వాణిజ్య శాస్త్రం', hi: 'वाणिज्य' },
+  'telugu': { te: 'తెలుగు', hi: 'तेलुगु' },
+  'hindi': { te: 'హిందీ', hi: 'हिन्दी' },
+  'science': { te: 'సైన్స్ (సాధారణ శాస్త్రం)', hi: 'विज्ञान' },
+  'social studies': { te: 'సాంఘిక శాస్త్రం', hi: 'सामाजिक अध्ययन' },
+  'social': { te: 'సాంఘిక శాస్త్రం', hi: 'सामाजिक अध्ययन' },
+  'media and entertainment': { te: 'మీడియా & ఎంటర్‌టైన్‌మెంట్', hi: 'मीडिया और मनोरंजन' },
+  'health care': { te: 'హెల్త్ కేర్', hi: 'हेल्थ केयर' }
+};
+
+function getLocalizedSubject(subj, currentLang) {
+  if (!subj) return '';
+  if (currentLang !== 'te' && currentLang !== 'hi') return subj;
+  const key = String(subj).trim().toLowerCase();
+  if (SUBJECTS_I18N[key] && SUBJECTS_I18N[key][currentLang]) {
+    return SUBJECTS_I18N[key][currentLang];
+  }
+  return subj;
+}
+
+function getLocalizedDesignation(desig, currentLang) {
+  if (!desig) return currentLang === 'te' ? 'అధ్యాపకులు' : (currentLang === 'hi' ? 'शिक्षक' : 'Faculty');
+  if (currentLang !== 'te' && currentLang !== 'hi') return desig;
+
+  const raw = String(desig).trim();
+  const upper = raw.toUpperCase();
+
+  if (raw.includes('/')) {
+    const parts = raw.split('/').map(p => p.trim());
+    const locParts = parts.map((part, idx) => {
+      if (idx === 0) return getLocalizedDesignation(part, currentLang);
+      return getLocalizedSubject(part, currentLang) || part;
+    });
+    return locParts.join(' / ');
+  }
+
+  if (currentLang === 'te') {
+    if (upper.includes('VICE')) {
+      return 'వైస్ ప్రిన్సిపాల్';
+    }
+    if (upper.includes('PRINCIPAL') && upper.includes('FAC')) {
+      return 'ప్రిన్సిపాల్ FAC';
+    }
+    if (upper.includes('PRINCIPAL')) {
+      return 'ప్రిన్సిపాల్';
+    }
+    if (upper.startsWith('PGT')) {
+      const rest = raw.replace(/^PGT\s*/i, '').trim();
+      const locSubj = getLocalizedSubject(rest, 'te');
+      return 'పి.జి.టి ' + (locSubj || rest);
+    }
+    if (upper.startsWith('TGT')) {
+      const rest = raw.replace(/^TGT\s*/i, '').trim();
+      const locSubj = getLocalizedSubject(rest, 'te');
+      return 'టి.జి.టి ' + (locSubj || rest);
+    }
+    if (upper.includes('MEDIA') || upper.includes('ENTERTAINMENT')) {
+      return 'వృత్తి విద్య (మీడియా & ఎంటర్‌టైన్‌మెంట్)';
+    }
+    if (upper.includes('HEALTH')) {
+      return 'వృత్తి విద్య (హెల్త్ కేర్)';
+    }
+    if (upper.includes('PHYSICAL DIRECTOR') || upper.includes('PD')) {
+      return 'ఫిజికల్ డైరెక్టర్ (పి.డి)';
+    }
+    if (upper.includes('COMPUTER OPERATOR')) {
+      return 'కంప్యూటర్ ఆపరేటర్';
+    }
+    if (upper.includes('OFFICE SUBORDINATE')) {
+      return 'ఆఫీస్ సబార్డినేట్';
+    }
+    if (upper.includes('NIGHT WATCHMAN') || upper.includes('WATCHMAN')) {
+      return 'నైట్ వాచ్‌మెన్';
+    }
+    if (upper.includes('HBT') || upper.includes('GUEST')) {
+      return 'గెస్ట్ అధ్యాపకులు';
+    }
+    if (upper.includes('TEACHING FACULTY')) {
+      return 'బోధనా అధ్యాపకులు';
+    }
+    return raw;
+  }
+
+  if (currentLang === 'hi') {
+    if (upper.includes('VICE')) {
+      return 'उप-प्रधानाचार्य';
+    }
+    if (upper.includes('PRINCIPAL') && upper.includes('FAC')) {
+      return 'प्रधानाचार्य (FAC)';
+    }
+    if (upper.includes('PRINCIPAL')) {
+      return 'प्रधानाचार्य';
+    }
+    if (upper.startsWith('PGT')) {
+      const rest = raw.replace(/^PGT\s*/i, '').trim();
+      const locSubj = getLocalizedSubject(rest, 'hi');
+      return 'पी.जी.टी ' + (locSubj || rest);
+    }
+    if (upper.startsWith('TGT')) {
+      const rest = raw.replace(/^TGT\s*/i, '').trim();
+      const locSubj = getLocalizedSubject(rest, 'hi');
+      return 'टी.जी.टी ' + (locSubj || rest);
+    }
+    if (upper.includes('MEDIA') || upper.includes('ENTERTAINMENT')) {
+      return 'व्यावसायिक (मीडिया और मनोरंजन)';
+    }
+    if (upper.includes('HEALTH')) {
+      return 'व्यावसायिक (स्वास्थ्य सेवा)';
+    }
+    if (upper.includes('PHYSICAL DIRECTOR') || upper.includes('PD')) {
+      return 'शारीरिक शिक्षक (पी.डी)';
+    }
+    if (upper.includes('COMPUTER OPERATOR')) {
+      return 'कंप्यूटर ऑपरेटर';
+    }
+    if (upper.includes('OFFICE SUBORDINATE')) {
+      return 'कार्यालय अधीनस्थ';
+    }
+    if (upper.includes('NIGHT WATCHMAN') || upper.includes('WATCHMAN')) {
+      return 'रात्रि चौकीदार';
+    }
+    if (upper.includes('HBT') || upper.includes('GUEST')) {
+      return 'अतिथि शिक्षक';
+    }
+    return raw;
+  }
+
+  return desig;
+}
+
+const QUALIFICATIONS_I18N = {
+  'phd in chemistry, b.ed.': { te: 'పిహెచ్‌డి (రసాయన శాస్త్రం), బి.ఇడి.', hi: 'पीएच.डी (रसायन विज्ञान), बी.एड.' },
+  'ph.d in chemistry, b.ed.': { te: 'పిహెచ్‌డి (రసాయన శాస్త్రం), బి.ఇడి.', hi: 'पीएच.डी (रसायन विज्ञान), बी.एड.' },
+  'phd in chemistry, b.ed': { te: 'పిహెచ్‌డి (రసాయన శాస్త్రం), బి.ఇడి.', hi: 'पीएच.डी (रसायन विज्ञान), बी.एड.' },
+  'm.sc., b.ed., set': { te: 'ఎం.ఎస్సీ., బి.ఇడి., సెట్', hi: 'एम.एससी., बी.एड., सेट' },
+  'm.sc., b.ed.': { te: 'ఎం.ఎస్సీ., బి.ఇడి.', hi: 'एम.एससी., बी.एड.' },
+  'm.sc, b.ed': { te: 'ఎం.ఎస్సీ., బి.ఇడి.', hi: 'एम.एससी., बी.एड.' },
+  'm.a., b.ed.': { te: 'ఎం.ఎ., బి.ఇడి.', hi: 'एम.ए., बी.एड.' },
+  'm.a, b.ed': { te: 'ఎం.ఎ., బి.ఇడి.', hi: 'एम.ए., बी.एड.' },
+  'm.com., b.ed.': { te: 'ఎం.కాం., బి.ఇడి.', hi: 'एम.कॉम., बी.एड.' },
+  'm.a., hpt': { te: 'ఎం.ఎ., హెచ్.పి.టి.', hi: 'एम.ए., एच.पी.टी.' },
+  'm.sc., town planning, set': { te: 'ఎం.ఎస్సీ., టౌన్ ప్లానింగ్, సెట్', hi: 'एम.एससी., टाउन प्लानिंग, सेट' },
+  'b.com. (computers), dtp, pgdca, animation': { te: 'బి.కాం. (కంప్యూటర్స్), డిటిపి, పిజిడిసిఎ, యానిమేషన్', hi: 'बी.कॉम. (कंप्यूटर्स), डीटीपी, पीजीडीसीए, एनीमेशन' },
+  'gnm nursing': { te: 'జి.ఎన్.ఎం. నర్సింగ్', hi: 'जी.एन.एम. नर्सिंग' }
+};
+
+function getLocalizedQualification(qual, currentLang) {
+  if (!qual || qual === '—') return qual;
+  if (currentLang !== 'te' && currentLang !== 'hi') return qual;
+  const key = String(qual).trim().toLowerCase();
+  if (QUALIFICATIONS_I18N[key] && QUALIFICATIONS_I18N[key][currentLang]) {
+    return QUALIFICATIONS_I18N[key][currentLang];
+  }
+
+  if (currentLang === 'te') {
+    let res = qual;
+    res = res.replace(/Ph\.?D\.?/gi, 'పిహెచ్‌డి');
+    res = res.replace(/M\.?Sc\.?/gi, 'ఎం.ఎస్సీ.');
+    res = res.replace(/B\.?Sc\.?/gi, 'బి.ఎస్సీ.');
+    res = res.replace(/M\.?A\.?/gi, 'ఎం.ఎ.');
+    res = res.replace(/B\.?A\.?/gi, 'బి.ఎ.');
+    res = res.replace(/M\.?Com\.?/gi, 'ఎం.కాం.');
+    res = res.replace(/B\.?Com\.?/gi, 'బి.కాం.');
+    res = res.replace(/B\.?Ed\.?/gi, 'బి.ఇడి.');
+    res = res.replace(/M\.?Ed\.?/gi, 'ఎం.ఇడి.');
+    res = res.replace(/SET/gi, 'సెట్');
+    res = res.replace(/NET/gi, 'నెట్');
+    res = res.replace(/HPT/gi, 'హెచ్.పి.టి.');
+    res = res.replace(/chemistry/gi, 'రసాయన శాస్త్రం');
+    return res;
+  }
+
+  return qual;
+}
+
 function principalCard(){
   const card=node('div',null,'principal-card');
   const image=node('img');
   const princ = (typeof schoolData?.principal === 'object' && schoolData?.principal) || {};
   const pName = princ.name || (typeof schoolData?.principal === 'string' ? schoolData.principal : 'Dr.Bandari Sampath Kumar');
   const pPhoto = schoolData?.principalPhoto || (schoolData?.staffPhotos && schoolData.staffPhotos[pName]) || 'images/principal-veerababu.jpg';
+  const locName = getLocalizedFacultyName(pName, lang);
   image.src = pPhoto;
-  image.alt = pName + ', Principal FAC';
+  image.alt = locName + ', ' + (lang === 'te' ? 'ప్రిన్సిపాల్ FAC' : (lang === 'hi' ? 'प्रधानाचार्य (FAC)' : 'Principal FAC'));
   const pDesig = princ.designation || 'Principal FAC';
   const pQual = princ.qualification || 'Phd in chemistry, B.Ed.';
   const pPhone = princ.phone || '08727-285222';
-  card.append(image,node('span',pDesig),node('h3',pName),node('p',pQual),link('☎ ' + pPhone,'tel:+91'+pPhone));
+  const locDesig = getLocalizedDesignation(pDesig, lang);
+  const locQual = getLocalizedQualification(pQual, lang);
+  card.append(image,node('span',locDesig),node('h3',locName),node('p',locQual),link('☎ ' + pPhone,'tel:+91'+pPhone));
   return card;
 }
 function createFacultyCard(member) {
@@ -179,24 +523,28 @@ function createFacultyCard(member) {
   const cat = String(member.category || '').toLowerCase();
   let badgeClass = 'role-staff';
   let badgeText = member.designation || 'Staff';
-  if (des.includes('PRINCIPAL')) {
+
+  if (des.includes('VICE')) {
     badgeClass = 'role-principal';
-    badgeText = '👑 Principal FAC';
+    badgeText = lang === 'te' ? 'వైస్ ప్రిన్సిపాల్' : (lang === 'hi' ? 'उप-प्रधानाचार्य' : 'Vice Principal');
+  } else if (des.includes('PRINCIPAL')) {
+    badgeClass = 'role-principal';
+    badgeText = lang === 'te' ? '👑 ప్రిన్సిపాల్ FAC' : (lang === 'hi' ? '👑 प्रधानाचार्य (FAC)' : '👑 Principal FAC');
   } else if (des.includes('PGT')) {
     badgeClass = 'role-pgt';
-    badgeText = 'PGT';
+    badgeText = lang === 'te' ? 'పి.జి.టి' : (lang === 'hi' ? 'पी.जी.टी' : 'PGT');
   } else if (des.includes('TGT')) {
     badgeClass = 'role-tgt';
-    badgeText = 'TGT';
+    badgeText = lang === 'te' ? 'టి.జి.టి' : (lang === 'hi' ? 'टी.जी.टी' : 'TGT');
   } else if (cat === 'guest' || des.includes('HBT') || des.includes('GUEST')) {
     badgeClass = 'role-guest';
-    badgeText = member.designation || 'HBT / Guest';
+    badgeText = lang === 'te' ? 'గెస్ట్ అధ్యాపకులు' : (lang === 'hi' ? 'अतिथि शिक्षक' : 'HBT / Guest');
   } else if (cat === 'vocational' || des.includes('VOCATIONAL') || des.includes('TRAINER') || des.includes('MEDIA') || des.includes('HEALTH')) {
     badgeClass = 'role-vocational';
-    badgeText = member.designation || 'Vocational';
+    badgeText = lang === 'te' ? 'వృత్తి విద్యా' : (lang === 'hi' ? 'व्यावसायिक' : 'Vocational');
   } else if (cat === 'support' || des.includes('SUPPORT') || des.includes('STAFF') || des.includes('ATTENDER') || des.includes('OPERATOR') || des.includes('WATCHMAN')) {
     badgeClass = 'role-staff';
-    badgeText = member.designation || 'Support Staff';
+    badgeText = lang === 'te' ? 'సిబ్బంది' : (lang === 'hi' ? 'सहायक कर्मचारी' : 'Support Staff');
   }
 
   let subj = member.subject || '';
@@ -205,9 +553,14 @@ function createFacultyCard(member) {
     if (match) subj = match[1] || match[2];
   }
 
-  card.dataset.name = (member.name || '').toLowerCase();
-  card.dataset.des = (member.designation || '').toLowerCase();
-  card.dataset.subj = (subj || '').toLowerCase();
+  const locName = getLocalizedFacultyName(member.name, lang);
+  const locDesig = getLocalizedDesignation(member.designation, lang);
+  const locSubj = getLocalizedSubject(subj, lang);
+  const locQual = getLocalizedQualification(member.qualification, lang);
+
+  card.dataset.name = ((member.name || '') + ' ' + locName).toLowerCase();
+  card.dataset.des = ((member.designation || '') + ' ' + locDesig).toLowerCase();
+  card.dataset.subj = ((subj || '') + ' ' + locSubj).toLowerCase();
   card.dataset.role = badgeClass;
   card.tabIndex = 0;
 
@@ -222,7 +575,7 @@ function createFacultyCard(member) {
     const img = document.createElement('img');
     img.className = 'faculty-photo-img';
     img.src = member.photo_url;
-    img.alt = member.name;
+    img.alt = locName || member.name;
     img.loading = 'lazy';
     img.onerror = () => {
       img.remove();
@@ -239,28 +592,31 @@ function createFacultyCard(member) {
 
   const nameEl = document.createElement('h3');
   nameEl.className = 'faculty-card-name';
-  nameEl.textContent = member.name;
+  nameEl.textContent = locName;
 
   const desEl = document.createElement('div');
   desEl.className = 'faculty-card-designation';
-  desEl.textContent = member.designation || 'Teaching Faculty';
+  desEl.textContent = locDesig;
 
   body.append(nameEl, desEl);
 
   const meta = document.createElement('div');
   meta.className = 'faculty-meta-list';
 
+  const subjLabel = lang === 'te' ? 'సబ్జెక్ట్:' : (lang === 'hi' ? 'विषय:' : 'Subject:');
+  const qualLabel = lang === 'te' ? 'విద్యార్హత:' : (lang === 'hi' ? 'योग्यता:' : 'Qualification:');
+
   if (subj && subj.toLowerCase() !== (member.designation || '').toLowerCase()) {
     const sItem = document.createElement('div');
     sItem.className = 'faculty-meta-item faculty-subject-highlight';
-    sItem.innerHTML = '<span class="faculty-meta-icon">📚</span><span><span class="faculty-meta-label">Subject:</span><strong class="faculty-meta-value">' + subj + '</strong></span>';
+    sItem.innerHTML = '<span class="faculty-meta-icon">📚</span><span><span class="faculty-meta-label">' + subjLabel + '</span><strong class="faculty-meta-value">' + locSubj + '</strong></span>';
     meta.append(sItem);
   }
 
   if (member.qualification && member.qualification !== '—') {
     const qItem = document.createElement('div');
     qItem.className = 'faculty-meta-item';
-    qItem.innerHTML = '<span class="faculty-meta-icon">🎓</span><span><span class="faculty-meta-label">Qualification:</span><span class="faculty-meta-value">' + member.qualification + '</span></span>';
+    qItem.innerHTML = '<span class="faculty-meta-icon">🎓</span><span><span class="faculty-meta-label">' + qualLabel + '</span><span class="faculty-meta-value">' + locQual + '</span></span>';
     meta.append(qItem);
   }
 
@@ -295,12 +651,14 @@ function renderModernFacultyPage(sheet, d) {
   header.className = 'faculty-page-header';
 
   const title = document.createElement('h2');
-  title.textContent = lang === 'te' ? 'పాఠశాల ఉపాధ్యాయులు & సిబ్బంది' : 'Our Faculty & Teaching Staff';
+  title.textContent = lang === 'te' ? 'పాఠశాల ఉపాధ్యాయులు & సిబ్బంది' : (lang === 'hi' ? 'विद्यालय शिक्षक एवं कर्मचारी' : 'Our Faculty & Teaching Staff');
 
   const subtitle = document.createElement('p');
   subtitle.textContent = lang === 'te'
     ? 'తెలంగాణ మోడల్ స్కూల్ & జూనియర్ కళాశాల, సోమారంలో విద్యార్థులను తీర్చిదిద్దుతున్న నిపుణులైన అధ్యాపక బృందం.'
-    : 'Meet our dedicated teaching faculty, subject specialists, and educators guiding the students of TGMS Somaram.';
+    : (lang === 'hi'
+      ? 'तेलंगाना मॉडल स्कूल एवं जूनियर कॉलेज, सोमराम में विद्यार्थियों का मार्गदर्शन करने वाले विशेषज्ञ शिक्षक।'
+      : 'Meet our dedicated teaching faculty, subject specialists, and educators guiding the students of TGMS Somaram.');
 
   function normalizeCategory(cat, des) {
     if (cat && ['teaching', 'guest', 'vocational', 'support'].includes(cat)) return cat;
@@ -360,7 +718,7 @@ function renderModernFacultyPage(sheet, d) {
   const totalCount = teachingList.length + guestList.length + vocationalList.length + supportList.length;
   const badge = document.createElement('div');
   badge.className = 'faculty-stats-badge';
-  badge.innerHTML = '<span>👥</span> <span>' + totalCount + ' ' + (lang === 'te' ? 'సిబ్బంది సభ్యులు' : 'Faculty & Staff Members') + '</span>';
+  badge.innerHTML = '<span>👥</span> <span>' + totalCount + ' ' + (lang === 'te' ? 'సిబ్బంది సభ్యులు' : (lang === 'hi' ? 'कर्मचारी सदस्य' : 'Faculty & Staff Members')) + '</span>';
 
   header.append(title, subtitle, badge);
   container.append(header);
@@ -374,19 +732,19 @@ function renderModernFacultyPage(sheet, d) {
   const searchInput = document.createElement('input');
   searchInput.type = 'search';
   searchInput.className = 'faculty-search-input';
-  searchInput.placeholder = lang === 'te' ? 'పేరు లేదా సబ్జెక్ట్ ద్వారా శోధించండి...' : 'Search by name, subject, or role...';
+  searchInput.placeholder = lang === 'te' ? 'పేరు లేదా సబ్జెక్ట్ ద్వారా శోధించండి...' : (lang === 'hi' ? 'नाम या विषय से खोजें...' : 'Search by name, subject, or role...');
   searchBox.append(searchInput);
 
   const pills = document.createElement('div');
   pills.className = 'faculty-filter-pills';
   const filterOptions = [
-    ['all', lang === 'te' ? 'అందరూ' : 'All'],
-    ['role-principal', lang === 'te' ? 'ప్రిన్సిపాల్' : 'Principal'],
-    ['role-pgt', lang === 'te' ? 'పి.జి.టి (ఇంటర్)' : 'PGT (Junior College)'],
-    ['role-tgt', lang === 'te' ? 'టి.జి.టి (హైస్కూల్)' : 'TGT (High School)'],
-    ['role-guest', lang === 'te' ? 'గెస్ట్ అధ్యాపకులు' : 'HBT / Guest Faculty'],
-    ['role-vocational', lang === 'te' ? 'వృత్తి విద్య' : 'Vocational'],
-    ['role-staff', lang === 'te' ? 'సిబ్బంది' : 'Support Staff']
+    ['all', lang === 'te' ? 'అందరూ' : (lang === 'hi' ? 'सभी' : 'All')],
+    ['role-principal', lang === 'te' ? 'ప్రిన్సిపాల్' : (lang === 'hi' ? 'प्रधानाचार्य' : 'Principal')],
+    ['role-pgt', lang === 'te' ? 'పి.జి.టి (ఇంటర్)' : (lang === 'hi' ? 'पी.जी.टी (इंटर)' : 'PGT (Junior College)')],
+    ['role-tgt', lang === 'te' ? 'టి.జి.టి (హైస్కూల్)' : (lang === 'hi' ? 'टी.जी.टी (हाई स्कूल)' : 'TGT (High School)')],
+    ['role-guest', lang === 'te' ? 'గెస్ట్ అధ్యాపకులు' : (lang === 'hi' ? 'अतिथि शिक्षक' : 'HBT / Guest Faculty')],
+    ['role-vocational', lang === 'te' ? 'వృత్తి విద్య' : (lang === 'hi' ? 'व्यावसायिक' : 'Vocational')],
+    ['role-staff', lang === 'te' ? 'సిబ్బంది' : (lang === 'hi' ? 'सहायक कर्मचारी' : 'Support Staff')]
   ];
   let currentFilter = 'all';
 
