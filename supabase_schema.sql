@@ -86,6 +86,7 @@ create table if not exists public.gallery_items (
 create table if not exists public.faculty (
     id uuid default gen_random_uuid() primary key,
     name text not null,
+    category text not null default 'teaching',
     designation text,
     subject text,
     qualification text,
@@ -95,6 +96,19 @@ create table if not exists public.faculty (
     created_at timestamp with time zone default timezone('utc'::text, now()) not null,
     updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+-- Safe idempotent column migration for existing faculty table
+DO $$ 
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_schema = 'public' 
+          AND table_name = 'faculty' 
+          AND column_name = 'category'
+    ) THEN
+        ALTER TABLE public.faculty ADD COLUMN category text NOT NULL DEFAULT 'teaching';
+    END IF;
+END $$;
 
 -- --------------------------------------------------------------
 -- 7. Flash News & Notices Table

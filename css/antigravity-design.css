@@ -1365,6 +1365,12 @@ footer.munagala-site-footer {
   border-color: #38bdf8 !important;
 }
 
+.faculty-role-badge.role-guest {
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.95), rgba(253, 230, 138, 0.95)) !important;
+  color: #92400e !important;
+  border-color: #f59e0b !important;
+}
+
 .faculty-role-badge.role-vocational {
   background: linear-gradient(135deg, rgba(243, 232, 255, 0.95), rgba(233, 213, 255, 0.95)) !important;
   color: #6b21a8 !important;

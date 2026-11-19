@@ -60,12 +60,53 @@ export default async function handler(req, res) {
         // Live Faculty Sync
         if (facultyRes.data && facultyRes.data.length > 0) {
           const facultyRows = facultyRes.data.filter(f => f && f.is_active !== false);
+
+          function normalizeCategory(cat, des) {
+            if (cat && ['teaching', 'guest', 'vocational', 'support'].includes(cat)) return cat;
+            const d = String(des || '').toUpperCase();
+            if (d.includes('HBT') || d.includes('GUEST')) return 'guest';
+            if (d.includes('VOCATIONAL') || d.includes('TRAINER')) return 'vocational';
+            if (d.includes('SUPPORT') || d.includes('ATTENDER') || d.includes('WATCHMAN') || 
+                d.includes('OFFICE') || d.includes('ASSISTANT') || d.includes('SWEEPER') || 
+                d.includes('SCAVENGER') || d.includes('OPERATOR') || d.includes('RECORD') || 
+                d.includes('PHYSICAL DIRECTOR') || d.includes('PD') || d.includes('STAFF')) {
+              return 'support';
+            }
+            return 'teaching';
+          }
+
+          facultyRows.forEach(f => {
+            f.category = normalizeCategory(f.category, f.designation);
+          });
+
           profileValues.facultyList = facultyRows;
-          profileValues.faculty = facultyRows.map(f => [
+
+          const regular = facultyRows.filter(f => f.category === 'teaching');
+          const guest = facultyRows.filter(f => f.category === 'guest');
+          const vocational = facultyRows.filter(f => f.category === 'vocational');
+          const support = facultyRows.filter(f => f.category === 'support');
+
+          profileValues.faculty = regular.map(f => [
             f.name,
             f.designation + (f.subject ? ' / ' + f.subject : ''),
             f.qualification || ''
           ]);
+          profileValues.guest = guest.map(f => [
+            f.name,
+            f.designation + (f.subject ? ' / ' + f.subject : ''),
+            f.qualification || ''
+          ]);
+          profileValues.vocational = vocational.map(f => [
+            f.name,
+            f.designation + (f.subject ? ' / ' + f.subject : ''),
+            f.qualification || ''
+          ]);
+          profileValues.support = support.map(f => [
+            f.name,
+            f.designation + (f.subject ? ' / ' + f.subject : ''),
+            f.qualification || ''
+          ]);
+
           profileValues.staffPhotos = profileValues.staffPhotos || {};
           facultyRows.forEach(f => {
             if (f.photo_url) profileValues.staffPhotos[f.name] = f.photo_url;
@@ -81,12 +122,11 @@ export default async function handler(req, res) {
             profileValues.principal.phone = profileValues.principal.phone || '08727-285222';
             if (princ.photo_url) profileValues.principalPhoto = princ.photo_url;
           }
+        } else {
+          profileValues.guest = profileValues.guest || [];
+          profileValues.vocational = profileValues.vocational || [];
+          profileValues.support = profileValues.support || [];
         }
-
-        // Purge any dummy or mock faculty/staff subcategories
-        profileValues.guest = [];
-        profileValues.vocational = [];
-        profileValues.support = [];
 
         // Live Gallery Sync
         if (Array.isArray(galleryRes.data)) {

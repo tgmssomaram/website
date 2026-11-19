@@ -59,6 +59,7 @@
     {
       "id": "9a47356c-ef35-4df0-b472-d12bdc574277",
       "name": "Dr.Bandari Sampath Kumar",
+      "category": "teaching",
       "designation": "Principal FAC",
       "subject": "Chemistry",
       "qualification": "Phd in chemistry, B.Ed.",
@@ -69,6 +70,7 @@
     {
       "id": "60b5d262-af6e-4961-b65b-5b2d40d146d7",
       "name": "B.Kumar",
+      "category": "teaching",
       "designation": "Vice principal",
       "subject": "Botany",
       "qualification": "M.Sc., B.Ed.",
@@ -79,6 +81,7 @@
     {
       "id": "0d58d520-8f19-457e-94dd-09b7ccfa9598",
       "name": "Bandi Saidulu",
+      "category": "teaching",
       "designation": "PGT Botany",
       "subject": "Botany",
       "qualification": "M.Sc., B.Ed., SET",
@@ -89,6 +92,7 @@
     {
       "id": "a8140954-2c86-4f05-9563-196001e2dcd1",
       "name": "Kondeti Saidulu",
+      "category": "teaching",
       "designation": "PGT English",
       "subject": "English",
       "qualification": "M.A., B.Ed.",

@@ -1,22 +1,58 @@
-// faculty.js — Professional Faculty Manager
-// Supports direct photo upload to Supabase cloud storage
+// faculty.js — Professional Faculty & Staff Manager
+// Supports direct photo upload to Supabase cloud storage, category classification, and live syncing
 
 window.AdminModules = window.AdminModules || {};
 window.AdminModules.faculty = {
   data: [],
+  selectedCategory: 'all',
+
+  normalizeCategory: function(cat, des) {
+    if (cat && ['teaching', 'guest', 'vocational', 'support'].includes(cat)) return cat;
+    var d = String(des || '').toUpperCase();
+    if (d.includes('HBT') || d.includes('GUEST')) return 'guest';
+    if (d.includes('VOCATIONAL') || d.includes('TRAINER')) return 'vocational';
+    if (d.includes('SUPPORT') || d.includes('ATTENDER') || d.includes('WATCHMAN') || 
+        d.includes('OFFICE') || d.includes('ASSISTANT') || d.includes('SWEEPER') || 
+        d.includes('SCAVENGER') || d.includes('OPERATOR') || d.includes('RECORD') || 
+        d.includes('PHYSICAL DIRECTOR') || d.includes('PD') || d.includes('STAFF')) {
+      return 'support';
+    }
+    return 'teaching';
+  },
+
+  getCategoryBadge: function(cat) {
+    if (cat === 'guest') {
+      return '<span class="badge" style="background:#fef3c7;color:#92400e;font-size:0.75rem;padding:2px 8px;font-weight:700;">🎓 HBT / Guest</span>';
+    } else if (cat === 'vocational') {
+      return '<span class="badge" style="background:#ede9fe;color:#6d28d9;font-size:0.75rem;padding:2px 8px;font-weight:700;">🛠️ Vocational</span>';
+    } else if (cat === 'support') {
+      return '<span class="badge" style="background:#f1f5f9;color:#475569;font-size:0.75rem;padding:2px 8px;font-weight:700;">🏛️ Support Staff</span>';
+    }
+    return '<span class="badge" style="background:#e0f2fe;color:#0369a1;font-size:0.75rem;padding:2px 8px;font-weight:700;">👨‍🏫 Regular Teaching</span>';
+  },
 
   render: async function() {
     var view = document.getElementById('admin-view');
     view.innerHTML = '\
       <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">\
         <div>\
-          <h1>👨‍🏫 Faculty Manager</h1>\
-          <p>Manage teaching staff, designations, academic qualifications, and profile photos.</p>\
+          <h1>👨‍🏫 Faculty & Staff Manager</h1>\
+          <p>Manage teaching staff, guest faculty, vocational trainers, and support staff with designations and photos.</p>\
         </div>\
         <button id="add-faculty-btn" class="btn btn-primary-dash">\
           <span>+ Add Faculty Member</span>\
         </button>\
       </div>\
+      \
+      <!-- Category Filter Pills -->\
+      <div class="faculty-admin-filters" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">\
+        <button type="button" class="btn btn-sm btn-secondary cat-filter-btn active" data-cat="all" onclick="window.AdminModules.faculty.filterCategory(\'all\')">All Staff (<span id="cat-count-all">0</span>)</button>\
+        <button type="button" class="btn btn-sm btn-secondary cat-filter-btn" data-cat="teaching" onclick="window.AdminModules.faculty.filterCategory(\'teaching\')">👨‍🏫 Regular Teaching (<span id="cat-count-teaching">0</span>)</button>\
+        <button type="button" class="btn btn-sm btn-secondary cat-filter-btn" data-cat="guest" onclick="window.AdminModules.faculty.filterCategory(\'guest\')">🎓 HBT / Guest (<span id="cat-count-guest">0</span>)</button>\
+        <button type="button" class="btn btn-sm btn-secondary cat-filter-btn" data-cat="vocational" onclick="window.AdminModules.faculty.filterCategory(\'vocational\')">🛠️ Vocational (<span id="cat-count-vocational">0</span>)</button>\
+        <button type="button" class="btn btn-sm btn-secondary cat-filter-btn" data-cat="support" onclick="window.AdminModules.faculty.filterCategory(\'support\')">🏛️ Support Staff (<span id="cat-count-support">0</span>)</button>\
+      </div>\
+      \
       <div class="card">\
         <div class="table-wrap">\
           <table class="data-table">\
@@ -24,7 +60,7 @@ window.AdminModules.faculty = {
               <tr>\
                 <th>Order</th>\
                 <th>Staff Member</th>\
-                <th>Designation</th>\
+                <th>Designation & Role</th>\
                 <th>Subject</th>\
                 <th>Qualification</th>\
                 <th>Status</th>\
@@ -43,6 +79,22 @@ window.AdminModules.faculty = {
     await this.loadFaculty();
   },
 
+  filterCategory: function(cat) {
+    this.selectedCategory = cat;
+    document.querySelectorAll('.cat-filter-btn').forEach(function(btn) {
+      if (btn.dataset.cat === cat) {
+        btn.classList.add('active');
+        btn.style.background = 'var(--primary)';
+        btn.style.color = '#fff';
+      } else {
+        btn.classList.remove('active');
+        btn.style.background = '';
+        btn.style.color = '';
+      }
+    });
+    this.renderTableRows();
+  },
+
   loadFaculty: async function() {
     var res = await window.AdminAPI.get('/api/admin/faculty');
     var tbody = document.getElementById('faculty-table-body');
@@ -53,9 +105,50 @@ window.AdminModules.faculty = {
       return;
     }
 
-    this.data = res.data;
     var self = this;
-    tbody.innerHTML = this.data.map(function(f) {
+    this.data = res.data.map(function(f) {
+      f.category = self.normalizeCategory(f.category, f.designation);
+      return f;
+    });
+
+    // Update counts
+    var countAll = this.data.length;
+    var countTeaching = this.data.filter(f => f.category === 'teaching').length;
+    var countGuest = this.data.filter(f => f.category === 'guest').length;
+    var countVoc = this.data.filter(f => f.category === 'vocational').length;
+    var countSup = this.data.filter(f => f.category === 'support').length;
+
+    var elAll = document.getElementById('cat-count-all');
+    var elTea = document.getElementById('cat-count-teaching');
+    var elGst = document.getElementById('cat-count-guest');
+    var elVoc = document.getElementById('cat-count-vocational');
+    var elSup = document.getElementById('cat-count-support');
+
+    if (elAll) elAll.textContent = countAll;
+    if (elTea) elTea.textContent = countTeaching;
+    if (elGst) elGst.textContent = countGuest;
+    if (elVoc) elVoc.textContent = countVoc;
+    if (elSup) elSup.textContent = countSup;
+
+    this.renderTableRows();
+  },
+
+  renderTableRows: function() {
+    var tbody = document.getElementById('faculty-table-body');
+    if (!tbody) return;
+
+    var cat = this.selectedCategory || 'all';
+    var filtered = this.data.filter(function(f) {
+      return cat === 'all' || f.category === cat;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding:36px;">No staff found in this category. Click "+ Add Faculty Member" to add one.</td></tr>';
+      return;
+    }
+
+    var self = this;
+    tbody.innerHTML = filtered.map(function(f) {
       return '\
         <tr>\
           <td style="color:var(--text-muted);font-weight:700;">#' + (f.order_index ?? 0) + '</td>\
@@ -69,7 +162,10 @@ window.AdminModules.faculty = {
               </div>\
             </div>\
           </td>\
-          <td style="font-weight:600;color:var(--text-secondary);">' + (f.designation || '-') + '</td>\
+          <td style="font-weight:600;color:var(--text-secondary);">\
+            <div>' + (f.designation || '-') + '</div>\
+            <div style="margin-top:4px;">' + self.getCategoryBadge(f.category) + '</div>\
+          </td>\
           <td><span class="badge badge-info">' + (f.subject || '-') + '</span></td>\
           <td style="color:var(--text-muted);font-size:0.85rem;">' + (f.qualification || '-') + '</td>\
           <td>\
@@ -120,6 +216,7 @@ window.AdminModules.faculty = {
     if (!modal) return;
     var isEdit = !!item;
     var currentPhotoUrl = item?.photo_url || '';
+    var currentCat = this.normalizeCategory(item?.category, item?.designation);
 
     modal.innerHTML = '\
       <div class="modal">\
@@ -155,25 +252,42 @@ window.AdminModules.faculty = {
               </div>\
             </div>\
             \
+            <!-- CATEGORY DROPDOWN -->\
+            <div class="form-row" style="margin-bottom:14px;">\
+              <div class="form-group-dash" style="flex:1;">\
+                <label for="faculty-category" style="font-weight:700;display:flex;align-items:center;gap:6px;">\
+                  <span>Staff Category / Role *</span>\
+                </label>\
+                <select id="faculty-category" style="width:100%;padding:11px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:0.92rem;background:var(--card-bg,#fff);color:var(--text-primary);font-weight:700;cursor:pointer;">\
+                  <option value="teaching"' + (currentCat === 'teaching' ? ' selected' : '') + '>👨‍🏫 Regular Teaching Staff (Principal / PGT / TGT)</option>\
+                  <option value="guest"' + (currentCat === 'guest' ? ' selected' : '') + '>🎓 HBT / Guest Faculty</option>\
+                  <option value="vocational"' + (currentCat === 'vocational' ? ' selected' : '') + '>🛠️ Vocational Trainers</option>\
+                  <option value="support"' + (currentCat === 'support' ? ' selected' : '') + '>🏛️ Support Staff</option>\
+                </select>\
+                <div id="faculty-category-hint" style="margin-top:6px;font-size:0.8rem;color:var(--primary);font-weight:600;"></div>\
+              </div>\
+            </div>\
+            \
             <div class="form-row">\
               <div class="form-group-dash">\
                 <label for="faculty-name">Full Name *</label>\
-                <input type="text" id="faculty-name" required value="' + (item?.name || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Farhana" />\
+                <input type="text" id="faculty-name" required value="' + (item?.name || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Dr. Bandari Sampath Kumar" />\
               </div>\
               <div class="form-group-dash">\
                 <label for="faculty-designation">Designation *</label>\
-                <input type="text" id="faculty-designation" required value="' + (item?.designation || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Principal FAC / PGT Mathematics" />\
+                <input type="text" id="faculty-designation" list="designation-suggestions" required value="' + (item?.designation || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Principal FAC / PGT Mathematics" />\
+                <datalist id="designation-suggestions"></datalist>\
               </div>\
             </div>\
             \
             <div class="form-row">\
               <div class="form-group-dash">\
                 <label for="faculty-subject">Subject</label>\
-                <input type="text" id="faculty-subject" value="' + (item?.subject || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Mathematics" />\
+                <input type="text" id="faculty-subject" value="' + (item?.subject || '').replace(/"/g, '&quot;') + '" placeholder="e.g. Mathematics / Botany / English" />\
               </div>\
               <div class="form-group-dash">\
                 <label for="faculty-qualification">Qualification</label>\
-                <input type="text" id="faculty-qualification" value="' + (item?.qualification || '').replace(/"/g, '&quot;') + '" placeholder="e.g. M.Sc., B.Ed." />\
+                <input type="text" id="faculty-qualification" value="' + (item?.qualification || '').replace(/"/g, '&quot;') + '" placeholder="e.g. M.Sc., B.Ed., SET" />\
               </div>\
             </div>\
             \
@@ -201,6 +315,35 @@ window.AdminModules.faculty = {
     var closeModal = function() { modal.classList.add('hidden'); };
     document.getElementById('close-faculty-modal-btn').onclick = closeModal;
     document.getElementById('cancel-faculty-modal-btn').onclick = closeModal;
+
+    // Category suggestions & hint handler
+    var catSelect = document.getElementById('faculty-category');
+    var catHint = document.getElementById('faculty-category-hint');
+    var datalist = document.getElementById('designation-suggestions');
+
+    var updateCategoryDetails = function() {
+      var selected = catSelect.value;
+      var suggestions = [];
+      if (selected === 'guest') {
+        catHint.textContent = '🎓 Displays under "HBT / Guest Faculty" subgroup on the main website.';
+        suggestions = ['HBT PGT', 'HBT TGT', 'Guest Faculty', 'Guest Lecturer', 'Honorarium Based Teacher'];
+      } else if (selected === 'vocational') {
+        catHint.textContent = '🛠️ Displays under "Vocational Trainers" subgroup on the main website.';
+        suggestions = ['Vocational Trainer - Retail', 'Vocational Trainer - Healthcare', 'Vocational Trainer - Media & Entertainment', 'Vocational Trainer - IT/ITes', 'Vocational Trainer'];
+      } else if (selected === 'support') {
+        catHint.textContent = '🏛️ Displays under "Support Staff" subgroup on the main website.';
+        suggestions = ['Physical Director (PD)', 'Computer Operator', 'Junior Assistant', 'Office Subordinate', 'Record Assistant', 'Lab Assistant', 'Night Watchman', 'Office Attender'];
+      } else {
+        catHint.textContent = '👨‍🏫 Displays in the primary "Our Faculty & Teaching Staff" grid.';
+        suggestions = ['Principal FAC', 'Vice Principal', 'PGT Mathematics', 'PGT Physics', 'PGT Chemistry', 'PGT Botany', 'PGT Zoology', 'PGT Civics', 'PGT Economics', 'PGT Commerce', 'PGT English', 'PGT Telugu', 'TGT Mathematics', 'TGT Science', 'TGT Social Studies', 'TGT English', 'TGT Telugu', 'TGT Hindi'];
+      }
+      datalist.innerHTML = suggestions.map(function(s) {
+        return '<option value="' + s + '">';
+      }).join('');
+    };
+
+    catSelect.onchange = updateCategoryDetails;
+    updateCategoryDetails();
 
     // Direct Photo Upload Handling
     var dropzone = document.getElementById('faculty-dropzone');
@@ -310,6 +453,7 @@ window.AdminModules.faculty = {
     var self = this;
     document.getElementById('faculty-form').onsubmit = async function(e) {
       e.preventDefault();
+      var category = catSelect.value;
       var name = document.getElementById('faculty-name').value.trim();
       var designation = document.getElementById('faculty-designation').value.trim();
       var subject = document.getElementById('faculty-subject').value.trim();
@@ -319,6 +463,7 @@ window.AdminModules.faculty = {
       var is_active = document.getElementById('faculty-active').checked;
 
       var payload = {
+        category: category,
         name: name,
         designation: designation,
         subject: subject,
